@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  maboke-client:
+    image: maboke-client
+    ports:
+      - "8080:8080"
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+      - '/app/node_modules'
+
