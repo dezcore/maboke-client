@@ -1,5 +1,5 @@
 <template>
- <v-app id="inspire">
+ <v-app>
     <v-system-bar>
       <v-spacer></v-spacer>
 
@@ -15,12 +15,6 @@
 
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
-
-    <v-navigation-drawer
-      v-model="drawer"
-      temporary
-    >
-    </v-navigation-drawer>
     <v-main>
       <router-view v-slot="{ Component, route }">
         <component :is="Component" :key="route.path"/>

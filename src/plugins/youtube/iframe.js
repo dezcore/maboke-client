@@ -1,34 +1,20 @@
-import Vue from 'vue'
-
 let cpt = 0
-const yApi = Vue.observable({ state : {} })
+let o = {};
 
-Object.defineProperty(Vue.prototype, '$yApi', {
-    get () {
-      return yApi.state
-    },
-    set (value) {
-      yApi.state = value
-    }
-})
+function initProx() {
+  return (
+    new Proxy(o, {
+      get(target, property, receiver) {
+        return Reflect.get(target, property, receiver);
+      },
+      set(target, property, value, receiver) {
+        return Reflect.set(target, property, value, receiver);
+      }
+    })
+  )
+}
 
-Object.defineProperty(Vue.prototype, '$yApi1', {
-  get () {
-    return yApi.state
-  },
-  set (value) {
-    yApi.state = value
-  }
-})
-
-Object.defineProperty(Vue.prototype, '$yApi2', {
-  get () {
-    return yApi.state
-  },
-  set (value) {
-    yApi.state = value
-  }
-})
+const oProxy = initProx()
 
 function loadVideo(id, pHeight, pWidth, vId) {
     const playerId = id ? id :"player"
@@ -50,10 +36,8 @@ function loadVideo(id, pHeight, pWidth, vId) {
 
     function onPlayerReady(event) {
       cpt++
-      Vue.set(Vue.prototype, '$yApi' + cpt, event.target)
-      window.App.$store.commit("updatePlayerReady", {state : true})
-
-      //
+      oProxy['$yApi' + cpt] = event.target
+      //window.App.$store.commit("updatePlayerReady", {state : true})
       /*player.loadVideoByUrl({mediaContentUrl:String,
         startSeconds:Number,
         endSeconds:Number,
@@ -63,19 +47,19 @@ function loadVideo(id, pHeight, pWidth, vId) {
 
     function onPlayerStateChange(event) {
       //let videoStatuses = Object.entries(window.YT.PlayerState)
-      
-      if(event && yApi.state) {
+
+      if(event && oProxy.value /*yApi.state*/ ) {
         switch(event.data){
           // Stop the video on ending so recommended videos don't pop up
           case 0:     // ended
-            yApi.state.stopVideo();
+            oProxy.value.stopVideo()
             break;
           case -1:    // unstarted
           case 1:     // playing
           case 2:     // paused
           case 3:     // buffering
-            window.App.$store.commit("updatePlayerReady", {state : true});
-            break;
+            //window.App.$store.commit("updatePlayerReady", {state : true});
+            //break;
           case 5:     // video cued
           default:
         }
@@ -84,5 +68,6 @@ function loadVideo(id, pHeight, pWidth, vId) {
 }
 
 export {
-    loadVideo
+    loadVideo,
+    oProxy
 }

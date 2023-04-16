@@ -1,14 +1,17 @@
 <template>
-<div>
-    <div class="mabokePlayer" ref="mabokePlayer">
-        <div id="player"></div>
-    </div>
-</div>
+<v-row>
+    <v-col cols="12">
+        <div class="mabokePlayer" ref="mabokePlayer">
+            <div id="player"></div>
+        </div>
+    </v-col>
+    <v-btn @click="changeVideo('WeIx7cZtOf0')">changeVideo</v-btn>
+</v-row>
 </template>
 
 <script>
 import $ from "jquery"
-import {loadVideo} from "../plugins/youtube/iframe"
+import {loadVideo,  oProxy} from "../plugins/youtube/iframe"
 
 export default {
     name: 'Player',
@@ -19,7 +22,8 @@ export default {
       }
     },
     mounted() {
-      this.binddPlayer()
+        console.log("Before bind")
+        this.bindPlayer()
     },
     unmounted() {
       window.removeEventListener("resize", this.onResize)
@@ -28,14 +32,14 @@ export default {
         initPlayer : function(width) {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
-                    loadVideo(null, null, width, this. playerVideoId)
+                    loadVideo(null, null, width, this.playerVideoId)
                 })
             })
         },
-        binddPlayer : function() {
+        bindPlayer : function() {
             let playerWidth
-            const clientWidth = this.$refs.mabokePlayer.clientWidth
-
+            const clientWidth = 700//this.$refs.mabokePlayer.clientWidth
+            console.log("clientWidth : ", this.$refs.mabokePlayer.clientWidth)
             if(clientWidth) {
                 playerWidth = Math.floor(Number(this.$refs.mabokePlayer.clientWidth) * 0.99)//99% of box
                 this.initPlayer(playerWidth)
@@ -47,11 +51,10 @@ export default {
             $("#player").width(playerWidth)
         },
         changeVideo : function(playerVideoId) {
-            const {loadVideoById} = this.$yApi1
-
+            const {loadVideoById} = oProxy.$yApi1
             if(playerVideoId && loadVideoById) {
                 this.playerVideoId = playerVideoId
-                this.$yApi1.loadVideoById({'videoId': playerVideoId})
+                oProxy.$yApi1.loadVideoById({'videoId': playerVideoId})
             }
         }
     }

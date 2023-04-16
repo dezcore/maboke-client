@@ -15,9 +15,6 @@
       return {
       }
     },
-    mounted() {
-      console.log("test playerView")
-    },
     methods : {}
   }
 </script>
