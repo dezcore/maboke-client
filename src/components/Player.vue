@@ -22,33 +22,40 @@ export default {
       }
     },
     mounted() {
-        console.log("Before bind")
         this.bindPlayer()
     },
     unmounted() {
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
-        initPlayer : function(width) {
+        initPlayer : function(width, playerHeight) {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
-                    loadVideo(null, null, width, this.playerVideoId)
+                    loadVideo(null, playerHeight, width, this.playerVideoId)
                 })
             })
         },
         bindPlayer : function() {
-            let playerWidth
-            const clientWidth = 700//this.$refs.mabokePlayer.clientWidth
-            console.log("clientWidth : ", this.$refs.mabokePlayer.clientWidth)
+            let playerWidth 
+            const clientWidth = this.$refs.mabokePlayer.clientWidth
+            const playerHeight = Math.floor(Number(clientWidth) * 0.53)
+            
             if(clientWidth) {
                 playerWidth = Math.floor(Number(this.$refs.mabokePlayer.clientWidth) * 0.99)//99% of box
-                this.initPlayer(playerWidth)
+                this.initPlayer(playerWidth, playerHeight)
                 window.addEventListener("resize", this.onResize)
             }
         },
         onResize : function () {
-            const playerWidth = Math.floor(Number(this.$refs.mabokePlaye.clientWidth) * 0.99)//99% of box
-            $("#player").width(playerWidth)
+            let playerWidth 
+            const clientWidth = this.$refs.mabokePlayer.clientWidth
+            const playerHeight = Math.floor(Number(clientWidth) * 0.53)
+            
+            if(clientWidth) {
+                playerWidth = Math.floor(Number(clientWidth) * 0.99)//99% of box
+                $("#player").width(playerWidth)
+                $("#player").height(playerHeight)
+            }
         },
         changeVideo : function(playerVideoId) {
             const {loadVideoById} = oProxy.$yApi1

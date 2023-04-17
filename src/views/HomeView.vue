@@ -1,20 +1,30 @@
 <template>
-    <div>
+  <TopBar>
+    <template #main>
+      <div>
         <v-btn>
-            Start
-            <v-tooltip
+          Start
+          <v-tooltip
             activator="parent"
             location="start"
-            >HomeView</v-tooltip>
+          >HomeView</v-tooltip>
         </v-btn>
-    </div>
+      </div>
+    </template>
+  </TopBar>
 </template>
 <script>
+  import TopBar from "../components/nav/TopBar.vue"
   export default {
     name: 'HomeView',
+    components : {
+      TopBar
+    },
+    mounted() {
+      console.log("test home")
+    },
     data () {
-      return {
-      }
+      return {}
     },
     methods : {}
   }
