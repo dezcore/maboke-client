@@ -5,7 +5,6 @@
             <div id="player"></div>
         </div>
     </v-col>
-    <v-btn @click="changeVideo('WeIx7cZtOf0')">changeVideo</v-btn>
 </v-row>
 </template>
 
@@ -28,9 +27,11 @@ export default {
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
-        initPlayer : function(width, playerHeight) {
+        initPlayer : function(width, playerHeight, videoId) {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
+                    this.playerVideoId = videoId ? videoId : this.playerVideoId
+                    console.log("test init : ",  this.playerVideoId, ", ", videoId)
                     loadVideo(null, playerHeight, width, this.playerVideoId)
                 })
             })
@@ -42,7 +43,7 @@ export default {
             
             if(clientWidth) {
                 playerWidth = Math.floor(Number(this.$refs.mabokePlayer.clientWidth) * 0.99)//99% of box
-                this.initPlayer(playerWidth, playerHeight)
+                this.initPlayer(playerWidth, playerHeight, this.$route.query.videoId)
                 window.addEventListener("resize", this.onResize)
             }
         },

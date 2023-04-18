@@ -1,14 +1,22 @@
 <template>
  <v-app>
-    <v-system-bar v-if="showSystemBar">
-      <v-spacer></v-spacer>
-      <v-icon>mdi-square</v-icon>
-      <v-icon>mdi-circle</v-icon>
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>
-    <v-app-bar v-if=" showAppBar">
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>{{title}}</v-toolbar-title>
+    <v-app-bar 
+      v-if="showAppBar"
+      color="black"
+      density="compact"
+    >
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+         <v-breadcrumbs
+            :items="items"
+            divider=" "
+        ></v-breadcrumbs>
+      </template>
+   
+      <template v-slot:append>
+        <v-btn icon="mdi-search-web"></v-btn>
+        <v-btn icon="mdi-bell"></v-btn>
+      </template>
     </v-app-bar>
     <v-main>
         <slot name="main"></slot> 
@@ -17,26 +25,43 @@
 </template>
 
 <script>
-  export default {
-    name: 'TopBar',
-    props : {
-        title : {
-            type : String,
-            default : ()=>{return ''}
-        },
-        showAppBar : {
-            type : Boolean,
-            default : ()=>{return false}
-        },
-        showSystemBar : {
-            type : Boolean,
-            default : ()=>{return false}
-        }
+export default {
+  name: 'TopBar',
+  props : {
+    title : {
+      type : String,
+      default : ()=>{return ''}
     },
-    data: () => ({ 
-        drawer: null 
-    }),
-  }
+    showAppBar : {
+      type : Boolean,
+      default : ()=>{return false}
+    },
+    showSystemBar : {
+      type : Boolean,
+      default : ()=>{return false}
+    }
+  },
+  data: () => ({ 
+    drawer: null,
+    items: [
+      {
+        title: 'Accueil',
+        disabled: false,
+        href: '/',
+      },
+      {
+        title: 'Series',
+        disabled: false,
+        href: '/serie',
+      },
+      {
+        title: 'Films',
+        disabled: false,
+        href: '/film',
+      },
+    ], 
+  }),
+}
 </script>
 
 <style>

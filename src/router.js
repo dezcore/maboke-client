@@ -2,7 +2,6 @@ import HomeView from './views/HomeView.vue'
 import MoviesView from './views/MoviesView.vue'
 import SeriesView from './views/SeriesView.vue'
 import PlayerView from './views/PlayerView.vue'
-//import VueRouter from 'vue-router'
 
 import {
   createRouter,
