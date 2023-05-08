@@ -12,10 +12,10 @@
             divider=" "
         ></v-breadcrumbs>
       </template>
-   
       <template v-slot:append>
         <v-btn icon="mdi-search-web"></v-btn>
         <v-btn icon="mdi-bell"></v-btn>
+        <AuthButtons/>
       </template>
     </v-app-bar>
     <v-main>
@@ -25,8 +25,13 @@
 </template>
 
 <script>
+import AuthButtons from "../auth/AuthButtons.vue"
+
 export default {
   name: 'TopBar',
+  components : {
+    AuthButtons
+  },
   props : {
     title : {
       type : String,
