@@ -3,34 +3,25 @@
     :showAppBar="true"
   >
     <template #main>
-      <div>
-        <HomeCarousel/>
-        <v-card-text>
-          <h2 class="text-h6 mb-2 text-left">
-            Films et séries
-          </h2>
-          <Videos/>
-        </v-card-text>
-        <v-card-text>
-          <h2 class="text-h6 mb-2 text-left">
-            Séries internationales
-          </h2>
-          <Videos/>
-        </v-card-text>
-      </div>
+      <ValidationPage/>
     </template>
   </TopBar>
 </template>
 <script>
   import TopBar from "../components/nav/TopBar.vue"
-  import Videos from "../components/grids/Videos.vue"
-  import HomeCarousel from "../components/selection/HomeCarousel.vue"
+  import SeriesColGrid from "../components/grids/SeriesColGrid.vue"
+  import VideoMetadata from "../components/metadata/VideoMetada.vue"
+  import VideoPreview from "../components/metadata/VideoPreview.vue"
+  import ValidationPage from "../page/studio/ValidationPage.vue"
+
   export default {
     name: 'StudioView',
     components : {
       TopBar,
-      Videos,
-      HomeCarousel
+      SeriesColGrid,
+      VideoMetadata,
+      VideoPreview,
+      ValidationPage
     },
     mounted() {
       console.log("test home")

@@ -178,6 +178,7 @@ function getTokens(code) {
 
     apiMixin.methods.postData(import.meta.env.VITE_MABOKE_API_ROOT + "/studiomaker", data, (response) => {
         if(response) {
+            console.log("respose : ", response)
             access_token = response.tokens.access_token
             console.log("access_token");
             //window.localStorage.setItem('tokens', JSON.stringify(response))

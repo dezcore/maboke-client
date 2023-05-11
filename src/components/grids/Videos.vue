@@ -30,15 +30,6 @@
 </div>
 </template>
 <script>
-/*<v-img
-          :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
-          class="white--text align-end"
-          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-          @click="()=>{}"
-          height="200px"
-        >
-        </v-img>
-        */
   export default {
     name: 'Videos',
     props : {},
