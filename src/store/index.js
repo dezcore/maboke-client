@@ -1,7 +1,7 @@
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import { createPinia } from 'pinia';
 
-import useGlobalStore from "./useGlobal";
+import {useGlobalStore} from "./useGlobal";
 
 /** Pinia Store */
 const pinia = createPinia();

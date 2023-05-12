@@ -1,13 +1,16 @@
 import axios from "axios"
+import {useGlobalStore} from '../store'
 
-/*axios.interceptors.request.use(async config => {
+axios.interceptors.request.use(async config => {
     let access_token
-    const tokensObj =  window.App.$store.state.trafficlawstore.tokens
+    const globalStore = useGlobalStore();
+    const tokens = globalStore.getAccessToken
 
-    if(tokensObj) {
-        access_token = tokensObj.tokens.access_token
-        if(config.url.includes('trafficlaws')) {
-            config.headers.tokens = JSON.stringify(tokensObj)
+    if(tokens) {
+        access_token = tokens.access_token
+        
+        if(config.url.includes('studiomaker')) {
+            config.headers.tokens = JSON.stringify(tokens)
             config.headers.accept = "application/json"
         } else if(access_token) {
             delete config.headers.tokens
@@ -17,7 +20,7 @@ import axios from "axios"
     }
 
     return config
-})*/
+})
 
 export default {
     create : (url, data) => {
