@@ -1,6 +1,6 @@
 <template>
  <v-app>
-    <v-app-bar 
+  <v-app-bar 
       v-if="showAppBar"
       color="black"
       density="compact"
@@ -19,7 +19,9 @@
       </template>
     </v-app-bar>
     <v-main>
-        <slot name="main"></slot> 
+      <v-container fluid>
+        <slot name="main"></slot>
+      </v-container> 
     </v-main>
   </v-app>
 </template>
@@ -27,6 +29,7 @@
 <script>
 import AuthButtons from "../auth/AuthButtons.vue"
 
+//const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
 export default {
   name: 'TopBar',
   components : {

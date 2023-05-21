@@ -2,8 +2,6 @@ import apiMixin from '../../mixins/apiMixin'
 import {useGlobalStore} from '../../store'
 
 let access_token, client, tokenClient
-const userInfo_url = 'https://www.googleapis.com/oauth2/v3/userinfo'
-
 
 function authenticate() {
     return window.google.accounts.oauth2.getAuthInstance()
@@ -177,22 +175,23 @@ function initTokenClient() {
 
 function getTokens(code) {
     const data = {code : code, scope : import.meta.env.VITE_SCOPE}
-    
-    apiMixin.methods.postData(import.meta.env.VITE_MABOKE_API_ROOT + "/studiomaker", data, (response) => {
+    console.log("data : ", data)
+
+    /*apiMixin.methods.postData(import.meta.env.VITE_MABOKE_API_ROOT + import.meta.env.VITE_MABOKE_API_TOKEN_URI, data, (response) => { 
         const globalStore = useGlobalStore();
 
         if(response && response.access_token) {
             access_token = response.access_token
             globalStore.setAccessToken(response)
             //window.localStorage.setItem('tokens', JSON.stringify(response))
-            apiMixin.methods.getData(userInfo_url, (user) => {
-                console.log("user : ", user)
+            apiMixin.methods.getData(import.meta.env.VITE_GOOGLE_USER_INFO_URL, (user) => {
+                console.log("user : ", user, ', ', response)
                 //this.loading = false  
                 //window.localStorage.setItem('user', JSON.stringify(user))
                 //window.location.replace(window.location.origin + window.location.pathname)
            })
         }
-    })
+    })*/
 }
 
 function initCodeClient() {
