@@ -70,18 +70,18 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const globalStore = useGlobalStore();
-  const tokens = window.localStorage.getItem("tokens")
+  //const tokens = window.localStorage.getItem("tokens")
 
-  if(window && to.name === 'Studio' && (tokens === null || tokens === 'null')) {
+  /*if(window && to.name === 'Studio' && (tokens === null || tokens === 'null')) {
     next({ name: 'Auth' })
   } else {
     if(globalStore.getAccessToken === undefined && tokens)
-      globalStore.setAccessToken(tokens)
+      globalStore.setAccessToken(tokens)*/
 
     globalStore.setLoading(true);
     await nextTick();
     next();
-  }
+  //}
 })
 
 router.afterEach(() => {

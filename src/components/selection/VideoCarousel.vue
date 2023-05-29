@@ -4,20 +4,17 @@
     cycle
     height="400"
     hide-delimiter-background
-    show-arrows="hover"
+    :show-arrows="false"
+    id="dynamic_carousel"
+    ref="dynamic_carousel"
   >
-    <v-carousel-item
-      v-for="(slide, i) in slides"
-      :key="i"
-    >
+    <v-carousel-item>
       <v-sheet
-        :color="colors[i]"
+        color="indigo"
         height="100%"
       >
         <div class="d-flex fill-height justify-center align-center">
-          <div class="text-h2">
-            {{ slide }} Slide
-          </div>
+          <CarouselPlayer/>
         </div>
       </v-sheet>
     </v-carousel-item>
@@ -25,12 +22,16 @@
 </div>
 </template>
 <script>
+  import CarouselPlayer from "./CarouselPlayer.vue"
+
   export default {
-    name: 'HomeCarousel',
+    name: 'VideoCarousel',
     components : {
+      CarouselPlayer
     },
     data () {
       return {
+        videoId : "",
         colors: [
           'indigo',
           'warning',
