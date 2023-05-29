@@ -1,11 +1,10 @@
 <template>
 <v-row>
     <v-col cols="12">
-        <v-overlay  v-model="overlay">
-            <div class="cplayer-container">
-                <div id="cplayer"></div>
+        <div class="cplayer-container">
+            <div id="cplayer">
             </div>
-        </v-overlay>
+        </div>
     </v-col>
 </v-row>
 </template>
@@ -21,7 +20,7 @@ export default {
     data () {
       return {
         overlay: true,
-        playerVideoId : "11-lpoJHu0U"
+        playerVideoId : ""
       }
     },
     mounted() {
@@ -30,20 +29,12 @@ export default {
     unmounted() {
       window.removeEventListener("resize", this.onResize)
     },
-    computed : {
-        getPlayerWidth : function() {
-            return $("#dynamic_carousel").width()
-        },
-        getPlayerHeight : function() {
-            return $("#dynamic_carousel").height()
-        }
-    },
+    computed : {},
     methods : {
         initPlayer : function(width, playerHeight, videoId) {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
                     this.playerVideoId = videoId ? videoId : this.playerVideoId
-                    //console.log("test init : ",  this.playerVideoId, ", ", videoId)
                     loadVideo("cplayer", playerHeight, width, this.playerVideoId)
                 })
             })
@@ -53,7 +44,6 @@ export default {
             const height = $("#dynamic_carousel").height();
             
             if(width !== undefined && height !== undefined) {
-                console.log("test carousel");
                 this.initPlayer(width, height, null)
                 window.addEventListener("resize", this.onResize)
             }

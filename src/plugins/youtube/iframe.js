@@ -20,7 +20,7 @@ function loadVideo(id, pHeight, pWidth, vId) {
     const playerId = id ? id :"player"
     const height = pHeight ? pHeight : "455"
     const width = pWidth ? pWidth : "700"
-    const videoId = vId ? vId : "WhY7uyc56ms"
+    const videoId = vId ? vId : "nXkgdu-frMw"
     
     window.YT.ready(function() {
       new window.YT.Player(playerId, {
@@ -31,7 +31,7 @@ function loadVideo(id, pHeight, pWidth, vId) {
           autoplay : 1, 
           fs : 0, 
           rel: 0, 
-          mute : 0, 
+          mute : 1, 
           color : 'white', 
           showinfo : 0,
           loop : 1,
