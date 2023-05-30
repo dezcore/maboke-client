@@ -3,30 +3,55 @@
   <v-slide-group
       show-arrows
     >
-      <v-slide-group-item
-        v-for="(item, index) in  series"
-        class="pa-0 ma-0"
-        :key="item.id + index"
+        <v-slide-group-item
+          v-for="(item, index) in  series"
+          class="pa-0 ma-0"
+          :key="item.id + index"
+        >
+        <v-card  class="pa-1">
+          <div class="pa-1"></div>
+          
+          <v-img
+            :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+            cover
+            width="300px"
+            height="100%"
+          ></v-img>
+          
+
+      <v-overlay
+        origin="overlap"
+        location="top center"
+        activator="parent"
+        location-strategy="connected"
+        class="align-center justify-center"
       >
-      <div class="pa-1"></div>
-      <v-img
-        :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
-        cover
-        width="300px"
-        height="100%"
-      ></v-img>
+      <VideoDescription 
+        :img="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+        :href="'/player?videoId=' + item.id"
+      />
+    </v-overlay>
+        </v-card>
+      
       </v-slide-group-item>
+      
+       
     </v-slide-group>
 </div>
 </template>
 <script>
 //:href="'/player?videoId=' + item.id"
+  import VideoDescription from "../cards/VideoDescription.vue"
   export default {
     name: 'Videos',
     props : {},
     watch : {},
+    components : {
+      VideoDescription
+    },
     data () {
       return {
+        overlay: false,
         series : [
             {
                 id : 'b6gd8H1F1Cc',
@@ -95,12 +120,11 @@
   }
 </script>
 
-<style>
+<style scoped>
 .headerClass{
   white-space: nowrap ;
   word-break: normal;
   overflow: hidden ;
   text-overflow: ellipsis;
 }
-
 </style>
