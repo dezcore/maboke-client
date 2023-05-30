@@ -2,28 +2,18 @@
 <div>
   <v-slide-group
       show-arrows
-     
     >
       <v-slide-group-item
         v-for="(item, index) in  series"
         class="pa-0 ma-0"
         :key="item.id + index"
       >
-      <v-card
-        color="grey-lighten-1"
-        :class="['ma-1', selectedClass]"
-        :href="'/player?videoId=' + item.id"
-      >
-
-       <v-img
-          class="bg-white"
-          width="250px"
-          max-height="150"
-          :aspect-ratio="1"
-          :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
-          cover
-        ></v-img>
-      </v-card>
+      <div class="pa-1"></div>
+      <v-img
+        :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+        cover
+        height="100%"
+      ></v-img>
       </v-slide-group-item>
     </v-slide-group>
 </div>
