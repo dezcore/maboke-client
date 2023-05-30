@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+  import {oProxy} from "../../plugins/youtube/iframe"
   export default {
     name: 'HomeCarouselOverlay',
     components : {},
@@ -25,7 +26,13 @@
     },
     methods : {
       setMute : function() {
+        const {mute, unMute} = oProxy.$yApi1
         this.mute = !this.mute
+        
+        if(this.mute && mute)
+          oProxy.$yApi1.mute()
+        else if(!this.mute && unMute) 
+          oProxy.$yApi1.unMute()
       }
     }
   }

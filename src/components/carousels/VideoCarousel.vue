@@ -39,7 +39,20 @@
           'First',
           'Second',
           'Third'
-        ]
+        ],
+        playerVars : { 
+          autoplay : 1, 
+          fs : 0, 
+          rel: 0, 
+          mute : 1, 
+          color : 'white', 
+          showinfo : 0,
+          loop : 1,
+          color : "white",
+          controls: 0,
+          playsinline : 0,
+          modestbranding : 1,
+        }
       }
     },
     mounted() {
@@ -49,11 +62,11 @@
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
-      initPlayer : function(width, playerHeight, videoId) {
+      initPlayer : function(width, playerHeight, videoId, playerVars) {
         $(document).ready(function() {
           $.getScript("https://www.youtube.com/iframe_api", function() {
             this.playerVideoId = videoId ? videoId : this.playerVideoId
-            loadVideo("cplayer", playerHeight, width, this.playerVideoId)
+            loadVideo("cplayer", playerHeight, width, this.playerVideoId, playerVars)
           })
         })
       },
@@ -62,7 +75,7 @@
         const height =  Math.floor(Number(width) * 0.53)
 
         if(width !== undefined && height !== undefined) {
-          this.initPlayer(width, height, null)
+          this.initPlayer(width, height, null, this.playerVars)
           window.addEventListener("resize", this.onResize)
         }
       },

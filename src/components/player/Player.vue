@@ -1,6 +1,9 @@
 <template>
 <v-row>
     <v-col cols="12">
+        <PlayerToolbar/>
+    </v-col>
+    <v-col cols="12">
         <div class="mabokePlayer" ref="mabokePlayer">
             <div id="player"></div>
         </div>
@@ -10,14 +13,30 @@
 
 <script>
 import $ from "jquery"
+import PlayerToolbar from "../toolbars/PlayerToolbar.vue"
 import {loadVideo,  oProxy} from "../../plugins/youtube/iframe"
 
 export default {
     name: 'Player',
-    components : {},
+    components : {
+        PlayerToolbar
+    },
     data () {
       return {
-        playerVideoId : "11-lpoJHu0U"
+        playerVideoId : "11-lpoJHu0U",
+        playerVars : { 
+          autoplay : 1, 
+          fs : 0, 
+          rel: 0, 
+          mute : 1, 
+          color : 'white', 
+          showinfo : 0,
+          loop : 1,
+          color : "white",
+          controls: 0,
+          playsinline : 0,
+          modestbranding : 1,
+        }
       }
     },
     mounted() {
@@ -27,12 +46,12 @@ export default {
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
-        initPlayer : function(width, playerHeight, videoId) {
+        initPlayer : function(width, playerHeight, videoId, playerVars) {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
                     this.playerVideoId = videoId ? videoId : this.playerVideoId
                     console.log("test init : ",  this.playerVideoId, ", ", videoId)
-                    loadVideo(null, playerHeight, width, this.playerVideoId)
+                    loadVideo(null, playerHeight, width, this.playerVideoId, playerVars)
                 })
             })
         },
@@ -43,7 +62,7 @@ export default {
             
             if(clientWidth) {
                 playerWidth = Math.floor(Number(this.$refs.mabokePlayer.clientWidth) * 0.99)//99% of box
-                this.initPlayer(playerWidth, playerHeight, this.$route.query.videoId)
+                this.initPlayer(playerWidth, playerHeight, this.$route.query.videoId, this.playerVars)
                 window.addEventListener("resize", this.onResize)
             }
         },

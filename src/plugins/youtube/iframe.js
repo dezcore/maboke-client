@@ -16,30 +16,19 @@ function initProx() {
 
 const oProxy = initProx()
 
-function loadVideo(id, pHeight, pWidth, vId) {
+function loadVideo(id, pHeight, pWidth, vId, yVars) {
     const playerId = id ? id :"player"
     const height = pHeight ? pHeight : "455"
     const width = pWidth ? pWidth : "700"
     const videoId = vId ? vId : "nXkgdu-frMw"
-    
+    const playerVars = yVars ? yVars : {}
+    console.log('PlayerVars : ', playerVars);
     window.YT.ready(function() {
       new window.YT.Player(playerId, {
         height: height,
         width: width,
         videoId: videoId,
-        playerVars: { 
-          autoplay : 1, 
-          fs : 0, 
-          rel: 0, 
-          mute : 1, 
-          color : 'white', 
-          showinfo : 0,
-          loop : 1,
-          color : "white",
-          controls: 0,
-          playsinline : 0,
-          modestbranding : 1,
-        },
+        playerVars: playerVars,
         events: {
           onReady: onPlayerReady,
           onStateChange: onPlayerStateChange
