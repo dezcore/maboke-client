@@ -12,6 +12,7 @@
       <v-img
         :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
         cover
+        width="300px"
         height="100%"
       ></v-img>
       </v-slide-group-item>
@@ -19,6 +20,7 @@
 </div>
 </template>
 <script>
+//:href="'/player?videoId=' + item.id"
   export default {
     name: 'Videos',
     props : {},
