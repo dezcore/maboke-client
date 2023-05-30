@@ -9,8 +9,6 @@
           :key="item.id + index"
         >
         <v-card  class="pa-1">
-          <div class="pa-1"></div>
-          
           <v-img
             :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
             cover
@@ -22,7 +20,9 @@
       <v-overlay
         origin="overlap"
         location="top center"
+        openOnHover 
         activator="parent"
+        :scrim="false"
         location-strategy="connected"
         class="align-center justify-center"
       >
