@@ -7,6 +7,7 @@
           v-for="(item, index) in  series"
           class="pa-0 ma-0"
           :key="item.id + index"
+          
         >
         <v-card  class="pa-1">
           <v-img
@@ -18,13 +19,14 @@
           
 
       <v-overlay
-        origin="overlap"
-        location="top center"
-        openOnHover 
-        activator="parent"
         :scrim="false"
+        openOnHover
+        open-delay="0"
+        close-delay="0" 
+        origin="overlap"
+        activator="parent"
+        scroll-strategy="close"
         location-strategy="connected"
-        class="align-center justify-center"
       >
       <VideoDescription 
         :img="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
