@@ -12,7 +12,16 @@
           <MovieCarouselOverlay/>
         </template>
       </VideoCarousel>
-      <Movies/>
+      <v-card-text 
+        v-for="({name}, index) in categories" 
+        :key="name + index"
+      >
+        <h2 class="text-h6 mb-2 text-left">
+          {{name}}
+        </h2>
+        <Movies/>
+      </v-card-text>
+     
     </div>
   </template>
 </TopBar>
@@ -20,6 +29,7 @@
 <script>
   import TopBar from "../components/nav/TopBar.vue"
   import Movies from "../components/grids/Movies.vue"
+
   import Parallax from "../components/image/Parallax.vue"
   import VideoCarousel from "../components/carousels/VideoCarousel.vue"
   import MovieCarouselOverlay from "../components/overlays/MovieCarouselOverlay.vue"
@@ -36,6 +46,26 @@
     },
     data () {
       return {
+        categories : [
+          {
+            name : "Histoires et talents",
+            videos : [
+
+            ]
+          },
+          {
+            name : "Notre sélection pour vous",
+            videos : [
+
+            ]
+          },
+          {
+            name : "Nouveautés",
+            videos : [
+
+            ]
+          }
+        ]
       }
     },
     methods : {}

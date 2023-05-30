@@ -16,14 +16,13 @@
       >
 
        <v-img
-        class="bg-white"
-        width="250px"
-         max-height="150"
-        :aspect-ratio="1"
-        :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
-        cover
-      ></v-img>
-        
+          class="bg-white"
+          width="250px"
+          max-height="150"
+          :aspect-ratio="1"
+          :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+          cover
+        ></v-img>
       </v-card>
       </v-slide-group-item>
     </v-slide-group>

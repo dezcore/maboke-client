@@ -1,27 +1,16 @@
 <template>
-<div>
-    <v-card  class="overflow-auto">
-        <v-container fluid>
-            <v-row dense>
-                <v-col
-                    v-for="(item, index) in  series"
-                    :key="item.id + index"
-                    :cols="3"
-                >
-                    <v-card :href="'/player?videoId=' + item.id">
-                        <v-img
-                            :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
-                            class="white--text align-end"
-                            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                            @click="()=>{}"
-                            height="200px"
-                        >
-                        </v-img>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-container>
-  </v-card>
+<div class="pa-4">
+  <v-row>
+    <template v-for="(item, index) in series" :key="item.id + index">
+      <v-col :cols="3" class="pa-1">
+        <v-img
+          :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+          cover
+          height="100%"
+        ></v-img>
+      </v-col>
+    </template>
+  </v-row>
 </div>
 </template>
 <script>
@@ -32,6 +21,26 @@
     data () {
       return {
         series : [
+            {
+                id : 'b6gd8H1F1Cc',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+            {
+                id : 'b6gd8H1F1Cc',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
             {
                 id : 'b6gd8H1F1Cc',
                 views : 28,
@@ -63,6 +72,26 @@
                 channelTitle : 'channelTitle'
             },
              {
+                id : 'FIBE5RS1Kdk',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+            {
+                id : 'FIBE5RS1Kdk',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+            {
                 id : 'FIBE5RS1Kdk',
                 views : 28,
                 title : 'title',
