@@ -4,7 +4,11 @@
   >
     <template #main>
       <div>
-        <VideoCarousel/>
+        <VideoCarousel>
+          <template #content>
+            <HomeCarouselOverlay/>
+          </template>
+        </VideoCarousel>
         <v-card-text 
           v-for="({name}, index) in categories" 
           :key="name + index"
@@ -21,15 +25,16 @@
 <script>
   import TopBar from "../components/nav/TopBar.vue"
   import Videos from "../components/grids/Videos.vue"
-  //import HomeCarousel from "../components/selection/HomeCarousel.vue"
-  import VideoCarousel from "../components/selection/VideoCarousel.vue"
+  import VideoCarousel from "../components/carousels/VideoCarousel.vue"
+  import HomeCarouselOverlay from "../components/overlays/HomeCarouselOverlay.vue"
+
   export default {
     name: 'HomeView',
     components : {
       TopBar,
       Videos,
-      VideoCarousel
-      //HomeCarousel
+      VideoCarousel,
+      HomeCarouselOverlay
     },
     mounted() {
       console.log("test home")
@@ -37,6 +42,36 @@
     data () {
       return {
         categories : [
+          {
+            name : "Histoires et talents",
+            videos : [
+
+            ]
+          },
+          {
+            name : "Notre sélection pour vous",
+            videos : [
+
+            ]
+          },
+          {
+            name : "Nouveautés",
+            videos : [
+
+            ]
+          },
+          {
+            name : "Appreciés sur Maboke",
+            videos : [
+
+            ]
+          },
+          {
+            name : "Revoir",
+            videos : [
+
+            ]
+          },
           {
             name : "Films et séries",
             videos : [

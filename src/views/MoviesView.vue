@@ -3,10 +3,17 @@
   :showAppBar="true"
 >
   <template #main>
-    <Parallax 
-      title="Movies"
-    />
-    <Movies/>
+    <div>
+      <VideoCarousel 
+        overlayClass="d-flex align-start flex-column"
+      > 
+        <template #content>
+          <GendersAutocomplete/>
+          <MovieCarouselOverlay/>
+        </template>
+      </VideoCarousel>
+      <Movies/>
+    </div>
   </template>
 </TopBar>
 </template>
@@ -14,13 +21,18 @@
   import TopBar from "../components/nav/TopBar.vue"
   import Movies from "../components/grids/Movies.vue"
   import Parallax from "../components/image/Parallax.vue"
-
+  import VideoCarousel from "../components/carousels/VideoCarousel.vue"
+  import MovieCarouselOverlay from "../components/overlays/MovieCarouselOverlay.vue"
+  import GendersAutocomplete from "../components/form/autocomplete/GendersAutocomplete.vue"
   export default {
     name: 'MoviesView',
     components : {
       TopBar,
       Movies,
-      Parallax
+      Parallax,
+      VideoCarousel,
+      GendersAutocomplete,
+      MovieCarouselOverlay
     },
     data () {
       return {

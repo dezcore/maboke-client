@@ -6,19 +6,11 @@
       :model-value="true"
       scrim="#036358"
       contained
-      class="align-center justify-start"
+      :class="overlayClass"
+      :closeOnContentClick="false"
+      persistent
     >
-      <div :class="['text-h1', 'pa-2']">TOXIC</div>
-      <div class="text-center pa-4">
-        <v-btn  density="comfortable" class= "ma-1" prepend-icon="mdi-play">
-          Lecture
-        </v-btn>
-        <v-btn  density="comfortable" class= "ma-1" prepend-icon="mdi-information">
-          Plus d'infos
-        </v-btn>
-        <v-btn density="compact" icon="mdi-volume-high" v-if="!mute" @click="setMute"></v-btn>
-        <v-btn density="compact" icon="mdi-volume-off" v-else @click="setMute"></v-btn>
-      </div>
+      <slot name="content"></slot>
     </v-overlay>
   </div>
   </v-card>
@@ -27,14 +19,16 @@
 <script>
   import $ from "jquery"
   import {loadVideo,  oProxy} from "../../plugins/youtube/iframe"
-
   export default {
     name: 'VideoCarousel',
-    components : {
+    props : {
+      overlayClass : {
+        type : String,
+        default : () => {return "align-center justify-start"}
+      }
     },
     data () {
       return {
-        mute : true,
         videoId : "",
         colors: [
           'indigo',
@@ -55,9 +49,6 @@
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
-      setMute : function() {
-        this.mute = !this.mute
-      },
       initPlayer : function(width, playerHeight, videoId) {
         $(document).ready(function() {
           $.getScript("https://www.youtube.com/iframe_api", function() {

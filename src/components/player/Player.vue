@@ -10,7 +10,7 @@
 
 <script>
 import $ from "jquery"
-import {loadVideo,  oProxy} from "../plugins/youtube/iframe"
+import {loadVideo,  oProxy} from "../../plugins/youtube/iframe"
 
 export default {
     name: 'Player',
