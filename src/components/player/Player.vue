@@ -5,7 +5,13 @@
     </v-col>
     <v-col cols="12">
         <div class="mabokePlayer" ref="mabokePlayer">
-            <div id="player"></div>
+            <PlayerOverlay 
+                :showPlayerOverlay="showPlayerOverlay"
+            >
+                <template #player>                        
+                    <div id="player"></div>
+                </template>
+            </PlayerOverlay>
         </div>
     </v-col>
 </v-row>
@@ -14,15 +20,18 @@
 <script>
 import $ from "jquery"
 import PlayerToolbar from "../toolbars/PlayerToolbar.vue"
-import {loadVideo,  oProxy} from "../../plugins/youtube/iframe"
+import PlayerOverlay from "../overlays/PlayerOverlay.vue"
+import {loadVideo,  oProxy, yProxy} from "../../plugins/youtube/iframe"
 
 export default {
     name: 'Player',
     components : {
+        PlayerOverlay,
         PlayerToolbar
     },
     data () {
       return {
+        showPlayerOverlay : false, 
         playerVideoId : "11-lpoJHu0U",
         playerVars : { 
           autoplay : 1, 
@@ -46,6 +55,10 @@ export default {
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
+        setPlayerOverlay : function(state) {
+            this.showPlayerOverlay = state
+            console.log("Test setOverlay")
+        },
         initPlayer : function(width, playerHeight, videoId, playerVars) {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
@@ -63,6 +76,7 @@ export default {
                 playerWidth = Math.floor(Number(this.$refs.mabokePlayer.clientWidth) * 0.99)//99% of box
                 this.initPlayer(playerWidth, playerHeight, this.$route.query.videoId, this.playerVars)
                 window.addEventListener("resize", this.onResize)
+                yProxy['setPlayerOverlay'] = this.setPlayerOverlay
             }
         },
         onResize : function () {

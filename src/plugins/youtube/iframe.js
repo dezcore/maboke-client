@@ -15,6 +15,7 @@ function initProx() {
 }
 
 const oProxy = initProx()
+const yProxy = initProx()
 
 function loadVideo(id, pHeight, pWidth, vId, yVars) {
     const playerId = id ? id :"player"
@@ -22,7 +23,7 @@ function loadVideo(id, pHeight, pWidth, vId, yVars) {
     const width = pWidth ? pWidth : "700"
     const videoId = vId ? vId : "nXkgdu-frMw"
     const playerVars = yVars ? yVars : {}
-    console.log('PlayerVars : ', playerVars);
+
     window.YT.ready(function() {
       new window.YT.Player(playerId, {
         height: height,
@@ -47,15 +48,23 @@ function loadVideo(id, pHeight, pWidth, vId, yVars) {
       //event.target.playVideo()
     }
 
-    function onPlayerStateChange(event) {
+    function stopPlayerHandler() {
       const {stopVideo} = oProxy.$yApi1
+      
+      if(stopVideo)
+        oProxy.$yApi1.stopVideo()
 
-      //let videoStatuses = Object.entries(window.YT.PlayerState)
-      if(event && stopVideo/*yApi.state*/ ) {
+      if(yProxy.setPlayerOverlay)
+        yProxy.setPlayerOverlay(true)
+
+    }
+
+    function onPlayerStateChange(event) {
+      if(event/*yApi.state*/ ) {
         switch(event.data){
           // Stop the video on ending so recommended videos don't pop up
           case 0:     // ended
-            oProxy.$yApi1.stopVideo()
+            stopPlayerHandler() 
             break;
           case -1:    // unstarted
           case 1:     // playing
@@ -72,5 +81,6 @@ function loadVideo(id, pHeight, pWidth, vId, yVars) {
 
 export {
     loadVideo,
-    oProxy
+    oProxy,
+    yProxy
 }
