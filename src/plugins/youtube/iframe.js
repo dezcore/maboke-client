@@ -50,12 +50,18 @@ function loadVideo(id, pHeight, pWidth, vId, yVars) {
 
     function stopPlayerHandler() {
       const {stopVideo} = oProxy.$yApi1
-      
+
       if(stopVideo)
         oProxy.$yApi1.stopVideo()
 
       if(yProxy.setPlayerOverlay)
-        yProxy.setPlayerOverlay(true)
+        yProxy.setPlayerOverlay({state : true})
+
+    }
+
+    function pausedHandler() {
+      if(yProxy.setPlayerOverlay)
+        yProxy.setPlayerOverlay({state : true})
 
     }
 
@@ -69,6 +75,8 @@ function loadVideo(id, pHeight, pWidth, vId, yVars) {
           case -1:    // unstarted
           case 1:     // playing
           case 2:     // paused
+            pausedHandler()
+            break;
           case 3:     // buffering
             //window.App.$store.commit("updatePlayerReady", {state : true});
             //break;

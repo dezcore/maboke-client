@@ -31,7 +31,7 @@ export default {
     },
     data () {
       return {
-        showPlayerOverlay : false, 
+        showPlayerOverlay : null, 
         playerVideoId : "11-lpoJHu0U",
         playerVars : { 
           autoplay : 1, 
@@ -55,8 +55,9 @@ export default {
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
-        setPlayerOverlay : function(state) {
-            this.showPlayerOverlay = state
+        setPlayerOverlay : function(current) {
+            if(current)
+                this.showPlayerOverlay = current
             console.log("Test setOverlay")
         },
         initPlayer : function(width, playerHeight, videoId, playerVars) {
