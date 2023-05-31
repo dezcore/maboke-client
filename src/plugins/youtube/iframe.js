@@ -48,13 +48,14 @@ function loadVideo(id, pHeight, pWidth, vId, yVars) {
     }
 
     function onPlayerStateChange(event) {
-      //let videoStatuses = Object.entries(window.YT.PlayerState)
+      const {stopVideo} = oProxy.$yApi1
 
-      if(event && oProxy.value /*yApi.state*/ ) {
+      //let videoStatuses = Object.entries(window.YT.PlayerState)
+      if(event && stopVideo/*yApi.state*/ ) {
         switch(event.data){
           // Stop the video on ending so recommended videos don't pop up
           case 0:     // ended
-            oProxy.value.stopVideo()
+            oProxy.$yApi1.stopVideo()
             break;
           case -1:    // unstarted
           case 1:     // playing

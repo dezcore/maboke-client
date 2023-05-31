@@ -26,16 +26,16 @@ export default {
         playerVideoId : "11-lpoJHu0U",
         playerVars : { 
           autoplay : 1, 
-          fs : 0, 
+          fs : 1,//Full screen 
           rel: 0, 
-          mute : 1, 
-          color : 'white', 
+          mute : 0, 
+          //color : 'white', 
           showinfo : 0,
-          loop : 1,
-          color : "white",
-          controls: 0,
+          //loop : 1,
+          //color : "white",
+          //controls: 0,
           playsinline : 0,
-          modestbranding : 1,
+          modestbranding : 1,// Youtbe logo
         }
       }
     },
@@ -50,7 +50,6 @@ export default {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
                     this.playerVideoId = videoId ? videoId : this.playerVideoId
-                    console.log("test init : ",  this.playerVideoId, ", ", videoId)
                     loadVideo(null, playerHeight, width, this.playerVideoId, playerVars)
                 })
             })
