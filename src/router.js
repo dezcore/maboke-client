@@ -1,5 +1,6 @@
 import AuthView from './views/AuthView.vue'
 import HomeView from './views/HomeView.vue'
+import KidsView from './views/KidsView.vue'
 import MoviesView from './views/MoviesView.vue'
 import SeriesView from './views/SeriesView.vue'
 import PlayerView from './views/PlayerView.vue'
@@ -60,7 +61,15 @@ const routes = [
         meta: {
             isAuthenticated: false
         }
-    }
+    },
+    { 
+      path: '/kids',
+      name: 'Kids',
+      component : KidsView,
+      meta: {
+          isAuthenticated: false
+      }
+  }
 ]
 
 const router = createRouter({

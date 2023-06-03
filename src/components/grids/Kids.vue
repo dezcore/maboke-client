@@ -1,0 +1,118 @@
+<template>
+<div class="pa-4">
+  <v-row>
+    <template v-for="(item, index) in series" :key="item.id + index">
+      <v-col :cols="3" class="pa-1">
+        <v-img
+          :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+          cover
+          height="100%"
+        ></v-img>
+      </v-col>
+    </template>
+  </v-row>
+</div>
+</template>
+<script>
+  export default {
+    name: 'Kids',
+    props : {},
+    watch : {},
+    data () {
+      return {
+        series : [
+            {
+                id : 'b6gd8H1F1Cc',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+            {
+                id : 'b6gd8H1F1Cc',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+            {
+                id : 'b6gd8H1F1Cc',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+             {
+                id : 'v7CrTuVxHSQ',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+             {
+                id : 'LgMGStELWkM',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+             {
+                id : 'FIBE5RS1Kdk',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+            {
+                id : 'FIBE5RS1Kdk',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            },
+            {
+                id : 'FIBE5RS1Kdk',
+                views : 28,
+                title : 'title',
+                description : '',
+                duration : '28:28',
+                src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
+                publishedAt : '28/03/2023',
+                channelTitle : 'channelTitle'
+            }
+        ]
+      }
+    },
+    methods : {}
+  }
+</script>
+
+<style scoped>
+.headerClass{
+  white-space: nowrap ;
+  word-break: normal;
+  overflow: hidden ;
+  text-overflow: ellipsis;
+}
+</style>

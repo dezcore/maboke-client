@@ -28,7 +28,6 @@
 
 <script>
 import AuthButtons from "../auth/AuthButtons.vue"
-
 //const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
 export default {
   name: 'TopBar',
@@ -67,6 +66,26 @@ export default {
         disabled: false,
         href: '/film',
       },
+      {
+        title: 'Talk Shows',
+        disabled: false,
+        href: '/kids',
+      },
+      {
+        title: 'Comedy club',
+        disabled: false,
+        href: '/kids',
+      },
+      {
+        title: 'Tv Shows',
+        disabled: false,
+        href: '/kids',
+      },
+      {
+        title: 'Kids',
+        disabled: false,
+        href: '/kids',
+      }
     ], 
   }),
 }
