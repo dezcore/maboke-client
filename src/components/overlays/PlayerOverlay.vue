@@ -9,7 +9,6 @@
             persistent
         >
             <v-menu 
-                persistent
                 :close-on-content-click="false"
             >
                 <template v-slot:activator="{ props }">

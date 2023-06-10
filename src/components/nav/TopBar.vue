@@ -9,11 +9,12 @@
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
          <v-breadcrumbs
             :items="items"
-            divider=" "
+            divider=""
         ></v-breadcrumbs>
       </template>
       <template v-slot:append>
         <v-btn icon="mdi-search-web"></v-btn>
+        <v-btn href="/kids">Kids</v-btn>
         <v-btn icon="mdi-bell"></v-btn>
         <AuthButtons/>
       </template>
@@ -67,24 +68,14 @@ export default {
         href: '/film',
       },
       {
-        title: 'Talk Shows',
+        title: 'Shows',
         disabled: false,
-        href: '/kids',
+        href: '/shows',
       },
       {
-        title: 'Comedy club',
+        title: 'Search',
         disabled: false,
-        href: '/kids',
-      },
-      {
-        title: 'Tv Shows',
-        disabled: false,
-        href: '/kids',
-      },
-      {
-        title: 'Kids',
-        disabled: false,
-        href: '/kids',
+        href: '/search',
       }
     ], 
   }),

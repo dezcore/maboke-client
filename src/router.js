@@ -1,10 +1,13 @@
 import AuthView from './views/AuthView.vue'
 import HomeView from './views/HomeView.vue'
 import KidsView from './views/KidsView.vue'
+import ShowsView from './views/ShowsView.vue'
 import MoviesView from './views/MoviesView.vue'
 import SeriesView from './views/SeriesView.vue'
 import PlayerView from './views/PlayerView.vue'
 import StudioView from './views/StudioView.vue'
+import SearchView from './views/SearchView.vue'
+
 
 import {
   createRouter,
@@ -59,7 +62,7 @@ const routes = [
         name: 'Serie',
         component : SeriesView,
         meta: {
-            isAuthenticated: false
+          isAuthenticated: false
         }
     },
     { 
@@ -67,9 +70,25 @@ const routes = [
       name: 'Kids',
       component : KidsView,
       meta: {
-          isAuthenticated: false
+        isAuthenticated: false
       }
-  }
+    },
+    { 
+      path: '/shows',
+      name: 'Shows',
+      component : ShowsView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/search',
+      name: 'Search',
+      component : SearchView,
+      meta: {
+        isAuthenticated: false
+      }
+    }
 ]
 
 const router = createRouter({
