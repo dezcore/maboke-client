@@ -5,12 +5,12 @@
             <v-row dense>
                 <v-col
                   v-for="(item, index) in  series"
-                  :key="item.id + index"
+                  :key="item.title + index"
                   :cols="3"
                 >
-                  <v-card :href="'/player?videoId=' + item.id">
+                  <v-card @click="previewSeasons(item.seasons)">
                       <v-img
-                        :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+                        :src="'https://img.youtube.com/vi/' + item.img + '/hqdefault.jpg'"
                         class="white--text align-end"
                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         @click="()=>{}"
@@ -20,142 +20,136 @@
                   </v-card>
                 </v-col>
             </v-row>
+            <v-pagination v-model="page" :length="4" rounded="circle"></v-pagination>
         </v-container>
   </v-card>
 </div>
 </template>
 <script>
+  import apiMixin from '../../mixins/apiMixin'
   export default {
     name: 'SeriesColGrid',
-    props : {},
+    props : {
+      previewSeasons : {
+        type : Function,
+        default : () => {}
+      }
+    },
     watch : {},
     data () {
       return {
+        page: 1,
         series : [
-          {
-            id : 'b6gd8H1F1Cc',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'v7CrTuVxHSQ',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'LgMGStELWkM',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'FIBE5RS1Kdk',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'FIBE5RS1Kdk',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'FIBE5RS1Kdk',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'FIBE5RS1Kdk',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'v7CrTuVxHSQ',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'FIBE5RS1Kdk',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'v7CrTuVxHSQ',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
-          {
-            id : 'FIBE5RS1Kdk',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          }, 
-          {
-            id : 'v7CrTuVxHSQ',
-            views : 28,
-            title : 'title',
-            description : '',
-            duration : '28:28',
-            src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-            publishedAt : '28/03/2023',
-            channelTitle : 'channelTitle'
-          },
+        {
+          title: "\"FILLE MÈRE\" EPISODE 1 [ film congolaise ] juin 2023",
+          img: "2fPCb8V4onM",
+          viewCount : "64 070 vues",
+          year: "1970-01-01T09:41:00Z",
+          seasons: [
+            {
+              title: "\"FILLE MÈRE\" EPISODE 1 [ film congolaise ] juin 2023",
+              date: "1970-01-01T09:41:00Z",
+              summary: "",
+              number: 1,
+              videoId : "2fPCb8V4onM",
+              videos: [
+                {
+                  title: "FILLE  MÈRE EPISODE 6 [ film congolaise ] juin 2023",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=2fPCb8V4onM",
+                  length: "50:05",
+                  censor_rating: "/watch?v=2fPCb8V4onM",
+                  videoId: " 2fPCb8V4onM"
+                },
+                {
+                  title: "\"FILLE MÈRE\" EPISODE 1 [ film congolaise ] juin 2023",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=N44Cppb8GHo",
+                  length: "52:04",
+                  censor_rating: "/watch?v=N44Cppb8GHo",
+                  videoId: " N44Cppb8GHo"
+                },
+                {
+                  title: "\"FILLE MÈRE\" EPISODE 3 [ film congolaise ] juin 2023",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=rj4sBXvc5vc",
+                  length: "51:37",
+                  censor_rating: "/watch?v=rj4sBXvc5vc",
+                  videoId: " rj4sBXvc5vc"
+                },
+                {
+                  title: "FILLE  MÈRE EPISODE 7 [ film congolaise ] juin 2023",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=gY7Tv6TVzms",
+                  length: "52:49",
+                  censor_rating: "/watch?v=gY7Tv6TVzms",
+                  videoId: " gY7Tv6TVzms"
+                },
+                {
+                  title: "\"FILLE MÈRE\" EPISODE 5 [ film congolaise ] juin 2023",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=Qne_khUvUoU",
+                  length: "50:12",
+                  censor_rating: "/watch?v=Qne_khUvUoU",
+                  videoId: " Qne_khUvUoU"
+                },
+                {
+                  title: "\"FILLE MÈRE\" EPISODE 4 [ film congolaise ] juin 2023",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=d8ug0l_bUiM",
+                  length: "51:04",
+                  censor_rating: "/watch?v=d8ug0l_bUiM",
+                  videoId: " d8ug0l_bUiM"
+                },
+                {
+                  title: "\"FILLE MÈRE\" EPISODE 2 [ film congolaise ] juin 2023",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=nG4jdulgVuc",
+                  length: "50:46",
+                  censor_rating: "/watch?v=nG4jdulgVuc",
+                  videoId: " nG4jdulgVuc"
+                },
+                {
+                  title: "Série- Vie d'ici- Episode 1",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=43AB5m0ScJs",
+                  length: "25:45",
+                  censor_rating: "/watch?v=43AB5m0ScJs",
+                  videoId: " 43AB5m0ScJs"
+                },
+                {
+                  title: "EPISODE 5",
+                  category: "",
+                  summary: "",
+                  url: "/watch?v=BL9XhZxCrdQ",
+                  length: "46:22",
+                  censor_rating: "",
+                  videoId: " BL9XhZxCrdQ"
+                }
+            ]
+          }
         ]
+      }]
       }
     },
-    methods : {}
+    mixins : [
+      apiMixin
+    ],
+    methods : {
+      getSerie : function() {
+        getData(import.meta.env.VITE_MABOKE_API_ROOT + "/series", (series) => {
+          console.log("Serie : ", series)
+        })
+      }
+    }
   }
 </script>
 

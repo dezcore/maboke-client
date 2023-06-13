@@ -9,21 +9,28 @@
       <h2 class="text-h6 mb-2 text-left">
         Video Metadata
       </h2>
-      <VideoMetadata/>
+      <VideoMetadata 
+        :metaData="metaData"
+      />
     </v-card-text>
     <v-card-text>
       <v-row>
         <v-col cols="2">
           <h2 class="text-h6 mb-2 text-left">
-            Video Preview
+            Video Preview   
           </h2>
-          <VideoPreview/>
+          <VideoPreview
+            :seasons="seasons"
+            :setMetaData="setMetaData"
+          />
         </v-col>
         <v-col cols="10">
           <h2 class="text-h6 mb-2 text-left">
             Séries Grid
           </h2>
-          <SeriesColGrid/>
+          <SeriesColGrid 
+            :previewSeasons="previewSeasons"
+          />
         </v-col>
       </v-row>
     </v-card-text>
@@ -42,8 +49,24 @@
       VideoPreview
     },
     data () {
-      return {}
+      return {
+        seasons: [],
+        metaData : null,
+        currentPreview : "Seasons"
+      }
     },
-    methods : {}
+    methods : {
+      previewSeasons : function(seasons) {
+        if(seasons) {
+          this.seasons = seasons
+          this.currentPreview = {value : "Seasons"}
+        }
+      },
+      setMetaData : function(metaData) {
+        if(metaData) {
+          this.metaData = metaData
+        }
+      }
+    }
   }
 </script>

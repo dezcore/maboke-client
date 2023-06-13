@@ -5,7 +5,7 @@
         <v-col cols="3">
           <v-card>
             <v-img
-              :src="videoSrc"
+              :src="'https://img.youtube.com/vi/' + currentVideo.videoId.trim() + '/hqdefault.jpg'"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               @click="()=>{}"
@@ -37,7 +37,7 @@
                 label="Description"
                 no-resize
                 rows="5"
-                :model-value="description"
+                :model-value="currentVideo.summary"
               >
               </v-textarea>
             </v-col>
@@ -50,8 +50,19 @@
 <script>
   export default {
     name: 'VideoMetadata',
-    props : {},
-    watch : {},
+    props : {
+      metaData : {
+        type : Object,
+        default : ()=>{return null}
+      }
+    },
+    watch : {
+      metaData : function(metaData) {
+        if(metaData) {
+          this.currentVideo = metaData
+        }
+      }
+    },
     data () {
       return {
         select: [],
@@ -82,8 +93,10 @@
           "UK",
           "Canada"
         ],
-        videoSrc: "https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        currentVideo : {
+          videoId: "nG4jdulgVuc",
+          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        },
       }
     },
     methods : {}

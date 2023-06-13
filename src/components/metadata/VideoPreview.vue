@@ -1,24 +1,26 @@
 <template>
 <v-card>
+  <v-icon icon="mdi-arrow-left" @click="back"></v-icon>
+  <v-icon icon="mdi-arrow-right" @click="foraward"></v-icon>
   <v-container fluid>
   <v-row>
     <v-col
-      v-for="(item, index) in  series"
+      v-for="(item, index) in  items"
       class="pa-0 ma-0"
-      :key="item.id + index"
+      :key="item.title + index"
       cols="12"
     >
       <v-card
         color="grey-lighten-1"
         :class="['ma-1', selectedClass]"
-        :href="'/player?videoId=' + item.id"
+        @click="previewSeason(item)"
       >
         <v-img
           class="bg-white"
           width="250px"
           max-height="150"
           :aspect-ratio="1"
-          :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+          :src="'https://img.youtube.com/vi/' + item.videoId.trim() + '/hqdefault.jpg'"
           cover
         ></v-img>   
       </v-card>
@@ -31,55 +33,56 @@
   <script>
     export default {
       name: 'VideoPreview',
-      props : {},
-      watch : {},
-      data () {
-        return {
-          series : [
-            {
-              id : 'b6gd8H1F1Cc',
-              views : 28,
-              title : 'title',
-              description : '',
-              duration : '28:28',
-              src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-              publishedAt : '28/03/2023',
-              channelTitle : 'channelTitle'
-            },
-            {
-              id : 'v7CrTuVxHSQ',
-              views : 28,
-              title : 'title',
-              description : '',
-              duration : '28:28',
-              src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-              publishedAt : '28/03/2023',
-              channelTitle : 'channelTitle'
-            },
-            {
-              id : 'LgMGStELWkM',
-              views : 28,
-              title : 'title',
-              description : '',
-              duration : '28:28',
-              src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-              publishedAt : '28/03/2023',
-              channelTitle : 'channelTitle'
-            },
-            {
-              id : 'FIBE5RS1Kdk',
-              views : 28,
-              title : 'title',
-              description : '',
-              duration : '28:28',
-              src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
-              publishedAt : '28/03/2023',
-              channelTitle : 'channelTitle'
-            }
-          ]
+      props : {
+        seasons : {
+          type :  Array,
+          default : ()=>{return []}
+        },
+        setMetaData : {
+          type : Function,
+          default : () => {}
         }
       },
-      methods : {}
+      watch : {
+        seasons : function(seasons) {
+          if(seasons) {
+            this.items = this.seasons
+            this.currentPreview = {value : "Seasons"}
+            //console.log("Watch : ", currentPreview.value);
+          }
+        }
+      },
+      data () {
+        return {
+          items : [],
+          season : [],
+          currentPreview : "Seasons"
+        }
+      },
+      methods : {
+        previewSeason : function(season) {
+          if(season && this.currentPreview.value === "Seasons") {
+            this.items = season.videos
+            this.season = season.videos
+            this.currentPreview = {value : "Season"}
+          } else if(season && this.currentPreview.value === "Season") { 
+            console.log("setMetaData")
+            this.setMetaData(season)
+          }
+        },
+        back : function() {
+          if(this.seasons && this.currentPreview.value === "Season") {
+            this.items = this.seasons
+            this.currentPreview = {value : "Seasons"}
+          }
+        },
+        foraward : function() {
+          if(this.seasons && this.currentPreview.value === "Seasons") {
+            this.items = this.season
+            this.currentPreview = {value : "Season"}
+          }
+        }
+      }
     }
   </script>
   
