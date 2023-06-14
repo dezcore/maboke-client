@@ -4,8 +4,8 @@ export default {
     data: () => ({}),
     methods : {
         getAuthCode,
-        getData: function(url, callBack) { 
-            api.getData(url)
+        getData: function(url, params, callBack) { 
+            api.getData(url, params)
             .then(response => {
                 if(response && callBack)
                     callBack(response.data)

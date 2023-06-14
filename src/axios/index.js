@@ -18,7 +18,7 @@ axios.interceptors.request.use(async config => {
             config.headers.Authorization = `Bearer ${access_token}`
         }
     }
-
+    
     return config
 })
 
@@ -26,8 +26,8 @@ export default {
     create : (url, data) => {
         return axios.post(url, data)
     },
-    getData : (url) => {
-        return axios.get(url)
+    getData : (url, params) => {
+        return axios.get(url, {params : params})
     },
     getDataByBody : (url, parameters) => {
         return axios.get(url, { params : parameters})

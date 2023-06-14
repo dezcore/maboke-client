@@ -20,7 +20,7 @@
                   </v-card>
                 </v-col>
             </v-row>
-            <v-pagination v-model="page" :length="4" rounded="circle"></v-pagination>
+            <v-pagination v-model="pageable.pageNumber" :length="pageable.totalPages" rounded="circle"></v-pagination>
         </v-container>
   </v-card>
 </div>
@@ -35,10 +35,25 @@
         default : () => {}
       }
     },
-    watch : {},
+    watch : {
+      pageable: {
+        handler: function (pageable) {
+          if(pageable && pageable.pageNumber !== this.page) {
+            this.page = pageable.pageNumber
+            this.getSerie({page : pageable.pageNumber, size : 12})
+            console.log("watch pageable : ", pageable, this.page);
+          }
+        },
+        deep: true
+      }
+    },
     data () {
       return {
         page: 1,
+        pageable : {
+          pageNumber : 1,
+          totalPages : 1
+        },
         series : [
         {
           title: "\"FILLE MÈRE\" EPISODE 1 [ film congolaise ] juin 2023",
@@ -143,10 +158,20 @@
     mixins : [
       apiMixin
     ],
+    mounted() {
+      this.getSerie({page : 1, size : 12})
+    },
     methods : {
-      getSerie : function() {
-        getData(import.meta.env.VITE_MABOKE_API_ROOT + "/series", (series) => {
-          console.log("Serie : ", series)
+      getSerie : function(params) {
+        this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", params, (series) => {
+          const {number, totalPages} = series
+
+          if(series) {
+            this.series = series.content
+            this.pageable.pageNumber = number
+            this.pageable.totalPages = totalPages
+            console.log("Serie : ", series)
+          }
         })
       }
     }
