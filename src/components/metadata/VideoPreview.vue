@@ -20,7 +20,7 @@
           width="250px"
           max-height="150"
           :aspect-ratio="1"
-          :src="'https://img.youtube.com/vi/' + getSeasonImg + '/hqdefault.jpg'"
+          :src="'https://img.youtube.com/vi/' + item.img + '/hqdefault.jpg'"
           cover
         ></v-img>   
       </v-card>
@@ -57,15 +57,6 @@
           items : [],
           season : [],
           currentPreview : "Seasons"
-        }
-      },
-      computed : {
-        getSeasonImg : function() {
-          let img = ""
-          const {videos} = this.items[0]
-          if(videos)
-            console.log("Items : ", this.items[0])
-          return img
         }
       },
       methods : {
