@@ -4,6 +4,7 @@
   <v-icon icon="mdi-arrow-right" @click="foraward"></v-icon>
   <v-container fluid>
   <v-row>
+    <v-card height="680" class="overflow-auto">
     <v-col
       v-for="(item, index) in  items"
       class="pa-0 ma-0"
@@ -25,6 +26,7 @@
         ></v-img>   
       </v-card>
     </v-col>
+    </v-card>
   </v-row>
   </v-container>
 </v-card>
