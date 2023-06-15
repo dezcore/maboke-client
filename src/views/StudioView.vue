@@ -23,9 +23,6 @@
       VideoPreview,
       ValidationPage
     },
-    mounted() {
-      console.log("test home")
-    },
     data () {
       return {}
     },

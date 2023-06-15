@@ -68,7 +68,7 @@
             this.season = season.videos
             this.currentPreview = {value : "Season"}
           } else if(season && this.currentPreview.value === "Season") { 
-            console.log("setMetaData")
+            //console.log("setMetaData")
             this.setMetaData(season)
           }
         },
