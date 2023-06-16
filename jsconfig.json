@@ -3,7 +3,8 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"],
-        }
+        },
+        "resolveJsonModule": true,
     },
     "exclude": ["dist", "node_modules"]
 }
