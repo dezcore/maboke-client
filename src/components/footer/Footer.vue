@@ -10,7 +10,10 @@
             <v-list-item
               v-for="(element, i) in item"
                 :key="i"
-                :href="item.href"
+                :href="element.href"
+                target="_blank"
+                color="primary"
+                variant="plain"
               >
               <v-list-item-title v-text="element.title"></v-list-item-title>
             </v-list-item>
@@ -43,6 +46,16 @@
               title: 'About',
               href: "/"
             },
+          ],
+          [
+            {
+              title: 'FAQ',
+              href: "/"
+            },
+            {
+              title: 'Help',
+              href: "/"
+            }
           ],
           [
             {

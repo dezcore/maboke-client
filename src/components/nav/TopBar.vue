@@ -12,11 +12,19 @@
             divider=""
         ></v-breadcrumbs>
       </template>
-      <template v-slot:append>
-        <v-btn icon="mdi-search-web"></v-btn>
-        <v-btn href="/kids">Kids</v-btn>
-        <v-btn icon="mdi-bell"></v-btn>
+      <template v-slot:append>        
+        <a href="/"><v-icon
+          color="white"
+          class="ma-1"
+          icon="mdi-search-web"
+        ></v-icon></a>
+        <a href="/"><v-icon
+          color="white"
+          class="ma-1"
+          icon="mdi-bell"
+        ></v-icon></a>
         <LanguageMenu/>
+        <v-btn href="/kids" variant="text">Kids</v-btn>
         <AuthButtons/>
       </template>
     </v-app-bar>

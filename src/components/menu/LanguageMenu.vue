@@ -2,7 +2,12 @@
   <div>
     <v-menu>
       <template v-slot:activator="{ props }">
-        <v-btn icon="mdi-translate" v-bind="props"></v-btn>
+        <v-icon
+          v-bind="props"
+          color="white"
+          class="ma-1"
+          icon="mdi-translate"
+        ></v-icon>
       </template>
       <v-list>
         <v-list-item

@@ -42,9 +42,6 @@
       VideoCarousel,
       HomeCarouselOverlay
     },
-    mounted() {
-      console.log("test home")
-    },
     data () {
       return {
         categories : [
