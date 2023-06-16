@@ -1,0 +1,13 @@
+[
+    {
+      "title": "English",
+      "locale": "en",
+      "enabled": true
+    },
+    {
+      "title": "Français",
+      "locale": "fr-FR",
+      "alternate": "fr",
+      "enabled": false
+    }
+  ]
