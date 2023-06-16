@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import {useLocaleStore} from '@/store'
 import locales from '@/i18n/locales.json'
 
 export default {
@@ -42,9 +43,12 @@ export default {
   },
   methods : {
     setLanguage : function(lang) {
+      //const localeStore = useLocaleStore()
       if(lang) {
         //this.$i18n.global.locale.value = locale
         this.$i18n.locale = lang.locale
+        //localeStore.setLocale(lang)
+        //console.log("Locale : ", localeStore.getLocale())
       }
     }
   }
