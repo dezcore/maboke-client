@@ -25,6 +25,7 @@
         <slot name="main"></slot>
       </v-container> 
     </v-main>
+    <slot name="footer"></slot>
   </v-app>
 </template>
 <script>
