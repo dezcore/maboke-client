@@ -9,6 +9,7 @@
           v-for="(item, index) in getItems"
           :key="index"
           :value="index"
+          @click="setLanguage(item)"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -24,21 +25,27 @@ export default {
   name: 'LanguageMenu',
   props : {},
   watch : {
-    /*watch(() => localeStore.locale, locale => {
-      i18n.global.locale.value = locale
-    })*/
+    
   },
   data: () => ({ 
     items: [], 
   }),
   computed : {
     getItems : function() {
-      return locales.filter(locale => locale.enabled).map(locale => {
+      return locales.filter(locale => locale.enabled).map(lang => {
         return {
-          title: locale.title,
-          //to: route.fullPath.replace(/^\/[a-zA-Z-]+/, `/${locale.alternate || locale.locale}`),
+          title: lang.title,
+          locale : lang.alternate || lang.locale
         }
       })
+    }
+  },
+  methods : {
+    setLanguage : function(lang) {
+      if(lang) {
+        //this.$i18n.global.locale.value = locale
+        this.$i18n.locale = lang.locale
+      }
     }
   }
 }
