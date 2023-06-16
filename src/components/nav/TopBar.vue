@@ -16,6 +16,7 @@
         <v-btn icon="mdi-search-web"></v-btn>
         <v-btn href="/kids">Kids</v-btn>
         <v-btn icon="mdi-bell"></v-btn>
+        <LanguageMenu/>
         <AuthButtons/>
       </template>
     </v-app-bar>
@@ -26,14 +27,15 @@
     </v-main>
   </v-app>
 </template>
-
 <script>
 import AuthButtons from "../auth/AuthButtons.vue"
-//const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
+import LanguageMenu from "@/components/menu/LanguageMenu.vue"
+
 export default {
   name: 'TopBar',
   components : {
-    AuthButtons
+    AuthButtons,
+    LanguageMenu
   },
   props : {
     title : {

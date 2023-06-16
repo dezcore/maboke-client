@@ -14,7 +14,3 @@ export default createI18n({
     locale:  'en',
     messages,
 })
-
-/*watch(() => localeStore.locale, locale => {
-    i18n.global.locale.value = locale
-})*/
