@@ -3,7 +3,8 @@
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vuetify from 'vite-plugin-vuetify';
+import vuetify from 'vite-plugin-vuetify'
+import ViteFonts from 'unplugin-fonts/vite'
 
 const resolve = file => fileURLToPath(new URL(file, import.meta.url))
 
@@ -22,6 +23,14 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     plugins: [
       vue(),
       vuetify({ autoImport: true }), // Enabled by default
+      ViteFonts({
+        google: {
+          families: [{
+            name: 'Roboto',
+            styles: 'wght@100;300;400;500;700;900',
+          }]
+        }
+      })
     ],
     server: {
       host: true,
