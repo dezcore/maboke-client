@@ -8,8 +8,9 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import VueForceNextTick from 'vue-force-next-tick'
 
-const vue = createApp(App);
 
+/** Register Vue */
+const vue = createApp(App);
 vue.use(VueAxios, axios)
 vue.use(router);
 vue.use(store);

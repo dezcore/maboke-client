@@ -13,26 +13,29 @@
               <v-icon>mdi-account</v-icon>
             </v-btn>
           </template>
-            <v-card>             
-             <v-list-item-group>
-               <v-list-item>
-                 <v-list-item-icon>
-                  <v-icon v-text="'mdi-account-details'"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="getUser.name"></v-list-item-title>
-                </v-list-item-content>
-               </v-list-item>
-               <v-divider></v-divider>
-               <v-list-item>
-                 <v-list-item-icon>
-                  <v-icon v-text="'mdi-logout'"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="'Logout'" v-on:click="signOut"></v-list-item-title>
-                </v-list-item-content>
-               </v-list-item>
-             </v-list-item-group>
+            <v-card>
+              <v-list density="compact">
+                <v-list-subheader>REPORTS</v-list-subheader>
+                  <v-list-item
+                    :value="item"
+                    color="primary"
+                  >
+                    <template v-slot:prepend>
+                      <v-icon icon="'mdi-account-details"></v-icon>
+                    </template>
+                    <v-list-item-title v-text="getUser.name"></v-list-item-title>
+                  </v-list-item>
+                  <v-list-item
+                    :value="item"
+                    color="primary"
+                    @click="signOut"
+                  >
+                    <template v-slot:prepend>
+                      <v-icon icon="mdi-logout"></v-icon>
+                    </template>
+                    <v-list-item-title v-text="Logout"></v-list-item-title>
+                  </v-list-item>
+              </v-list>
             </v-card>
          </v-menu>
       </v-toolbar>

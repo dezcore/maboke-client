@@ -11,11 +11,11 @@
         </VideoCarousel>
         <v-card-text 
           v-for="({name}, index) in categories" 
-          :key="name + index"
+          :key=" 'categorie'+index"
         >
-          <h2 class="text-h6 mb-2 text-left">
+          <div class="text-h6 mb-2 text-left">
             {{name}}
-          </h2>
+          </div>
           <Videos/>
         </v-card-text>
       </div>

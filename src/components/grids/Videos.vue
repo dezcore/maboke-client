@@ -5,7 +5,6 @@
     >
         <v-slide-group-item
           v-for="(item, index) in  series"
-          class="pa-0 ma-0"
           :key="item.id + index"
           
         >
@@ -17,7 +16,6 @@
             height="100%"
           ></v-img>
           
-
       <v-overlay
         :scrim="false"
         openOnHover
