@@ -14,7 +14,7 @@
           :key=" 'categorie'+index"
         >
           <div class="text-h6 mb-2 text-left">
-            {{name}}
+            {{name}} {{ $t("breakpoints") }}
           </div>
           <Videos/>
         </v-card-text>
