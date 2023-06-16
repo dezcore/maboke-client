@@ -21,7 +21,7 @@
         </v-col>
         <v-col cols="12">
           <v-divider></v-divider>
-          <div>©{{ new Date().getFullYear() }} — <strong>Maboke</strong></div>
+          <div>Copyright  © {{ new Date().getFullYear() }} — <strong>Maboke</strong></div>
         </v-col>
       </v-row>
   </v-footer>
