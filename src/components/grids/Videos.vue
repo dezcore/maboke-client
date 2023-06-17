@@ -10,7 +10,7 @@
         >
         <v-card  class="pa-1">
           <v-img
-            :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+            :src="'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg'"
             cover
             width="300px"
             height="100%"
@@ -27,7 +27,7 @@
         location-strategy="connected"
       >
       <VideoDescription 
-        :img="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+        :img="'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg'"
         :href="'/player?videoId=' + item.id"
       />
     </v-overlay>

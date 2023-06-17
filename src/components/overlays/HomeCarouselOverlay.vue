@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="['text-h1', 'pa-2']">TOXIC</div>
+    <div class="text-h1 font-weight-regular text-white">TOXIC</div>
       <div class="text-center pa-4">
         <v-btn  density="comfortable" class= "ma-1" prepend-icon="mdi-play">
           Lecture
@@ -22,6 +22,43 @@
       return {
         mute : true,
         videoId : "",
+        fonts : [
+          "font-weight-black",
+          "font-weight-bold",
+          "font-weight-medium",
+          "font-weight-regular",
+          "font-weight-light",
+          "font-weight-thin",
+          "font-italic"
+        ],
+        textTransform : [
+          "text-lowercase",
+          "text-uppercase",
+          "text-capitalize"
+        ],
+        textAlign : [
+          "text-left",
+          "text-right",
+          "text-center",
+          "text-justify",
+          "text-start",
+          "text-end"
+        ],
+        classes: [
+          'text-h1',
+          'text-h2',
+          'text-h3',
+          'text-h4',
+          'text-h5',
+          'text-h6',
+          'text-subtitle-1',
+          'text-subtitle-2',
+          'text-body-1',
+          'text-body-2',
+          'text-button',
+          'text-caption',
+          'text-overline',
+        ],
       }
     },
     methods : {

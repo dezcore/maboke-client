@@ -10,7 +10,7 @@
                 >
                   <v-card @click="previewSeasons(item.seasons)">
                       <v-img
-                        :src="'https://img.youtube.com/vi/' + item.img + '/hqdefault.jpg'"
+                        :src="'https://i.ytimg.com/vi/' + item.img + '/mqdefault.jpg'"
                         class="white--text align-end"
                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         @click="()=>{}"
@@ -27,6 +27,8 @@
 </template>
 <script>
   import apiMixin from '../../mixins/apiMixin'
+  ///sddefault.jpg
+
   export default {
     name: 'SeriesColGrid',
     props : {

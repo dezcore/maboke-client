@@ -4,7 +4,7 @@
     <template v-for="(item, index) in series" :key="item.id + index">
       <v-col :cols="3" class="pa-1">
         <v-img
-          :src="'https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg'"
+          :src="'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg'"
           cover
           height="100%"
         ></v-img>
@@ -27,6 +27,7 @@
                 title : 'title',
                 description : '',
                 duration : '28:28',
+                //https://i.ytimg.com/vi/UKQcJUj8Bjs/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFfyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA9tOLQeLDc5Il901j80NIPbADBvA
                 src : 'https://i.ytimg.com/vi/b6gd8H1F1Cc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLByg8QMP8mFroTA8ylmt3Nv-SVGsA',
                 publishedAt : '28/03/2023',
                 channelTitle : 'channelTitle'
