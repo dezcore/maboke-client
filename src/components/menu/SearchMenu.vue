@@ -26,8 +26,10 @@
         <v-autocomplete
           v-model="select"
           v-model:search="search"
+          hide-details
+          hide-no-data
           :items="items"
-          density="comfortable"
+          density="compact"
           placeholder="Search"
           prepend-inner-icon="mdi-magnify"
           rounded
