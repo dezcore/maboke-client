@@ -44,14 +44,15 @@
 
 <script>
 import { mergeProps } from 'vue'
-
+import {useGlobalStore} from '@/store'
 export default {
   name: 'SearchMenu',
   props : {},
   watch : {
     search : function(search) {
-    if(search !== '') {
-      console.log("Values : ", search)
+    const globalStore  = useGlobalStore()
+    if(search) {
+      globalStore.setSearch(search)
     }
    } 
   },

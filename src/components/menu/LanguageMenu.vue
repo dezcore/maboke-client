@@ -24,19 +24,32 @@
 </template>
 
 <script>
-import {useLocaleStore} from '@/store'
+import {useLocaleStore, useGlobalStore} from '@/store'
 import locales from '@/i18n/locales.json'
 
 export default {
   name: 'LanguageMenu',
   props : {},
   watch : {
-    
+    locale(lang) {
+      console.log("Lang : ", lang)
+    },
+    search(search) {
+      console.log("Search : ", search)
+    }
   },
   data: () => ({ 
     items: [], 
   }),
   computed : {
+    locale() {
+      const localeStore = useLocaleStore()
+      return localeStore.locale
+    },
+    search() {
+      const gStore = useGlobalStore()
+      return gStore.search
+    },
     getItems : function() {
       return locales.filter(locale => locale.enabled).map(lang => {
         return {
@@ -44,16 +57,15 @@ export default {
           locale : lang.alternate || lang.locale
         }
       })
-    }
+    },
   },
   methods : {
     setLanguage : function(lang) {
-      //const localeStore = useLocaleStore()
+      const localeStore = useLocaleStore()
       if(lang) {
         //this.$i18n.global.locale.value = locale
         this.$i18n.locale = lang.locale
-        //localeStore.setLocale(lang)
-        //console.log("Locale : ", localeStore.getLocale())
+        localeStore.setLocale(lang.locale)
       }
     }
   }
