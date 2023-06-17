@@ -80,14 +80,6 @@ const routes = [
       meta: {
         isAuthenticated: false
       }
-    },
-    { 
-      path: '/search',
-      name: 'Search',
-      component : SearchView,
-      meta: {
-        isAuthenticated: false
-      }
     }
 ]
 

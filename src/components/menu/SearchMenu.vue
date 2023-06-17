@@ -51,9 +51,7 @@ export default {
   watch : {
     search : function(search) {
     const globalStore  = useGlobalStore()
-    if(search) {
-      globalStore.setSearch(search)
-    }
+    globalStore.setSearch(search)
    } 
   },
   data: () => ({ 

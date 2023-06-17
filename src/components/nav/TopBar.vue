@@ -80,11 +80,6 @@ export default {
         title: 'Shows',
         disabled: false,
         href: '/shows',
-      },
-      {
-        title: 'Search',
-        disabled: false,
-        href: '/search',
       }
     ], 
   }),

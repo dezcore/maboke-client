@@ -3,7 +3,7 @@
     :showAppBar="true"
   >
     <template #main>
-      <div>
+      <div v-if="search == ''">
         <VideoCarousel>
           <template #content>
             <HomeCarouselOverlay/>
@@ -19,6 +19,10 @@
           <Videos/>
         </v-card-text>
       </div>
+      <div v-else>
+        <SearchView :search="searchInput">
+        </SearchView>
+      </div>
     </template>
     <template #footer>
       <Footer>
@@ -27,11 +31,15 @@
   </TopBar>
 </template>
 <script>
+
+  import SearchView from "@/views/SearchView.vue"
   import TopBar from "../components/nav/TopBar.vue"
   import Videos from "../components/grids/Videos.vue"
   import Footer from "@/components/footer/Footer.vue"
   import VideoCarousel from "../components/carousels/VideoCarousel.vue"
   import HomeCarouselOverlay from "../components/overlays/HomeCarouselOverlay.vue"
+  import {useGlobalStore} from '@/store'
+
 
   export default {
     name: 'HomeView',
@@ -39,11 +47,19 @@
       TopBar,
       Videos,
       Footer,
+      SearchView,
       VideoCarousel,
       HomeCarouselOverlay
     },
+    watch : {
+      search(search) {
+        this.searchInput = search
+        console.log("Search : ", search)
+      }
+    },
     data () {
       return {
+        searchInput : '',
         categories : [
           {
             name : "Histoires et talents",
@@ -119,6 +135,12 @@
           }
         ]
       }
+    },
+    computed : {
+      search() {
+        const gStore = useGlobalStore()
+        return gStore.search
+      },
     },
     methods : {}
   }

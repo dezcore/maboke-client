@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {useLocaleStore, useGlobalStore} from '@/store'
+import {useLocaleStore} from '@/store'
 import locales from '@/i18n/locales.json'
 
 export default {
@@ -33,9 +33,6 @@ export default {
   watch : {
     locale(lang) {
       console.log("Lang : ", lang)
-    },
-    search(search) {
-      console.log("Search : ", search)
     }
   },
   data: () => ({ 
@@ -45,10 +42,6 @@ export default {
     locale() {
       const localeStore = useLocaleStore()
       return localeStore.locale
-    },
-    search() {
-      const gStore = useGlobalStore()
-      return gStore.search
     },
     getItems : function() {
       return locales.filter(locale => locale.enabled).map(lang => {
