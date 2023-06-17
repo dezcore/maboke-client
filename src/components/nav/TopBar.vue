@@ -13,11 +13,7 @@
         ></v-breadcrumbs>
       </template>
       <template v-slot:append>        
-        <a href="/"><v-icon
-          color="white"
-          class="ma-1"
-          icon="mdi-search-web"
-        ></v-icon></a>
+        <SearchMenu></SearchMenu>
         <a href="/"><v-icon
           color="white"
           class="ma-1"
@@ -38,11 +34,13 @@
 </template>
 <script>
 import AuthButtons from "../auth/AuthButtons.vue"
+import SearchMenu from "@/components/menu/SearchMenu.vue"
 import LanguageMenu from "@/components/menu/LanguageMenu.vue"
 
 export default {
   name: 'TopBar',
   components : {
+    SearchMenu,
     AuthButtons,
     LanguageMenu
   },
