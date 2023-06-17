@@ -8,12 +8,12 @@
     <v-col
       v-for="(item, index) in  items"
       class="pa-0 ma-0"
-      :key="item.title + index"
+      :key="'title' + index"
       cols="12"
     >
       <v-card
         color="grey-lighten-1"
-        :class="['ma-1', selectedClass]"
+        class="ma-1"
         @click="previewSeason(item)"
       >
         <v-img

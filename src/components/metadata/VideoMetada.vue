@@ -5,7 +5,7 @@
         <v-col cols="3">
           <v-card>
             <v-img
-              :src="'https://img.youtube.com/vi/' + currentVideo.videoId.trim() + '/hqdefault.jpg'"
+              :src="'https://img.youtube.com/vi/' + currentVideo.img + '/hqdefault.jpg'"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               @click="()=>{}"
@@ -59,6 +59,7 @@
     watch : {
       metaData : function(metaData) {
         if(metaData) {
+          console.log("Watch Metadata : ", metaData)
           this.currentVideo = metaData
         }
       }
