@@ -11,7 +11,7 @@
       >
         <template #Preview>
           <ValidationPlayer 
-            :videoId="videoId"
+            :video="video"
           />
         </template>
         <template #Validation>
@@ -19,7 +19,7 @@
             Video Metadata
           </h2>
           <VideoMetadata 
-            :metaData="metaData"
+            :metaData="video"
           />
         </template>
       </VideoTabs>
@@ -32,7 +32,7 @@
           </h2>
           <VideoPreview
             :seasons="seasons"
-            :setMetaData="setMetaData"
+            :setMetaData="setVideo"
           />
         </v-col>
         <v-col cols="10">
@@ -66,8 +66,8 @@
     data () {
       return {
         seasons: [],
+        video : null,
         metaData : null,
-        videoId :  "11-lpoJHu0U",
         currentPreview : "Seasons",
         tabs : [
             {
@@ -88,10 +88,9 @@
           this.currentPreview = {value : "Seasons"}
         }
       },
-      setMetaData : function(metaData) {
-        if(metaData) {
-          this.metaData = metaData
-          this.videoId = metaData.img
+      setVideo : function(video) {
+        if(video) {
+          this.video = video
         }
       }
     }
