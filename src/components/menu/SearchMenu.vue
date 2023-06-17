@@ -1,12 +1,32 @@
 <template>
-  <div>
+  <div >
     <v-menu 
       width="300" 
       transition="slide-x-transition"
       :close-on-content-click="false"
       location="start"
-      class="pa-0 ma-0 mt-0"
+      class="pa-0 ma-0 searchdiv"
     >  
+          <div>
+            <v-autocomplete
+              v-model="select"
+              v-model:search="search"
+              hide-details
+              single-line
+              hide-no-data
+              :items="items"
+              menu-icon=""
+              density="compact"
+              variant="underlined"
+              placeholder="Search"
+              prepend-inner-icon="mdi-magnify"
+              rounded
+              clearable
+              class="pa-0 ma-0 mt-0"
+            ></v-autocomplete>
+          </div>
+       
+
       <template v-slot:activator="{ props: menu }">
         <v-tooltip location="bottom">
           <template v-slot:activator="{ props: tooltip }">
@@ -21,23 +41,6 @@
           <span>Search</span>
         </v-tooltip>
         </template>
-        
-      <div>
-        <v-autocomplete
-          v-model="select"
-          v-model:search="search"
-          hide-details
-          hide-no-data
-          :items="items"
-          density="compact"
-          placeholder="Search"
-          prepend-inner-icon="mdi-magnify"
-          rounded
-          variant="underlined"
-          clearable
-        ></v-autocomplete>
-
-      </div>
     </v-menu>
   </div>
 </template>
@@ -45,6 +48,7 @@
 <script>
 import { mergeProps } from 'vue'
 import {useGlobalStore} from '@/store'
+//v-menu > .v-overlay__content
 export default {
   name: 'SearchMenu',
   props : {},
@@ -68,4 +72,8 @@ export default {
 </script>
 
 <style>
+.searchdiv .v-overlay__content {
+    top: auto !important;
+  }
+
 </style>
