@@ -15,11 +15,8 @@
           />
         </template>
         <template #Validation>
-          <h2 class="text-h6 mb-2 text-left">
-            Video Metadata
-          </h2>
           <VideoMetadata 
-            :metaData="video"
+            :season="season"
           />
         </template>
       </VideoTabs>
@@ -32,17 +29,24 @@
           </h2>
           <VideoPreview
             :seasons="seasons"
+            :setSeason="setSeason"
             :setMetaData="setVideo"
           />
         </v-col>
         <v-col cols="10">
-          <h2 class="text-h6 mb-2 text-left">
-            Séries Grid
-          </h2>
-          <SeriesColGrid 
-            :previewSeasons="previewSeasons"
-          />
-        </v-col>
+          <VideoTabs 
+            :tabs="serieTabs"
+          >
+            <template #Serie>
+              <h2 class="text-h6 mb-2 text-left">
+                Séries Grid
+              </h2>
+              <SeriesColGrid 
+                :previewSeasons="previewSeasons"
+              />
+            </template>
+        </VideoTabs>
+      </v-col>
       </v-row>
     </v-card-text>
   </div>
@@ -67,6 +71,7 @@
       return {
         seasons: [],
         video : null,
+        season : null,
         metaData : null,
         currentPreview : "Seasons",
         tabs : [
@@ -77,6 +82,20 @@
             {
               id : "2",
               title : "Validation"
+            }
+          ],
+          serieTabs : [
+            {
+              id : "1",
+              title : "Serie"
+            },
+            {
+              id : "2",
+              title : "Match"
+            },
+            {
+              id : "3",
+              title : "NoMatch"
             }
           ]
       }
@@ -89,8 +108,15 @@
         }
       },
       setVideo : function(video) {
+        console.log("video : ", video)
         if(video) {
           this.video = video
+        }
+      },
+      setSeason : function(season) {
+        if(season) {
+          this.season = season
+          //console.log("season : ", season)
         }
       }
     }

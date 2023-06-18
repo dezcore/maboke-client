@@ -1,106 +1,74 @@
 <template>
-  <v-card class="overflow-auto">
-    <v-container fluid>
-      <v-row dense>
-        <v-col cols="3">
-          <v-card>
-            <v-img
-              :src="'https://img.youtube.com/vi/' + currentVideo.img + '/hqdefault.jpg'"
-              class="white--text align-end"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              @click="()=>{}"
-              height="200px"
-            >
-            </v-img>
-          </v-card>
-        </v-col>
-        <v-col cols="9">
-          <v-row dense>
-            <v-col cols="4">
-              <v-combobox
-                v-model="select"
-                :items="gender"
-                label="Genre"
-                multiple
-              ></v-combobox>
-            </v-col>
-            <v-col cols="4">
-              <v-combobox
-                v-model="select"
-                :items="gender"
-                label="Contry"
-                multiple
-              ></v-combobox>
-            </v-col>
-            <v-col cols="12">
-              <v-textarea
-                label="Description"
-                no-resize
-                rows="5"
-                :model-value="currentVideo.summary"
-              >
-              </v-textarea>
-            </v-col>
-          </v-row>
-        </v-col>
+  <v-card>
+    <v-row dense>
+        <v-col cols="6">
+          <v-card class="overflow-auto">
+            <v-container fluid>
+              <v-row dense>
+                <v-col
+                  v-for="(item, index) in currentSeason.videos"
+                  :key="item.img + index"
+                  :cols="3"
+                >
+                <v-img
+                  :src="'https://i.ytimg.com/vi/' + item.img + '/mqdefault.jpg'"
+                  class="white--text align-end"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  @click="setVideo(item)"
+                  height="200px"
+                  >
+                  </v-img>
+                </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
+      </v-col>
+      <v-col cols="6">
+        <ValidationForm 
+          :video="video"
+        />
+      </v-col>
       </v-row>
-    </v-container>
   </v-card>
 </template>
+
 <script>
+  import ValidationForm from "@/components/form/ValidationForm.vue"
   export default {
     name: 'VideoMetadata',
+    components : {
+      ValidationForm
+    },
     props : {
-      metaData : {
+      season : {
         type : Object,
-        default : ()=>{return null}
       }
     },
     watch : {
-      metaData : function(metaData) {
-        if(metaData) {
-          console.log("Watch Metadata : ", metaData)
-          this.currentVideo = metaData
+      season : function(season) {
+        if(season) {
+          this.currentSeason = season
+          //console.log("Watch season : ",  season)
         }
       }
     },
     data () {
       return {
         select: [],
-        gender : [
-          "Action",
-          "Animation",
-          "Aventure",
-          "Biopic",
-          "Comédie",
-          "Documentaire",
-          "Drame",
-          "Famille",
-          "Fantastique",
-          "Guerre",
-          "Historique",
-          "Horreur",
-          "Judiciaire",
-          "Musical",
-          "Policier",
-          "Romance",
-          "Science fiction",
-          "Thriller",
-          "Western"
-        ],
-        country : [
-          "France",
-          "USA",
-          "UK",
-          "Canada"
-        ],
-        currentVideo : {
-          videoId: "nG4jdulgVuc",
-          summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        video : null,
+        currentSeason : {
+          videos : []
         },
       }
     },
-    methods : {}
+    methods : {
+      setVideo : function(video) {
+        //console.log("video : ", video)
+        if(video) {
+          this.video = video
+        }
+      },
+    }
   }
 </script>
 

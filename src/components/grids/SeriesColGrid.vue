@@ -17,6 +17,11 @@
                         height="200px"
                     >
                     </v-img>
+                    <v-card-actions>
+                      <v-btn variant="outlined">
+                        Append
+                      </v-btn>
+                    </v-card-actions>
                   </v-card>
                 </v-col>
             </v-row>
@@ -26,9 +31,7 @@
 </div>
 </template>
 <script>
-  import apiMixin from '../../mixins/apiMixin'
-  ///sddefault.jpg
-
+import apiMixin from "@/mixins/apiMixin"
   export default {
     name: 'SeriesColGrid',
     props : {

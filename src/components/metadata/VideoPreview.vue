@@ -4,7 +4,7 @@
   <v-icon icon="mdi-arrow-right" @click="foraward"></v-icon>
   <v-container fluid>
   <v-row>
-    <v-card height="680" class="overflow-auto">
+    <v-card height="900" class="overflow-auto">
     <v-col
       v-for="(item, index) in  items"
       class="pa-0 ma-0"
@@ -23,7 +23,12 @@
           :aspect-ratio="1"
           :src="'https://img.youtube.com/vi/' + item.img + '/hqdefault.jpg'"
           cover
-        ></v-img>   
+        ></v-img>
+        <v-card-actions>
+          <v-btn variant="outlined">
+            Extract
+          </v-btn>
+        </v-card-actions>   
       </v-card>
     </v-col>
     </v-card>
@@ -39,6 +44,10 @@
         seasons : {
           type :  Array,
           default : ()=>{return []}
+        },
+        setSeason : {
+          type : Function,
+          default : () => {}
         },
         setMetaData : {
           type : Function,
@@ -66,6 +75,7 @@
           if(season && this.currentPreview.value === "Seasons") {
             this.items = season.videos
             this.season = season.videos
+            this.setSeason(season)
             this.currentPreview = {value : "Season"}
           } else if(season && this.currentPreview.value === "Season") { 
             //console.log("setMetaData")
