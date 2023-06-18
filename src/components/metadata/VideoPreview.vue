@@ -14,7 +14,6 @@
       <v-card
         color="grey-lighten-1"
         class="ma-1"
-        @click="previewSeason(item)"
       >
         <v-img
           class="bg-white"
@@ -23,11 +22,25 @@
           :aspect-ratio="1"
           :src="'https://img.youtube.com/vi/' + item.img + '/hqdefault.jpg'"
           cover
+          @click="previewSeason(item)"
         ></v-img>
-        <v-card-actions>
-          <v-btn variant="outlined">
-            Extract
-          </v-btn>
+        <v-card-actions v-if="item.length">
+          <v-list-item class="w-100">
+            <template v-slot:prepend>
+              <div class="justify-self-end">
+                <v-icon class="me-1" icon="mdi-clock-outline"></v-icon>
+                <span class="subheading me-2">{{item.length}}</span>
+                <v-icon class="me-1" icon="mdi-eye-outline"></v-icon>
+                <span class="subheading">45</span>
+              </div>
+            </template>
+
+            <template v-slot:append>
+              <div class="justify-self-end">
+                <v-icon icon="mdi-transfer-right"></v-icon>
+              </div>
+            </template>
+          </v-list-item>
         </v-card-actions>   
       </v-card>
     </v-col>

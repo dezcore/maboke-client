@@ -53,9 +53,9 @@
 </template>
 <script>
   import VideoTabs from "@/components/tabs/VideoTabs.vue"
-  import SeriesColGrid from "../../components/grids/SeriesColGrid.vue"
-  import VideoMetadata from "../../components/metadata/VideoMetada.vue"
-  import VideoPreview from "../../components/metadata/VideoPreview.vue"
+  import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
+  import VideoMetadata from "@/components/metadata/VideoMetada.vue"
+  import VideoPreview from "@/components/metadata/VideoPreview.vue"
   import ValidationPlayer from "@/components/player/ValidationPlayer.vue"
 
   export default {
