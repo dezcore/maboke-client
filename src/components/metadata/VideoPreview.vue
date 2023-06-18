@@ -37,7 +37,7 @@
 
             <template v-slot:append>
               <div class="justify-self-end">
-                <v-icon icon="mdi-transfer-right"></v-icon>
+                <v-icon icon="mdi-transfer-right" @click="extractVideo(item)"></v-icon>
               </div>
             </template>
           </v-list-item>
@@ -54,6 +54,9 @@
     export default {
       name: 'VideoPreview',
       props : {
+        season : {
+          type : Object,
+        },
         seasons : {
           type :  Array,
           default : ()=>{return []}
@@ -65,9 +68,21 @@
         setMetaData : {
           type : Function,
           default : () => {}
+        },
+        extractVideo : {
+          type : Function
         }
       },
       watch : {
+        season : {
+          handler: function(season) {
+            if(season) {
+              this.items = season.videos
+              console.log("Watch season : ",  season)
+            }
+          },
+          deep: true
+        },
         seasons : function(seasons) {
           if(seasons) {
             this.items = this.seasons
@@ -79,15 +94,13 @@
       data () {
         return {
           items : [],
-          season : [],
-          currentPreview : "Seasons"
+          currentPreview : {value : "Seasons"}
         }
       },
       methods : {
         previewSeason : function(season) {
           if(season && this.currentPreview.value === "Seasons") {
             this.items = season.videos
-            this.season = season.videos
             this.setSeason(season)
             this.currentPreview = {value : "Season"}
           } else if(season && this.currentPreview.value === "Season") { 

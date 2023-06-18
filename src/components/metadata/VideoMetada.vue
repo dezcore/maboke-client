@@ -32,7 +32,7 @@
                       <span class="subheading me-2">28</span>
                       <v-icon class="me-1" icon="mdi-eye-outline"></v-icon>
                       <span class="subheading">45</span>
-                      <v-icon icon="mdi-transfer-down"></v-icon>
+                      <v-icon icon="mdi-transfer-down" @click="extractVideo(item)"></v-icon>
                     </div>
                   </template>
                 </v-list-item>
@@ -62,6 +62,9 @@
     props : {
       season : {
         type : Object,
+      },
+      extractVideo : {
+        type : Function
       }
     },
     watch : {

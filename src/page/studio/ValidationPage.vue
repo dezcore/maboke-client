@@ -17,6 +17,7 @@
         <template #Validation>
           <VideoMetadata 
             :season="season"
+            :extractVideo="extractVideo"
           />
         </template>
       </VideoTabs>
@@ -28,9 +29,11 @@
             Video Preview   
           </h2>
           <VideoPreview
+            :season="season"
             :seasons="seasons"
             :setSeason="setSeason"
             :setMetaData="setVideo"
+            :extractVideo="extractVideo"
           />
         </v-col>
         <v-col cols="10">
@@ -41,7 +44,11 @@
               <h2 class="text-h6 mb-2 text-left">
                 Séries Grid
               </h2>
-              <SeriesColGrid 
+              <SeriesColGrid
+                :series="series"
+                :getSerie="getSerie"
+                :pageable="pageable" 
+                :appendVideo="appendVideo"
                 :previewSeasons="previewSeasons"
               />
             </template>
@@ -52,6 +59,7 @@
   </div>
 </template>
 <script>
+  import apiMixin from "@/mixins/apiMixin"
   import VideoTabs from "@/components/tabs/VideoTabs.vue"
   import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
   import VideoMetadata from "@/components/metadata/VideoMetada.vue"
@@ -69,11 +77,17 @@
     },
     data () {
       return {
+        series : [],
         seasons: [],
+        serie : null,
         video : null,
         season : null,
         metaData : null,
         currentPreview : "Seasons",
+        pageable : {
+          pageNumber : 1,
+          totalPages : 1
+        },
         tabs : [
             {
               id : "1",
@@ -100,10 +114,31 @@
           ]
       }
     },
+    mixins : [
+      apiMixin
+    ],
+    mounted() {
+      this.getSerie({page : 1, size : 12})
+    },
     methods : {
-      previewSeasons : function(seasons) {
-        if(seasons) {
-          this.seasons = seasons
+      getSerie : function(params) {
+        this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", params, (series) => {
+          const {number, totalPages} = series
+
+          if(series) {
+            this.series = series.content            
+            this.pageable = {
+              pageNumber : number,
+              totalPages :  totalPages
+            }
+            //console.log("Serie : ", series)
+          }
+        })
+      },
+      previewSeasons : function(serie) {
+        if(serie) {
+          this.serie = serie
+          this.seasons = serie.seasons
           this.currentPreview = {value : "Seasons"}
         }
       },
@@ -117,6 +152,32 @@
         if(season) {
           this.season = season
           //console.log("season : ", season)
+        }
+      },
+      extractVideo : function(video) {
+        let targetSerie, season, videos
+        if(this.serie && this.season && video) {
+          targetSerie = this.series.find(serie => serie.id === this.serie.id)
+          if(targetSerie) {
+            if((season = targetSerie.seasons.find(s => s.title === this.season.title))) {
+              //videos = season.videos.filter(v => v.title !== video.title)
+              if((videos = season.videos.filter(v => v.title !== video.title))) {
+                season.videos = videos
+                this.serie = targetSerie
+                this.season = season
+                this.seasons = targetSerie.seasons
+                //console.log("extractVideo : ", targetSerie, season, videos)
+              }
+            }
+            //targetSerie.videos =  targetSerie.videos.filter(v => v.title !== video.title)
+            //this.serie = targetSerie
+            //this.season
+          }
+        }
+      },
+      appendVideo : function(season, video) {
+        if(season && video) {
+          console.log("season : ", season, video)
         }
       }
     }

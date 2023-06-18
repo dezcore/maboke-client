@@ -4,11 +4,11 @@
         <v-container fluid>
             <v-row dense>
                 <v-col
-                  v-for="(item, index) in  series"
+                  v-for="(item, index) in currentSeries"
                   :key="item.img + index"
                   :cols="3"
                 >
-                  <v-card @click="previewSeasons(item.seasons)">
+                  <v-card @click="previewSeasons(item)">
                       <v-img
                         :src="'https://i.ytimg.com/vi/' + item.img + '/mqdefault.jpg'"
                         class="white--text align-end"
@@ -25,26 +25,48 @@
                   </v-card>
                 </v-col>
             </v-row>
-            <v-pagination v-model="pageable.pageNumber" :length="pageable.totalPages" rounded="circle"></v-pagination>
+            <v-pagination v-model="currentPageable.pageNumber" :length="currentPageable.totalPages" rounded="circle"></v-pagination>
         </v-container>
   </v-card>
 </div>
 </template>
 <script>
-import apiMixin from "@/mixins/apiMixin"
   export default {
     name: 'SeriesColGrid',
     props : {
+      series : {
+        type : Array
+      },
+      pageable : {
+        type :  Object
+      },
+      getSerie : {
+        type : Function
+      },
+      appendVideo : {
+        type : Function
+      },
       previewSeasons : {
-        type : Function,
-        default : () => {}
+        type : Function
       }
     },
     watch : {
+      series : function(series) {
+        if(series)
+          this.currentSeries = series
+      },
       pageable: {
         handler: function (pageable) {
           if(pageable && pageable.pageNumber !== this.page) {
             this.page = pageable.pageNumber
+            this.currentPageable = pageable
+          }
+        },
+        deep: true
+      },
+      currentPageable : {
+        handler: function (pageable) {
+          if(pageable && pageable.pageNumber !== this.page) {
             this.getSerie({page : pageable.pageNumber, size : 12})
           }
         },
@@ -54,33 +76,14 @@ import apiMixin from "@/mixins/apiMixin"
     data () {
       return {
         page: 1,
-        pageable : {
+        currentSeries : [],
+        currentPageable : {
           pageNumber : 1,
           totalPages : 1
-        },
-        series : []
+        }
       }
     },
-    mixins : [
-      apiMixin
-    ],
-    mounted() {
-      this.getSerie({page : 1, size : 12})
-    },
-    methods : {
-      getSerie : function(params) {
-        this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", params, (series) => {
-          const {number, totalPages} = series
-
-          if(series) {
-            this.series = series.content
-            this.pageable.pageNumber = number
-            this.pageable.totalPages = totalPages
-            //console.log("Serie : ", series)
-          }
-        })
-      }
-    }
+    methods : {}
   }
 </script>
 
