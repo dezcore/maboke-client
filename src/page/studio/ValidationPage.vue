@@ -178,6 +178,13 @@
           //console.log("season : ", season)
         }
       },
+      postConflict : function(orignTitle, conflictTitle) {
+        let conflict
+        if(orignTitle && conflictTitle) {
+          conflict = {orignTitle : orignTitle, conflictTitle : conflictTitle}
+          this.postData(import.meta.env.VITE_MABOKE_API_ROOT + "/conflict", conflict)
+        }
+      },
       extractVideo : function(video) {
         let targetSerie, season, videos
         if(this.serie && this.season && video) {
@@ -190,6 +197,7 @@
                 this.serie = targetSerie
                 this.season = season
                 this.seasons = targetSerie.seasons
+                this.postConflict(this.season.title, video.title)
                 //console.log("extractVideo : ", targetSerie, season, videos)
               }
             }
