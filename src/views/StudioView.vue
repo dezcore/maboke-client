@@ -8,11 +8,11 @@
   </TopBar>
 </template>
 <script>
-  import TopBar from "../components/nav/TopBar.vue"
-  import SeriesColGrid from "../components/grids/SeriesColGrid.vue"
-  import VideoMetadata from "../components/metadata/VideoMetada.vue"
-  import VideoPreview from "../components/metadata/VideoPreview.vue"
-  import ValidationPage from "../page/studio/ValidationPage.vue"
+  import TopBar from "@/components/nav/TopBar.vue"
+  import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
+  import VideoMetadata from "@/components/metadata/VideoMetada.vue"
+  import VideoPreview from "@/components/metadata/VideoPreview.vue"
+  import ValidationPage from "@/page/studio/ValidationPage.vue"
 
   export default {
     name: 'StudioView',

@@ -52,12 +52,14 @@
     },
     watch : {
       series : function(series) {
+        console.log("watch serie : ", series)
         if(series)
           this.currentSeries = series
       },
       pageable: {
         handler: function (pageable) {
-          if(pageable && pageable.pageNumber !== this.page) {
+          console.log("watch pageable : ", pageable)
+          if(pageable) {
             this.page = pageable.pageNumber
             this.currentPageable = pageable
           }
@@ -66,7 +68,9 @@
       },
       currentPageable : {
         handler: function (pageable) {
-          if(pageable && pageable.pageNumber !== this.page) {
+          console.log(pageable, this.page)
+          if(pageable && pageable.pageNumber !== this.page ) {
+            console.log("getSerie")
             this.getSerie({page : pageable.pageNumber, size : 12})
           }
         },
@@ -81,6 +85,16 @@
           pageNumber : 1,
           totalPages : 1
         }
+      }
+    },
+    mounted() {
+      if(this.series) {
+        this.currentSeries = this.series
+        /*if(this.pageable) {
+          this.page = this.pageable.pageNumber
+          this.currentPageable = this.pageable
+
+        }*/
       }
     },
     methods : {}

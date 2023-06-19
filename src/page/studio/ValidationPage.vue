@@ -52,6 +52,18 @@
                 :previewSeasons="previewSeasons"
               />
             </template>
+            <template #NoMatch>
+              <h2 class="text-h6 mb-2 text-left">
+                Nomatch Series Grid
+              </h2>
+              <SeriesColGrid
+                :series="noMatchSeries"
+                :getSerie="getNomatchSerie"
+                :pageable="noMatchPageable" 
+                :appendVideo="()=>{}"
+                :previewSeasons="()=>{}"
+              />
+            </template>
         </VideoTabs>
       </v-col>
       </v-row>
@@ -83,55 +95,77 @@
         video : null,
         season : null,
         metaData : null,
+        noMatchSeries : [],
         currentPreview : "Seasons",
         pageable : {
           pageNumber : 1,
           totalPages : 1
         },
+        noMatchPageable : {
+          pageNumber : 1,
+          totalPages : 1
+        },
         tabs : [
-            {
-              id : "1",
-              title : "Preview"
-            },
-            {
-              id : "2",
-              title : "Validation"
-            }
-          ],
-          serieTabs : [
-            {
-              id : "1",
-              title : "Serie"
-            },
-            {
-              id : "2",
-              title : "Match"
-            },
-            {
-              id : "3",
-              title : "NoMatch"
-            }
-          ]
+          {
+            id : "1",
+            title : "Preview"
+          },
+          {
+            id : "2",
+            title : "Validation"
+          }
+        ],
+        serieTabs : [
+          {
+            id : "1",
+            title : "Serie"
+          },
+          {
+            id : "2",
+            title : "NoMatch"
+          },
+          {
+            id : "3",
+            title : "Match"
+          }
+        ]
       }
     },
     mixins : [
       apiMixin
     ],
     mounted() {
-      this.getSerie({page : 1, size : 12})
+      this.getSerie({page : 1, size : 12}, () => {
+        this.getNomatchSerie({page : 1, size : 12}) 
+      })
     },
     methods : {
-      getSerie : function(params) {
+      getSerie : function(params, callBack) {
         this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", params, (series) => {
           const {number, totalPages} = series
-
           if(series) {
             this.series = series.content            
             this.pageable = {
               pageNumber : number,
               totalPages :  totalPages
             }
+
+            if(callBack)
+              callBack()
             //console.log("Serie : ", series)
+          }
+        })
+      },
+      getNomatchSerie : function(params) {
+        this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/nomatch", params, (noMatchSeries) => {
+          const {number, totalPages} = noMatchSeries
+          if(noMatchSeries) {
+            //console.log("noMatchSeries : ", noMatchSeries)
+            this.noMatchSeries = noMatchSeries.content            
+            this.noMatchPageable = {
+              pageNumber : number,
+              totalPages :  totalPages
+            }
           }
         })
       },
@@ -143,7 +177,7 @@
         }
       },
       setVideo : function(video) {
-        console.log("video : ", video)
+        //console.log("video : ", video)
         if(video) {
           this.video = video
         }
