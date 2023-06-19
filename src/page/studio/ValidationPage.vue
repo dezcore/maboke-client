@@ -45,9 +45,13 @@
                 Séries Grid
               </h2>
               <SeriesColGrid
+                :season="season"
                 :series="series"
+                :seasons="seasons"
                 :getSerie="getSerie"
-                :appendVideo="appendVideo"
+                :appendSerie="appendSerie"
+                :appendSeason="appendSeason"
+                :appendVideos="appendVideos"
                 :previewSeasons="previewSeasons"
               />
             </template>
@@ -56,9 +60,13 @@
                 Nomatch Series Grid
               </h2>
               <SeriesColGrid
+                :season="season"
+                :seasons="seasons"
                 :series="noMatchSeries"
                 :getSerie="getNomatchSerie"
-                :appendVideo="()=>{}"
+                :appendSerie="appendSerie"
+                :appendSeason="appendSeason"
+                :appendVideos="appendVideos"
                 :previewSeasons="previewSeasons"
               />
             </template>
@@ -185,6 +193,11 @@
           this.postData(import.meta.env.VITE_MABOKE_API_ROOT + "/conflict", conflict)
         }
       },
+      putSerie : function(serie, callBack) {
+        if(serie) {
+          this.putData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", serie, callBack)
+        }
+      },
       extractVideo : function(video) {
         let targetSerie, season, videos
         if(this.serie && this.season && video) {
@@ -197,8 +210,10 @@
                 this.serie = targetSerie
                 this.season = season
                 this.seasons = targetSerie.seasons
-                this.postConflict(this.season.title, video.title)
-                //console.log("extractVideo : ", targetSerie, season, videos)
+                this.putSerie(this.serie, () => {
+                  this.postConflict(this.season.title, video.title)
+                  //console.log("extractVideo : ", targetSerie, season, videos)
+                })
               }
             }
             //targetSerie.videos =  targetSerie.videos.filter(v => v.title !== video.title)
@@ -207,9 +222,19 @@
           }
         }
       },
-      appendVideo : function(season, video) {
-        if(season && video) {
-          console.log("season : ", season, video)
+      appendVideos : function(videos) {
+        if(videos) {
+          console.log("appendVideos : ", videos)
+        }
+      },
+      appendSeason : function(season) {
+        if(season) {
+          console.log("appendSeason : ", season)
+        }
+      },
+      appendSerie : function(serie) {
+        if(serie) {
+          console.log("appendSerie : ", serie)
         }
       }
     }

@@ -31,6 +31,14 @@
           ></v-combobox>
         </v-col>
         <v-col cols="12">
+          <v-combobox
+            v-model="serieState"
+            :items="serieStates"
+            label="Serie state"
+            multiple
+          ></v-combobox>
+        </v-col>
+        <v-col cols="12">
           <v-textarea
             label="Description"
             no-resize
@@ -45,16 +53,6 @@
       >
         Save
       </v-btn>
-      <v-btn
-        class="me-4"
-      >
-        Validate
-      </v-btn>
-      <v-btn
-        class="me-4"
-      >
-        Complete
-      </v-btn>
     </form>
   </div>
 </template>
@@ -62,19 +60,23 @@
   export default {
     name: 'ValidationForm',
     props : {
-        video : {
-            type : Object,
-            default : ()=>{return null}
-        }
+      video : {
+        type : Object,
+        default : ()=>{return null}
+      },
+      save : {
+        type : Function,
+        default : () => {}
+      }
     },
     components : {},
     watch : {
-        video : function(video) {
-            if(video) {
-                this.currentVideo = video
-                //console.log("year : ", this.currentVideo.year, this.currentVideo)
-            }
+      video : function(video) {
+        if(video) {
+          this.currentVideo = video
+          //console.log("year : ", this.currentVideo.year, this.currentVideo)
         }
+      }
     },
     data () {
       return {
@@ -110,6 +112,13 @@
           "UK",
           "Canada"
         ],
+        serieStates : [
+          "No match",
+          "Match",
+          "Complete",
+          "To complete"
+        ],
+        serieState : null,
         selectGender : null,
         selectCountry : null,
       }
