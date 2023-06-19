@@ -2,6 +2,8 @@
 <v-card>
   <v-icon icon="mdi-arrow-left" @click="back"></v-icon>
   <v-icon icon="mdi-arrow-right" @click="foraward"></v-icon>
+  <v-breadcrumbs :items="serieTree">
+  </v-breadcrumbs>
   <v-container fluid>
   <v-row>
     <v-card height="900" class="overflow-auto">
@@ -87,6 +89,7 @@
           if(seasons) {
             this.items = this.seasons
             this.currentPreview = {value : "Seasons"}
+            this.enableSerieTreeNode(["Seasons"])
             //console.log("Watch : ", currentPreview.value);
           }
         }
@@ -94,30 +97,52 @@
       data () {
         return {
           items : [],
-          currentPreview : {value : "Seasons"}
+          currentPreview : {value : "Seasons"},
+          serieTree :  [
+            {
+              title: 'Seasons',
+              disabled: true
+            },
+            {
+              title: 'Season',
+              disabled: true
+            }
+      ]
         }
       },
       methods : {
+        enableSerieTreeNode : function(nodesTitle) {
+          if(nodesTitle) {
+            this.serieTree = this.serieTree.map((n) =>{
+              n.disabled = !nodesTitle.some(title => n.title === title)
+              return n 
+            })
+          }
+        },
         previewSeason : function(season) {
           if(season && this.currentPreview.value === "Seasons") {
             this.items = season.videos
             this.setSeason(season)
             this.currentPreview = {value : "Season"}
+            this.enableSerieTreeNode(["Seasons", "Season"])
           } else if(season && this.currentPreview.value === "Season") { 
             //console.log("setMetaData")
             this.setMetaData(season)
+            this.enableSerieTreeNode(["Seasons"])
           }
         },
         back : function() {
           if(this.seasons && this.currentPreview.value === "Season") {
             this.items = this.seasons
             this.currentPreview = {value : "Seasons"}
+            this.enableSerieTreeNode(["Seasons"])
           }
         },
         foraward : function() {
           if(this.seasons && this.currentPreview.value === "Seasons") {
             this.items = this.season
             this.currentPreview = {value : "Season"}
+            this.enableSerieTreeNode(["Seasons", "Season"])
           }
         }
       }

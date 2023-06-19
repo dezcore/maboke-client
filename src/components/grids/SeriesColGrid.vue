@@ -1,7 +1,12 @@
 <template>
 <div>
     <v-card class="overflow-auto">
-        <v-container fluid>
+      <v-alert
+        v-if="showAlert"
+        type="warning"
+        :title="alertMessage"
+      ></v-alert>
+      <v-container fluid>
             <v-row dense>
                 <v-col
                   v-for="(item, index) in currentSeries"
@@ -12,7 +17,6 @@
                       <v-img
                         :src="'https://i.ytimg.com/vi/' + item.img + '/mqdefault.jpg'"
                         class="white--text align-end"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                         @click="previewSeasons(item)"
                         height="200px"
                     >
@@ -48,7 +52,7 @@
                             size="large"
                             icon="mdi-file-video"
                             v-bind="props"
-                            @click="appendVideos(item)"
+                            @click="appendVideoHandler(item)"
                           ></v-icon>
                         </template>
                       </v-tooltip>
@@ -114,7 +118,9 @@
     data () {
       return {
         page: 1,
+        showAlert : false,
         currentSeries : [],
+        alertMessage : "",
         pageable : {
           pageNumber : 1,
           totalPages : 1
@@ -128,8 +134,26 @@
       })
     },
     methods : {
+      showAlertMessage : function(message) {
+        if(message) {
+          this.alertMessage = message
+          this.showAlert = true
+          setTimeout(() => {
+            this.alertMessage = ""
+            this.showAlert = false
+          }, 1000);
+        }
+      },
       serieHandler : function() {
         console.log("serieHandler")
+      },
+      appendVideoHandler : function(serie) {
+        if(serie && this.season) {
+          console.log("appendVideoHandler : ", serie)
+          //this.appendVideos(serie)
+        } else {
+          this.showAlertMessage("Please select a season")
+        }
       }
     }
   }
