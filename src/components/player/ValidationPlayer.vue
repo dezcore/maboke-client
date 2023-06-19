@@ -59,16 +59,38 @@ export default {
       window.removeEventListener("resize", this.onResize)
     },
     methods : {
-        initPlayer : function(videoId, playerVars) {
+        initPlayer : function(width, playerHeight, videoId, playerVars) {
             $(document).ready(function() {
                 $.getScript("https://www.youtube.com/iframe_api", function() {
                     this.playerVideoId = videoId ? videoId : this.playerVideoId
-                    loadVideo(null, null, null, this.playerVideoId, playerVars)
+                    console.log(width, playerHeight)
+                    loadVideo(null, playerHeight, width, this.playerVideoId, playerVars)
                 })
             })
         },
         bindPlayer : function() {
-            this.initPlayer(this.videoId, this.playerVars)
+            let playerWidth 
+            const clientWidth = this.$refs.validationPlayer.clientWidth
+            const playerHeight = Math.floor(Number(clientWidth) * 0.53)
+            console.log("client : ", clientWidth, this.$refs.validationPlayer.clientWidth)
+            if(clientWidth) {
+                playerWidth = Math.floor(Number(this.$refs.validationPlayer.clientWidth) * 0.99)//99% of box
+                this.initPlayer(playerWidth, playerHeight, this.videoId, this.playerVars)
+                window.addEventListener("resize", this.onResize)
+            }
+
+            this.initPlayer(clientWidth, playerHeight, this.videoId, this.playerVars)
+        },
+        onResize : function () {
+            let playerWidth 
+            const clientWidth = this.$refs.validationPlayer.clientWidth
+            const playerHeight = Math.floor(Number(clientWidth) * 0.53)
+            
+            if(clientWidth) {
+                playerWidth = Math.floor(Number(clientWidth) * 0.99)//99% of box
+                $("#player").width(playerWidth)
+                $("#player").height(playerHeight)
+            }
         },
         changeVideo : function(videoId) {
             const {loadVideoById} = oProxy.$yApi1
