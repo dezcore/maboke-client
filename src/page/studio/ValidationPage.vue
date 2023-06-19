@@ -47,7 +47,6 @@
               <SeriesColGrid
                 :series="series"
                 :getSerie="getSerie"
-                :pageable="pageable" 
                 :appendVideo="appendVideo"
                 :previewSeasons="previewSeasons"
               />
@@ -59,9 +58,8 @@
               <SeriesColGrid
                 :series="noMatchSeries"
                 :getSerie="getNomatchSerie"
-                :pageable="noMatchPageable" 
                 :appendVideo="()=>{}"
-                :previewSeasons="()=>{}"
+                :previewSeasons="previewSeasons"
               />
             </template>
         </VideoTabs>
@@ -97,14 +95,6 @@
         metaData : null,
         noMatchSeries : [],
         currentPreview : "Seasons",
-        pageable : {
-          pageNumber : 1,
-          totalPages : 1
-        },
-        noMatchPageable : {
-          pageNumber : 1,
-          totalPages : 1
-        },
         tabs : [
           {
             id : "1",
@@ -134,38 +124,38 @@
     mixins : [
       apiMixin
     ],
-    mounted() {
-      this.getSerie({page : 1, size : 12}, () => {
-        this.getNomatchSerie({page : 1, size : 12}) 
-      })
-    },
     methods : {
       getSerie : function(params, callBack) {
         this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", params, (series) => {
+          let pageable 
           const {number, totalPages} = series
           if(series) {
             this.series = series.content            
-            this.pageable = {
+            pageable = {
               pageNumber : number,
               totalPages :  totalPages
             }
 
             if(callBack)
-              callBack()
+              callBack(pageable)
             //console.log("Serie : ", series)
           }
         })
       },
-      getNomatchSerie : function(params) {
+      getNomatchSerie : function(params, callBack) {
         this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/nomatch", params, (noMatchSeries) => {
+          let pageable
           const {number, totalPages} = noMatchSeries
           if(noMatchSeries) {
             //console.log("noMatchSeries : ", noMatchSeries)
             this.noMatchSeries = noMatchSeries.content            
-            this.noMatchPageable = {
+            pageable = {
               pageNumber : number,
               totalPages :  totalPages
             }
+
+            if(callBack)
+              callBack(pageable)
           }
         })
       },

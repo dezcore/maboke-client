@@ -25,7 +25,7 @@
                   </v-card>
                 </v-col>
             </v-row>
-            <v-pagination v-model="currentPageable.pageNumber" :length="currentPageable.totalPages" rounded="circle"></v-pagination>
+            <v-pagination v-model="pageable.pageNumber" :length="pageable.totalPages" rounded="circle"></v-pagination>
         </v-container>
   </v-card>
 </div>
@@ -36,9 +36,6 @@
     props : {
       series : {
         type : Array
-      },
-      pageable : {
-        type :  Object
       },
       getSerie : {
         type : Function
@@ -52,26 +49,17 @@
     },
     watch : {
       series : function(series) {
-        console.log("watch serie : ", series)
         if(series)
           this.currentSeries = series
       },
       pageable: {
-        handler: function (pageable) {
-          console.log("watch pageable : ", pageable)
-          if(pageable) {
+        handler: function(pageable) {
+          if(pageable && pageable.pageNumber !== this.page) {
             this.page = pageable.pageNumber
-            this.currentPageable = pageable
-          }
-        },
-        deep: true
-      },
-      currentPageable : {
-        handler: function (pageable) {
-          console.log(pageable, this.page)
-          if(pageable && pageable.pageNumber !== this.page ) {
-            console.log("getSerie")
-            this.getSerie({page : pageable.pageNumber, size : 12})
+            this.getSerie({page : pageable.pageNumber, size : 12}, (pageable) => {
+              if(pageable)
+                this.pageable = pageable
+            })
           }
         },
         deep: true
@@ -81,21 +69,17 @@
       return {
         page: 1,
         currentSeries : [],
-        currentPageable : {
+        pageable : {
           pageNumber : 1,
           totalPages : 1
         }
       }
     },
     mounted() {
-      if(this.series) {
-        this.currentSeries = this.series
-        /*if(this.pageable) {
-          this.page = this.pageable.pageNumber
-          this.currentPageable = this.pageable
-
-        }*/
-      }
+      this.getSerie({page : 1, size : 12}, (pageable) => {
+        if(pageable)
+          this.pageable = pageable
+      })
     },
     methods : {}
   }
