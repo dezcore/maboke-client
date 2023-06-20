@@ -31,7 +31,7 @@
                             color="green-darken-2"
                             icon="mdi-folder-play"
                             v-bind="props"
-                            @click="appendSerie(item)"
+                            @click="createSerieHandler(item)"
                           ></v-icon>
                         </template>
                       </v-tooltip>
@@ -168,6 +168,11 @@
           })
         }else {
           this.showAlertMessage("Please select a serie")
+        }
+      },
+      createSerieHandler : function(serie) {
+        if(serie) {
+          this.appendSerie(serie)
         }
       }
     }
