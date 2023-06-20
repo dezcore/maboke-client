@@ -61,11 +61,12 @@
                 Nomatch Series Grid
               </h2>
               <SeriesColGrid
+                state="no match"
                 :serie="serie"
                 :season="season"
                 :seasons="seasons"
                 :series="noMatchSeries"
-                :getSerie="getNomatchSerie"
+                :getSerie="getSerie"
                 :appendSerie="appendSerie"
                 :appendSeason="appendSeason"
                 :appendVideos="appendVideos"
@@ -140,32 +141,21 @@
           let pageable 
           const {number, totalPages} = series
           if(series) {
-            this.series = series.content            
             pageable = {
               pageNumber : number,
               totalPages :  totalPages
             }
 
-            if(callBack)
+            if(params.state === "match") {
+              this.series = series.content            
+            } else if(params.state === "no match") {
+              this.noMatchSeries = series.content  
+            }
+
+            if(callBack) {
               callBack(pageable)
+            }
             //console.log("Serie : ", series)
-          }
-        })
-      },
-      getNomatchSerie : function(params, callBack) {
-        this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/nomatch", params, (noMatchSeries) => {
-          let pageable
-          const {number, totalPages} = noMatchSeries
-          if(noMatchSeries) {
-            //console.log("noMatchSeries : ", noMatchSeries)
-            this.noMatchSeries = noMatchSeries.content            
-            pageable = {
-              pageNumber : number,
-              totalPages :  totalPages
-            }
-
-            if(callBack)
-              callBack(pageable)
           }
         })
       },

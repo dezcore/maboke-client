@@ -71,6 +71,10 @@
   export default {
     name: 'SeriesColGrid',
     props : {
+      state : {
+        type : String,
+        default : ()=>{return "match"}
+      },
       series : {
         type : Array
       },
@@ -102,6 +106,7 @@
     },
     watch : {
       series : function(series) {
+        console.log("Watch serie : ", series)
         if(series)
           this.currentSeries = series
       },
@@ -109,7 +114,9 @@
         handler: function(pageable) {
           if(pageable && pageable.pageNumber !== this.page) {
             this.page = pageable.pageNumber
-            this.getSerie({page : pageable.pageNumber, size : 12}, (pageable) => {
+            console.log("mWatch")
+            this.getSerie({page : pageable.pageNumber, size : 12, state : this.state}, (pageable) => {
+              console.log("mWatch")
               if(pageable)
                 this.pageable = pageable
             })
@@ -131,7 +138,9 @@
       }
     },
     mounted() {
-      this.getSerie({page : 1, size : 12}, (pageable) => {
+      console.log("mounted serie")
+      this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
+        console.log("mounted")
         if(pageable)
           this.pageable = pageable
       })
