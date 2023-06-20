@@ -198,33 +198,47 @@
           this.putData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", serie, callBack)
         }
       },
-      extractVideo : function(video) {
+      getTargetSerie : function(callBack) {
         let targetSerie, season, videos
-        if(this.serie && this.season && video) {
+
+        if(this.serie && this.season) {
           targetSerie = this.series.find(serie => serie.id === this.serie.id)
+          targetSerie = targetSerie ? targetSerie : this.serie
+          //console.log("targetSerie : ", targetSerie, this.serie, this.series)
           if(targetSerie) {
             if((season = targetSerie.seasons.find(s => s.title === this.season.title))) {
-              //videos = season.videos.filter(v => v.title !== video.title)
-              if((videos = season.videos.filter(v => v.title !== video.title))) {
-                season.videos = videos
-                this.serie = targetSerie
-                this.season = season
-                this.seasons = targetSerie.seasons
-                this.putSerie(this.serie, () => {
-                  this.postConflict(this.season.title, video.title)
-                  //console.log("extractVideo : ", targetSerie, season, videos)
-                })
-              }
+              if(callBack)
+                callBack(targetSerie, season)
             }
-            //targetSerie.videos =  targetSerie.videos.filter(v => v.title !== video.title)
-            //this.serie = targetSerie
-            //this.season
           }
         }
       },
+      extractVideo : function(video) { 
+        let videos
+        this.getTargetSerie((targetSerie, season) => {
+          if((videos = season.videos.filter(v => v.title !== video.title))) {
+            season.videos = videos
+            this.serie = targetSerie
+            this.season = season
+            this.seasons = targetSerie.seasons
+            this.putSerie(this.serie, () => {
+              this.postConflict(this.season.title, video.title)
+            })
+          }
+        })
+      },
       appendVideos : function(videos) {
-        if(videos) {
-          console.log("appendVideos : ", videos)
+        let seasonVideos, seasoncpy
+
+        if(this.serie && this.season && videos) {
+          this.getTargetSerie((targetSerie, season) => {
+            seasonVideos = [...season.videos, ...videos]
+            season.videos = seasonVideos
+            this.season = season
+            this.seasons = targetSerie.seasons
+            this.serie = targetSerie
+            //console.log("appendVideos : ", videos, targetSerie, season)
+          })
         }
       },
       appendSeason : function(season) {

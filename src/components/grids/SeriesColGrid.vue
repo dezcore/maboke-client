@@ -149,8 +149,10 @@
       },
       appendVideoHandler : function(serie) {
         if(serie && this.season) {
-          console.log("appendVideoHandler : ", serie)
-          //this.appendVideos(serie)
+          //console.log("appendVideoHandler : ", serie)
+          serie.seasons.forEach(season => {
+            this.appendVideos(season.videos)
+          })
         } else {
           this.showAlertMessage("Please select a season")
         }
