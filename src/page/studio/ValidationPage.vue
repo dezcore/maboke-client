@@ -45,6 +45,7 @@
                 Séries Grid
               </h2>
               <SeriesColGrid
+                :serie="serie"
                 :season="season"
                 :series="series"
                 :seasons="seasons"
@@ -60,6 +61,7 @@
                 Nomatch Series Grid
               </h2>
               <SeriesColGrid
+                :serie="serie"
                 :season="season"
                 :seasons="seasons"
                 :series="noMatchSeries"
@@ -199,17 +201,19 @@
         }
       },
       getTargetSerie : function(callBack) {
-        let targetSerie, season, videos
+        let targetSerie, season
 
-        if(this.serie && this.season) {
+        if(this.serie) {
           targetSerie = this.series.find(serie => serie.id === this.serie.id)
           targetSerie = targetSerie ? targetSerie : this.serie
           //console.log("targetSerie : ", targetSerie, this.serie, this.series)
           if(targetSerie) {
-            if((season = targetSerie.seasons.find(s => s.title === this.season.title))) {
-              if(callBack)
-                callBack(targetSerie, season)
-            }
+            
+            if(this.season)
+              season = targetSerie.seasons.find(s => s.title === this.season.title)
+
+            if(callBack)
+              callBack(targetSerie, season)
           }
         }
       },
@@ -241,9 +245,18 @@
           })
         }
       },
-      appendSeason : function(season) {
-        if(season) {
-          console.log("appendSeason : ", season)
+      appendSeason : function(newSeason) {
+        let seasons
+        if(newSeason) {
+          this.getTargetSerie((targetSerie) => {
+            seasons = [...targetSerie.seasons, newSeason]
+            console.log("seasons : ", seasons)
+            targetSerie.seasons = seasons
+            this.seasons = targetSerie.seasons
+            this.serie = targetSerie
+            //console.log("appendVideos : ", videos, targetSerie, season)
+          })
+          console.log("appendSeason : ", this.seasons)
         }
       },
       appendSerie : function(serie) {

@@ -42,7 +42,7 @@
                             color="red"
                             icon="mdi-multimedia"
                             v-bind="props"
-                            @click="appendSeason(item)"
+                            @click="createSeasonHandler(item)"
                           ></v-icon>
                         </template>
                       </v-tooltip>
@@ -74,8 +74,11 @@
       series : {
         type : Array
       },
+      serie : {
+        type : Object
+      },
       season : {
-        type : Object,
+        type : Object
       },
       seasons : {
         type :  Array,
@@ -155,6 +158,16 @@
           })
         } else {
           this.showAlertMessage("Please select a season")
+        }
+      },
+      createSeasonHandler : function(serie) {
+        if(serie && this.serie) {
+          //console.log("appendVideoHandler : ", serie)
+          serie.seasons.forEach(season => {
+            this.appendSeason(season)
+          })
+        }else {
+          this.showAlertMessage("Please select a serie")
         }
       }
     }
