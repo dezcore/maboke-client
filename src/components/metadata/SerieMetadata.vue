@@ -46,7 +46,8 @@
         <v-card height="500" class="overflow-auto">
           <v-card-text>
             <SerieForm
-              :serie="serie" 
+              :serie="serie"
+              :updateSerie="updateSerie" 
             />
           </v-card-text>
         </v-card>
@@ -64,6 +65,10 @@
     props : {
       serie : {
         type : Object,
+      },
+      updateSerie : {
+        type : Function,
+        default : () => {}
       }
     },
     watch : {

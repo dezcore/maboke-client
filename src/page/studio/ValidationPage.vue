@@ -27,7 +27,8 @@
         </template>
         <template #Serie>
           <SerieMetadata
-            :serie="serie" 
+            :serie="serie"
+            :updateSerie="updateSerie" 
           />
         </template>
       </VideoTabs>
@@ -226,6 +227,22 @@
             if(callBack)
               callBack(targetSerie, season)
           }
+        }
+      },
+      updateSerie : function(serie, callBack) {
+        if(serie) {
+          this.serie = serie
+          this.series = this.series.map( (serie2) => {
+            let res = serie2.id === serie.id ? serie : serie2
+            return res
+          })
+          
+          this.getTargetSerie((targetSerie,  season) => {
+            this.season = season
+            this.seasons = targetSerie.seasons
+            this.putSerie(this.serie, callBack)
+          })
+          
         }
       },
       extractVideo : function(video) { 

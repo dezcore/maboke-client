@@ -1,6 +1,12 @@
 <template>
   <div>
     <form>
+      <v-alert
+        v-if="showAlert"
+        type="success"
+        :title="alertMessage"
+      ></v-alert>
+
       <v-row>
         <v-col cols="6">
           <v-text-field
@@ -19,7 +25,6 @@
             v-model="currentSerie.gender"
             :items="gender"
             label="Genre"
-            multiple
           ></v-combobox>
         </v-col>
         <v-col cols="6">
@@ -34,7 +39,6 @@
             v-model="currentSerie.state"
             :items="serieStates"
             label="Serie state"
-            multiple
           ></v-combobox>
         </v-col>
         <v-col cols="6">
@@ -56,6 +60,7 @@
       </v-row>
       <v-btn
         class="me-4"
+        @click="saveSerie(currentSerie)"
       >
         Save
       </v-btn>
@@ -70,7 +75,7 @@
         type : Object,
         default : ()=>{return null}
       }, 
-      save : {
+      updateSerie : {
         type : Function,
         default : () => {}
       }
@@ -90,6 +95,8 @@
           year : '',
           summary : '',
         },
+        showAlert : false,
+        alertMessage : "",
         gender : [
           "Action",
           "Animation",
@@ -124,10 +131,10 @@
           "IN"
         ],
         serieStates : [
-          "No match",
-          "Match",
-          "Complete",
-          "To complete"
+          "no match",
+          "match",
+          "complete",
+          "to complete"
         ],
         serieCategories : [
           "Histoires et talents",
@@ -153,7 +160,23 @@
         this.currentSerie = this.serie
     },
     methods : {
-     
+      showAlertMessage : function(message) {
+        if(message) {
+          this.alertMessage = message
+          this.showAlert = true
+          setTimeout(() => {
+            this.alertMessage = ""
+            this.showAlert = false
+          }, 1000);
+        }
+      },
+      saveSerie : function(serie) {
+        if(serie) {
+          this.updateSerie(serie, () => {
+            this.showAlertMessage("Updated serie")
+          })
+        }
+      }
     }
   }
 </script>
