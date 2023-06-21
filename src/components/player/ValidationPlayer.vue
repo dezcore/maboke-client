@@ -6,9 +6,13 @@
             </div>
         </v-col>
         <v-col cols="6">
-            <ValidationForm 
-                :video="video"
-            />
+            <v-card height="500" class="overflow-auto">
+                <v-card-text>
+                    <ValidationForm 
+                        :video="video"
+                    />
+                </v-card-text>
+            </v-card>
         </v-col>
     </v-row>
 </template>

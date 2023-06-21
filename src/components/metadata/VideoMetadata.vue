@@ -3,7 +3,8 @@
     <v-row dense>
       <v-col cols="6">
         <v-card height="500" class="overflow-auto">
-          <v-row dense>
+          <v-card-text>
+            <v-row dense>
           <v-col
             v-for="(item, index) in currentSeason.videos"
             :key="item.img + index"
@@ -40,13 +41,19 @@
             </v-card> 
           </v-col>
         </v-row>
+          </v-card-text>
         </v-card>
        
       </v-col>
       <v-col cols="6">
-        <ValidationForm 
-          :video="video"
-        />
+        <v-card height="500" class="overflow-auto">
+          <v-card-text>
+            <ValidationForm 
+              :video="video"
+              :season="season"
+            />
+          </v-card-text>
+        </v-card>
       </v-col>
       </v-row>
   </v-card>

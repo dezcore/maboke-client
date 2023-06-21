@@ -80,7 +80,7 @@
           handler: function(season) {
             if(season) {
               this.items = season.videos
-              console.log("Watch season : ",  season)
+              //console.log("Watch season : ",  season)
             }
           },
           deep: true

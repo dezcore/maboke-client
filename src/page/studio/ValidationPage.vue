@@ -9,15 +9,25 @@
       <VideoTabs 
         :tabs="tabs"
       >
-        <template #Preview>
+        <template #Video>
           <ValidationPlayer 
             :video="video"
           />
         </template>
-        <template #Validation>
+        <template #Season>
           <VideoMetadata 
             :season="season"
             :extractVideo="extractVideo"
+          />
+        </template>
+        <template #Seasons>
+          <SeasonsMetadata 
+            :seasons="seasons"
+          />
+        </template>
+        <template #Serie>
+          <SerieMetadata
+            :serie="serie" 
           />
         </template>
       </VideoTabs>
@@ -83,17 +93,24 @@
   import apiMixin from "@/mixins/apiMixin"
   import VideoTabs from "@/components/tabs/VideoTabs.vue"
   import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
-  import VideoMetadata from "@/components/metadata/VideoMetada.vue"
   import VideoPreview from "@/components/metadata/VideoPreview.vue"
+  import VideoMetadata from "@/components/metadata/VideoMetadata.vue"
+  import SerieMetadata from "@/components/metadata/SerieMetadata.vue"
+  import SeasonMetadata from "@/components/metadata/SeasonMetadata.vue"
   import ValidationPlayer from "@/components/player/ValidationPlayer.vue"
+  import SeasonsMetadata from "@/components/metadata/SeasonsMetadata.vue"
+
 
   export default {
     name: 'ValidationPage',
     components : {
       VideoTabs,
+      VideoPreview,
+      SerieMetadata,
       SeriesColGrid,
       VideoMetadata,
-      VideoPreview,
+      SeasonMetadata,
+      SeasonsMetadata,
       ValidationPlayer
     },
     data () {
@@ -109,11 +126,19 @@
         tabs : [
           {
             id : "1",
-            title : "Preview"
+            title : "Video"
           },
           {
             id : "2",
-            title : "Validation"
+            title : "Season"
+          },
+          {
+            id : "3",
+            title : "Seasons"
+          },
+          {
+            id : "4",
+            title : "Serie"
           }
         ],
         serieTabs : [

@@ -15,9 +15,13 @@
                 />
               </v-col>
               <v-col cols="4">
-                <SeasonForm 
-                  :serie="serie"
-                />
+                <v-card height="800" class="overflow-auto">
+                  <v-card-text>
+                    <SerieForm 
+                      :serie="serie"
+                    />
+                  </v-card-text>
+                </v-card>
               </v-col>
             </v-row>
           </template>
@@ -38,13 +42,13 @@ import apiMixin from "@/mixins/apiMixin"
 import VideoTabs from "@/components/tabs/VideoTabs.vue"
 import CatalogsTopBar from "@/components/nav/CatalogsTopBar.vue"
 import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
-import SeasonForm from "@/components/form/SeasonForm.vue"
+import SerieForm from "@/components/form/SerieForm.vue"
 
 export default {
   name: 'CatalogsHomeView',
   components : {
+    SerieForm,
     VideoTabs,
-    SeasonForm,
     SeriesColGrid,
     CatalogsTopBar
   },

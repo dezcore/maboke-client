@@ -14,28 +14,11 @@
             label="Year"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
-          <v-combobox
-            v-model="selectGender"
-            :items="gender"
-            label="Genre"
-            multiple
-          ></v-combobox>
-        </v-col>
-        <v-col cols="6">
-          <v-combobox
-            v-model="selectCountry"
-            :items="country"
-            label="Contry"
-            multiple
-          ></v-combobox>
-        </v-col>
         <v-col cols="12">
           <v-combobox
-            v-model="serieState"
-            :items="serieStates"
-            label="Serie state"
-            multiple
+            v-model="currentVideo.category"
+            :items="gender"
+            label="Genre"
           ></v-combobox>
         </v-col>
         <v-col cols="12">
@@ -64,6 +47,10 @@
         type : Object,
         default : ()=>{return null}
       },
+      season : {
+        type : Object,
+        default : ()=>{return null}
+      },
       save : {
         type : Function,
         default : () => {}
@@ -72,14 +59,23 @@
     components : {},
     watch : {
       video : function(video) {
+        //console.log("Watch video : ", video)
         if(video) {
           this.currentVideo = video
+          //console.log("year : ", this.currentVideo.year, this.currentVideo)
+        }
+      },
+      season : function(season) {
+        //console.log("Watch season : ", season)
+        if(season) {
+          this.currentSeason = season
           //console.log("year : ", this.currentVideo.year, this.currentVideo)
         }
       }
     },
     data () {
       return {
+        currentSeason : null,
         currentVideo : {
           title : '',
           year : '',
@@ -104,23 +100,11 @@
           "Romance",
           "Science fiction",
           "Thriller",
-          "Western"
+          "Western",
+          "Comedy",
+          "Theater",
+          "Cartoon"
         ],
-        country : [
-          "France",
-          "USA",
-          "UK",
-          "Canada"
-        ],
-        serieStates : [
-          "No match",
-          "Match",
-          "Complete",
-          "To complete"
-        ],
-        serieState : null,
-        selectGender : null,
-        selectCountry : null,
       }
     },
     methods : {

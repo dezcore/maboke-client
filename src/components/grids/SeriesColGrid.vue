@@ -7,65 +7,65 @@
         :title="alertMessage"
       ></v-alert>
       <v-container fluid>
-            <v-row dense>
-                <v-col
-                  v-for="(item, index) in currentSeries"
-                  :key="item.img + index"
-                  :cols="3"
-                >
-                  <v-card>
-                      <v-img
-                        :src="'https://i.ytimg.com/vi/' + item.img + '/mqdefault.jpg'"
-                        class="white--text align-end"
-                        @click="previewSeasons(item)"
-                        height="200px"
-                    >
-                    </v-img>
-                    <v-card-actions>
-                      <v-list-item class="w-100">
-                      <template v-slot:append>
-                      <v-tooltip text="Create Serie" location="bottom">
-                        <template v-slot:activator="{ props }">
-                          <v-icon
-                            size="large"
-                            color="green-darken-2"
-                            icon="mdi-folder-play"
-                            v-bind="props"
-                            @click="createSerieHandler(item)"
-                          ></v-icon>
-                        </template>
-                      </v-tooltip>
-                      <v-tooltip text="Append Season" location="bottom">
-                        <template v-slot:activator="{ props }">
-                          <v-icon
-                            size="large"
-                            color="red"
-                            icon="mdi-multimedia"
-                            v-bind="props"
-                            @click="createSeasonHandler(item)"
-                          ></v-icon>
-                        </template>
-                      </v-tooltip>
-                      <v-tooltip text="Append videos" location="bottom">
-                        <template v-slot:activator="{ props }">
-                          <v-icon
-                            size="large"
-                            icon="mdi-file-video"
-                            v-bind="props"
-                            @click="appendVideoHandler(item)"
-                          ></v-icon>
-                        </template>
-                      </v-tooltip>
+        <v-row dense>
+          <v-col
+            v-for="(item, index) in currentSeries"
+            :key="item.img + index"
+            :cols="3"
+          >
+            <v-card>
+              <v-img
+                :src="'https://i.ytimg.com/vi/' + item.img + '/mqdefault.jpg'"
+                class="white--text align-end"
+                @click="previewSeasons(item)"
+                height="200px"
+              >
+              </v-img>
+              <v-card-actions>
+                <v-list-item class="w-100">
+                  <template v-slot:append>
+                    <v-tooltip text="Create Serie" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <v-icon
+                          size="large"
+                          color="green-darken-2"
+                          icon="mdi-folder-play"
+                          v-bind="props"
+                          @click="createSerieHandler(item)"
+                        ></v-icon>
                       </template>
-                      </v-list-item>
-                    </v-card-actions>
-                  </v-card>
-                </v-col>
-            </v-row>
-            <v-pagination v-model="pageable.pageNumber" :length="pageable.totalPages" rounded="circle"></v-pagination>
-        </v-container>
-  </v-card>
-</div>
+                    </v-tooltip>
+                    <v-tooltip text="Append Season" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <v-icon
+                          size="large"
+                          color="red"
+                          icon="mdi-multimedia"
+                          v-bind="props"
+                          @click="createSeasonHandler(item)"
+                        ></v-icon>
+                      </template>
+                    </v-tooltip>
+                    <v-tooltip text="Append videos" location="bottom">
+                      <template v-slot:activator="{ props }">
+                        <v-icon
+                          size="large"
+                          icon="mdi-file-video"
+                          v-bind="props"
+                          @click="appendVideoHandler(item)"
+                        ></v-icon>
+                      </template>
+                    </v-tooltip>
+                  </template>
+                </v-list-item>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-pagination v-model="pageable.pageNumber" :length="pageable.totalPages" rounded="circle"></v-pagination>
+      </v-container>
+    </v-card>
+  </div>
 </template>
 <script>
   export default {
