@@ -1,13 +1,15 @@
-import AuthView from './views/AuthView.vue'
-import HomeView from './views/HomeView.vue'
-import KidsView from './views/KidsView.vue'
-import ShowsView from './views/ShowsView.vue'
-import MoviesView from './views/MoviesView.vue'
-import SeriesView from './views/SeriesView.vue'
-import PlayerView from './views/PlayerView.vue'
-import StudioView from './views/StudioView.vue'
-import SearchView from './views/SearchView.vue'
-
+import AuthView from '@/views/AuthView.vue'
+import HomeView from  "@/views/HomeView.vue"
+import KidsView from '@/views/KidsView.vue'
+import ShowsView from '@/views/ShowsView.vue'
+import MoviesView from '@/views/MoviesView.vue'
+import SeriesView from '@/views/SeriesView.vue'
+import PlayerView from '@/views/PlayerView.vue'
+import StudioView from '@/views/StudioView.vue'
+import CatalogsHomeView from "@/page/catalogs/CatalogsHomeView.vue"
+import CatalogsMovieView from "@/page/catalogs/CatalogsMovieView.vue"
+import CatalogsSerieView from "@/page/catalogs/CatalogsSerieView.vue"
+import CatalogsShowsView from "@/page/catalogs/CatalogsShowsView.vue"
 
 import {
   createRouter,
@@ -34,8 +36,40 @@ const routes = [
       }
     },
     { 
-      path: '/studio',
-      name: 'Studio',
+      path: '/catalogs',
+      name: 'CatalogsHomeView',
+      component : CatalogsHomeView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/catalogs/serie',
+      name: 'CatalogsSerieView',
+      component : CatalogsSerieView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/catalogs/movie',
+      name: 'CatalogsMovieView',
+      component : CatalogsMovieView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/catalogs/shows',
+      name: 'CatalogsShowsView',
+      component : CatalogsShowsView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/catalogs/validation',
+      name: 'Catalogs',
       component : StudioView,
       meta: {
         isAuthenticated: false

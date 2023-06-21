@@ -124,10 +124,6 @@
           {
             id : "2",
             title : "NoMatch"
-          },
-          {
-            id : "3",
-            title : "Match"
           }
         ]
       }

@@ -1,23 +1,21 @@
 <template>
-  <TopBar 
-    :showAppBar="true"
-  >
+  <CatalogsTopBar :showAppBar="true">
     <template #main>
       <ValidationPage/>
     </template>
-  </TopBar>
+  </CatalogsTopBar>
 </template>
 <script>
-  import TopBar from "@/components/nav/TopBar.vue"
+  import CatalogsTopBar from "@/components/nav/CatalogsTopBar.vue"
   import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
   import VideoMetadata from "@/components/metadata/VideoMetada.vue"
   import VideoPreview from "@/components/metadata/VideoPreview.vue"
   import ValidationPage from "@/page/studio/ValidationPage.vue"
-
+  
   export default {
     name: 'StudioView',
     components : {
-      TopBar,
+      CatalogsTopBar,
       SeriesColGrid,
       VideoMetadata,
       VideoPreview,

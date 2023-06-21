@@ -24,7 +24,7 @@
                     <v-card-actions>
                       <v-list-item class="w-100">
                       <template v-slot:append>
-                      <v-tooltip text="Append Serie" location="bottom">
+                      <v-tooltip text="Create Serie" location="bottom">
                         <template v-slot:activator="{ props }">
                           <v-icon
                             size="large"
@@ -76,37 +76,44 @@
         default : ()=>{return "match"}
       },
       series : {
-        type : Array
+        type : Array,
+        default : ()=> {return []}
       },
       serie : {
-        type : Object
+        type : Object,
+        default : ()=>{return null}
       },
       season : {
-        type : Object
+        type : Object,
+        default : ()=>{return null}
       },
       seasons : {
         type :  Array,
         default : ()=>{return []}
       },
       getSerie : {
-        type : Function
+        type : Function,
+        default : ()=>{}
       },
       appendVideos : {
-        type : Function
+        type : Function,
+        default : ()=>{}
       },
       appendSeason : {
-        type : Function
+        type : Function,
+        default : ()=>{}
       },
       appendSerie : {
-        type : Function
+        type : Function,
+        default : ()=>{}
       },
       previewSeasons : {
-        type : Function
+        type : Function,
+        default : ()=>{}
       }
     },
     watch : {
       series : function(series) {
-        console.log("Watch serie : ", series)
         if(series)
           this.currentSeries = series
       },
@@ -114,9 +121,7 @@
         handler: function(pageable) {
           if(pageable && pageable.pageNumber !== this.page) {
             this.page = pageable.pageNumber
-            console.log("mWatch")
             this.getSerie({page : pageable.pageNumber, size : 12, state : this.state}, (pageable) => {
-              console.log("mWatch")
               if(pageable)
                 this.pageable = pageable
             })
@@ -138,9 +143,7 @@
       }
     },
     mounted() {
-      console.log("mounted serie")
       this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
-        console.log("mounted")
         if(pageable)
           this.pageable = pageable
       })

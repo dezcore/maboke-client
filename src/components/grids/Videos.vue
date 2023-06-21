@@ -3,10 +3,9 @@
   <v-slide-group
       show-arrows
     >
-        <v-slide-group-item
-          v-for="(item, index) in  series"
+      <v-slide-group-item
+        v-for="(item, index) in  series"
           :key="item.id + index"
-          
         >
         <v-card  class="pa-1">
           <v-img
@@ -15,27 +14,24 @@
             width="300px"
             height="100%"
           ></v-img>
-          
-      <v-overlay
-        :scrim="false"
-        openOnHover
-        open-delay="0"
-        close-delay="0" 
-        origin="overlap"
-        activator="parent"
-        scroll-strategy="close"
-        location-strategy="connected"
-      >
-      <VideoDescription 
-        :img="'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg'"
-        :href="'/player?videoId=' + item.id"
-      />
-    </v-overlay>
+
+          <v-overlay
+            :scrim="false"
+            openOnHover
+            open-delay="0"
+            close-delay="0" 
+            origin="overlap"
+            activator="parent"
+            scroll-strategy="close"
+            location-strategy="connected"
+          >
+            <VideoDescription 
+              :img="'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg'"
+              :href="'/player?videoId=' + item.id"
+            />
+          </v-overlay>
         </v-card>
-      
       </v-slide-group-item>
-      
-       
     </v-slide-group>
 </div>
 </template>
