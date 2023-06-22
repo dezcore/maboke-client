@@ -42,44 +42,6 @@
                 height="200px"
               >
               </v-img>
-              <v-card-actions>
-                <v-list-item class="w-100">
-                  <template v-slot:append>
-                    <v-tooltip text="Create Serie" location="bottom">
-                      <template v-slot:activator="{ props }">
-                        <v-icon
-                          size="large"
-                          color="green-darken-2"
-                          icon="mdi-folder-play"
-                          v-bind="props"
-                          @click="createSerieHandler(item)"
-                        ></v-icon>
-                      </template>
-                    </v-tooltip>
-                    <v-tooltip text="Append Season" location="bottom">
-                      <template v-slot:activator="{ props }">
-                        <v-icon
-                          size="large"
-                          color="red"
-                          icon="mdi-multimedia"
-                          v-bind="props"
-                          @click="createSeasonHandler(item)"
-                        ></v-icon>
-                      </template>
-                    </v-tooltip>
-                    <v-tooltip text="Append videos" location="bottom">
-                      <template v-slot:activator="{ props }">
-                        <v-icon
-                          size="large"
-                          icon="mdi-file-video"
-                          v-bind="props"
-                          @click="appendVideoHandler(item)"
-                        ></v-icon>
-                      </template>
-                    </v-tooltip>
-                  </template>
-                </v-list-item>
-              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
@@ -101,6 +63,14 @@
       series : {
         type : Array,
         default : ()=> {return []}
+      },
+      getCategory : {
+        type : Function,
+        default : () => {}
+      },
+      postCategory : {
+        type : Function,
+        default : () => {}
       },
       serie : {
         type : Object,
@@ -190,9 +160,12 @@
       }
     },
     mounted() {
-      this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
-        if(pageable)
-          this.pageable = pageable
+      this.getCategory((categories)=>{
+        console.log("Categories : ", categories)
+        this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
+          if(pageable)
+            this.pageable = pageable
+        })
       })
     },
     methods : {
@@ -235,7 +208,11 @@
         }
       },
       setCategoryPage : function(category, index) {
-        console.log("Set category page : ", category, this.selectPage[index])
+        if(category) {
+          this.postCategory(this.selectPage[index], category, (res) => {
+            console.log("Set category page : ", category, this.selectPage[index], res)
+          }) 
+        }
       }
     }
   }

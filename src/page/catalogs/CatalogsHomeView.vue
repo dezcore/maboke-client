@@ -11,7 +11,9 @@
                   state="match"
                   :series="series"
                   :getSerie="getSerie"
+                  :getCategory="getCategory"
                   :previewSeasons="setSerie"
+                  :postCategory="postCategory"
                 />
               </v-col>
               <v-col cols="4">
@@ -79,7 +81,7 @@ export default {
         if(series) {
           pageable = {
             pageNumber : number,
-            totalPages :  totalPages
+            totalPages :  totalPages -1
           }
 
           if(params.state === "match") {
@@ -92,6 +94,20 @@ export default {
           //console.log("Serie : ", series)
         }
       })
+    },
+    getCategory : function(callBack) {
+      this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/category", {}, (categories) => {
+        if(callBack) {
+          callBack(categories)
+        }
+      })
+    },
+    postCategory : function(page, category, callBack) {
+      let pageCategory
+      if(page && category) {
+        pageCategory = {page : page, category: category}
+        this.postData(import.meta.env.VITE_MABOKE_API_ROOT + "/category", pageCategory, callBack)
+      }
     },
     setSerie : function(serie) {
       if(serie) {
