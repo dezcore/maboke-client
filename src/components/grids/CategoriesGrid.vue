@@ -107,10 +107,18 @@
     },
     watch : {
       series : function(series) {
-        if(series)
+        if(series) {
           this.currentSeries = series
+          Object.keys(this.sortCategories).forEach((key) => {
+            let index = this.categories.findIndex(pageCategory => pageCategory.category === key)
 
-        //console.log("Array : ", this.sortCategories)
+            if(index !== -1) {
+              this.selectPage.push(this.categories[index].page)
+            } else {
+              this.selectPage.push("")
+            }
+          })
+        }
       },
       pageable: {
         handler: function(pageable) {
@@ -129,6 +137,7 @@
       return {
         page: 1,
         selectPage : [],
+        categories : [],
         showAlert : false,
         currentSeries : [],
         alertMessage : "",
@@ -155,13 +164,16 @@
             categories[serie.category].push(serie)
           })
         }
-        console.log("this.series : ", categories)
+        //console.log("this.series : ", categories)
         return categories
       }
     },
     mounted() {
       this.getCategory((categories)=>{
-        console.log("Categories : ", categories)
+        //console.log("Categories : ", categories)
+        if(categories)
+          this.categories = categories
+
         this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
           if(pageable)
             this.pageable = pageable
@@ -210,7 +222,7 @@
       setCategoryPage : function(category, index) {
         if(category) {
           this.postCategory(this.selectPage[index], category, (res) => {
-            console.log("Set category page : ", category, this.selectPage[index], res)
+            console.log("Set category page : ", category, this.selectPage, res)
           }) 
         }
       }

@@ -106,6 +106,7 @@ export default {
       let pageCategory
       if(page && category) {
         pageCategory = {page : page, category: category}
+        console.log("Page : ", pageCategory)
         this.postData(import.meta.env.VITE_MABOKE_API_ROOT + "/category", pageCategory, callBack)
       }
     },
