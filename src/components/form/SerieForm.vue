@@ -59,6 +59,7 @@
         </v-col>
       </v-row>
       <v-btn
+        v-if="showButtons"
         class="me-4"
         @click="saveSerie(currentSerie)"
       >
@@ -74,7 +75,11 @@
       serie : {
         type : Object,
         default : ()=>{return null}
-      }, 
+      },
+      showButtons : {
+        type : Boolean,
+        default : ()=>{ return true}
+      },
       updateSerie : {
         type : Function,
         default : () => {}

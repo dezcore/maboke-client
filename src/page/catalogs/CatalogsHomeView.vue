@@ -7,7 +7,7 @@
           <template #Series>
             <v-row>
               <v-col cols="8">
-                <SeriesColGrid
+                <CategoriesGrid
                   state="match"
                   :series="series"
                   :getSerie="getSerie"
@@ -19,6 +19,7 @@
                   <v-card-text>
                     <SerieForm 
                       :serie="serie"
+                      :showButtons="false"
                     />
                   </v-card-text>
                 </v-card>
@@ -41,7 +42,7 @@
 import apiMixin from "@/mixins/apiMixin"
 import VideoTabs from "@/components/tabs/VideoTabs.vue"
 import CatalogsTopBar from "@/components/nav/CatalogsTopBar.vue"
-import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
+import CategoriesGrid from "@/components/grids/CategoriesGrid.vue"
 import SerieForm from "@/components/form/SerieForm.vue"
 
 export default {
@@ -49,7 +50,7 @@ export default {
   components : {
     SerieForm,
     VideoTabs,
-    SeriesColGrid,
+    CategoriesGrid,
     CatalogsTopBar
   },
   data: () => ({
@@ -72,7 +73,7 @@ export default {
   ],
   methods : {
     getSerie : function(params, callBack) {
-      this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie", params, (series) => {
+      this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/serie/categories", params, (series) => {
         let pageable 
         const {number, totalPages} = series
         if(series) {
