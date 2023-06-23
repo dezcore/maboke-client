@@ -5,15 +5,25 @@ import { defineStore } from 'pinia';
 export const useGlobalStore = defineStore('global', {
     state: () => ({
       search : '',
+      user : null,
       loading : true,
       access_token: "",
-      progress : null
+      progress : null,
+      credential : null
     }),
     getters: {
+      getUser: (state) => state.user,
       getSearch: (state) => state.search,
+      getCredential: (state) => state.credential,
       getAccessToken: (state) => state.access_token,
     },
     actions: {
+        setUser(user) {
+          this.user = user
+        },
+        setCredential(credential) {
+          this.credential = credential
+        },
         setSearch(search) {
           this.search = search
         },

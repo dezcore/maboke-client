@@ -1,5 +1,5 @@
-import apiMixin from '../../mixins/apiMixin'
-import {useGlobalStore} from '../../store'
+import apiMixin from '@/mixins/apiMixin'
+import {useGlobalStore} from '@/store'
 
 let access_token, client, tokenClient
 
@@ -176,22 +176,23 @@ function initTokenClient() {
 function getTokens(code) {
     const data = {code : code, scope : import.meta.env.VITE_SCOPE}
     console.log("data : ", data)
-
-    /*apiMixin.methods.postData(import.meta.env.VITE_MABOKE_API_ROOT + import.meta.env.VITE_MABOKE_API_TOKEN_URI, data, (response) => { 
+    apiMixin.methods.postData(import.meta.env.VITE_MABOKE_API_ROOT + import.meta.env.VITE_MABOKE_API_TOKEN_URI, data, (response) => {
         const globalStore = useGlobalStore();
-
         if(response && response.access_token) {
             access_token = response.access_token
             globalStore.setAccessToken(response)
-            //window.localStorage.setItem('tokens', JSON.stringify(response))
-            apiMixin.methods.getData(import.meta.env.VITE_GOOGLE_USER_INFO_URL, (user) => {
-                console.log("user : ", user, ', ', response)
-                //this.loading = false  
-                //window.localStorage.setItem('user', JSON.stringify(user))
-                //window.location.replace(window.location.origin + window.location.pathname)
+
+            apiMixin.methods.getData(import.meta.env.VITE_GOOGLE_USER_INFO_URL, {}, (user) => {
+                //this.loading = false 
+                if(user) {
+                    globalStore.setUser(user)
+                    window.localStorage.setItem('user', JSON.stringify(user))
+                    window.location.replace(window.location.origin + window.location.pathname)
+                    window.localStorage.setItem('tokens', JSON.stringify(response))
+                }
            })
         }
-    })*/
+    })
 }
 
 function initCodeClient() {
@@ -228,16 +229,18 @@ function loadCalendar() {
 }
 
 function clearSession() {
+    const globalStore = useGlobalStore();
+    globalStore.setCredential(null)
+    globalStore.setAccessToken(null)
     window.localStorage.setItem('user', null)
-    window.localStorage.setItem('credential', null)
-    window.App.$store.commit("updateCredential" , null)
     window.localStorage.setItem('tokens', null)
-    window.App.$store.commit("updateTokens" , null)
+    window.localStorage.setItem('credential', null)
     window.location.replace(window.location.origin + window.location.pathname)
 }
 
 function signOut() {
-    const credential = window.App.$store.state.trafficlawstore.credential
+    const globalStore = useGlobalStore();
+    const credential = globalStore.getCredential
     const tokensObj =  JSON.parse(window.localStorage.getItem('tokens'))
     if(credential) {
         window.google.accounts.id.revoke(credential.sub, (response) => {
@@ -245,7 +248,7 @@ function signOut() {
                 clearSession()
         })
     } else if(tokensObj) {
-        window.google.accounts.oauth2.revoke(tokensObj.tokens.access_token, (response) => {
+        window.google.accounts.oauth2.revoke(tokensObj.access_token, (response) => {
             if(response) 
                 clearSession()
         })
@@ -253,9 +256,10 @@ function signOut() {
 }
 
 function handleCredentialResponse(response) {
+    const globalStore = useGlobalStore();
     if(response) {
         window.localStorage.setItem('credential', response.credential)
-        window.App.$store.commit("updateCredential" , response.credential)
+        globalStore.setCredential(response.credential)
         window.location.replace(window.location.origin  + window.location.pathname)
     }
 }

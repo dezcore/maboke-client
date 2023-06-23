@@ -21,7 +21,6 @@
         ></v-icon></a>
         <LanguageMenu/>
         <v-btn href="/kids" variant="text">Kids</v-btn>
-        <AuthButtons/>
       </template>
     </v-app-bar>
     <v-main>
@@ -33,7 +32,6 @@
   </v-app>
 </template>
 <script>
-import AuthButtons from "../auth/AuthButtons.vue"
 import SearchMenu from "@/components/menu/SearchMenu.vue"
 import LanguageMenu from "@/components/menu/LanguageMenu.vue"
 
@@ -41,7 +39,6 @@ export default {
   name: 'TopBar',
   components : {
     SearchMenu,
-    AuthButtons,
     LanguageMenu
   },
   props : {

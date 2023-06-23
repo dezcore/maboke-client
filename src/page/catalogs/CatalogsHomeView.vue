@@ -10,6 +10,7 @@
                 <CategoriesGrid
                   state="match"
                   :series="series"
+                  :getFile="getFile"
                   :getSerie="getSerie"
                   :getCategory="getCategory"
                   :previewSeasons="setSerie"
@@ -92,6 +93,13 @@ export default {
             callBack(pageable)
           }
           //console.log("Serie : ", series)
+        }
+      })
+    },
+    getFile : function(params, callBack) {
+      this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/google/filecontent", params, (content) => {
+        if(callBack) {
+          callBack(content)
         }
       })
     },

@@ -64,6 +64,10 @@
         type : Array,
         default : ()=> {return []}
       },
+      getFile : {
+        type : Function,
+        default : () => {}
+      },
       getCategory : {
         type : Function,
         default : () => {}
@@ -177,6 +181,9 @@
         this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
           if(pageable)
             this.pageable = pageable
+            /*this.getFile({id : "" }, (content) => {
+              console.log("Content : ", content)
+            })*/
         })
       })
     },

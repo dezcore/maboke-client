@@ -37,7 +37,7 @@ const routes = [
     },
     { 
       path: '/catalogs',
-      name: 'CatalogsHomeView',
+      name: 'Catalogs',
       component : CatalogsHomeView,
       meta: {
         isAuthenticated: false
@@ -69,7 +69,7 @@ const routes = [
     },
     { 
       path: '/catalogs/validation',
-      name: 'Catalogs',
+      name: 'CatalogsValidation',
       component : StudioView,
       meta: {
         isAuthenticated: false
@@ -124,18 +124,28 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const globalStore = useGlobalStore();
-  //const tokens = window.localStorage.getItem("tokens")
+  const tokens = window.localStorage.getItem("tokens")
+  const user = JSON.parse(window.localStorage.getItem('user'))
+  //console.log("path : ", to, tokens, to.name)
 
-  /*if(window && to.name === 'Studio' && (tokens === null || tokens === 'null')) {
+  if(window && to.name === 'Catalogs' && (tokens === null || tokens === 'null')) {
     next({ name: 'Auth' })
   } else {
-    if(globalStore.getAccessToken === undefined && tokens)
-      globalStore.setAccessToken(tokens)*/
 
+    if(globalStore.getAccessToken === undefined && tokens)
+      globalStore.setAccessToken(tokens)
+
+    if(user)
+      globalStore.setUser(user)
+
+    
     globalStore.setLoading(true);
     await nextTick();
-    next();
-  //}
+    if(tokens && to.name === 'Auth')
+      next({ name: 'Catalogs'})
+    else
+      next();
+  }
 })
 
 router.afterEach(() => {

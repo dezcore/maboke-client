@@ -29,6 +29,9 @@
   
   export default {
     name: 'AuthView',
+    mounted() {
+      //console.log("AuthView")
+    },
     methods : {
       getAuthCode
     }

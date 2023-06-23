@@ -1,43 +1,23 @@
 <template>
   <div>
-    <v-toolbar dense floating color="primary" v-if="getUser">   
-      <span class="white--text" @v-on:click="signOut">Logout</span>
-        <v-divider class="mx-2" vertical></v-divider>
-        <v-menu
-          min-width="200px"
-          rounded
-          offset-y
-         >
-          <template v-slot:activator="{ on }">
-            <v-btn icon  v-on="on" class="white--text">
-              <v-icon>mdi-account</v-icon>
-            </v-btn>
+    <v-toolbar color="black" v-if="user">   
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-btn
+              variant="text"
+              icon="mdi-account"
+              v-bind="props"
+            ></v-btn>
           </template>
-            <v-card>
-              <v-list density="compact">
-                <v-list-subheader>REPORTS</v-list-subheader>
-                  <v-list-item
-                    :value="item"
-                    color="primary"
-                  >
-                    <template v-slot:prepend>
-                      <v-icon icon="'mdi-account-details"></v-icon>
-                    </template>
-                    <v-list-item-title v-text="getUser.name"></v-list-item-title>
-                  </v-list-item>
-                  <v-list-item
-                    :value="item"
-                    color="primary"
-                    @click="signOut"
-                  >
-                    <template v-slot:prepend>
-                      <v-icon icon="mdi-logout"></v-icon>
-                    </template>
-                    <v-list-item-title v-text="Logout"></v-list-item-title>
-                  </v-list-item>
-              </v-list>
-            </v-card>
-         </v-menu>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title>{{user.name}}</v-list-item-title>
+            </v-list-item>
+            <v-list-item  @click="signOut">
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-toolbar>
       <div v-else>   
         <span class="white--text" @v-on:click="signOut">Login</span>
@@ -50,19 +30,25 @@
 <script>
   import {
     signOut, 
-  } from "../../plugins/youtube/index"
-  import apiMixin from "../../mixins/apiMixin"
-
+  } from "@/plugins/youtube/index"
+  import apiMixin from "@/mixins/apiMixin"
+  import {useGlobalStore} from "@/store"
+  
   export default {
     name: 'AuthButtons',
-    data: () => ({}),
+    data: () => ({
+      user : {
+        name : 'default'
+      }
+    }),
     mixins : [
       apiMixin
     ],
-    computed : {
-      getUser() {
-        let user = JSON.parse(window.localStorage.getItem('user'))
-        return user && user.name ? user : null
+    mounted() {
+      const globalStore = useGlobalStore();
+      const user = globalStore.getUser
+      if(user) {
+        this.user = user
       }
     },
     methods : {

@@ -14,13 +14,7 @@
       </template>
       <template v-slot:append>        
         <SearchMenu></SearchMenu>
-        <a href="/"><v-icon
-          color="white"
-          class="ma-1"
-          icon="mdi-bell"
-        ></v-icon></a>
         <LanguageMenu/>
-        <v-btn href="/kids" variant="text">Kids</v-btn>
         <AuthButtons/>
       </template>
     </v-app-bar>
@@ -33,7 +27,7 @@
   </v-app>
 </template>
 <script>
-import AuthButtons from "../auth/AuthButtons.vue"
+import AuthButtons from "@/components/auth/AuthButtons.vue"
 import SearchMenu from "@/components/menu/SearchMenu.vue"
 import LanguageMenu from "@/components/menu/LanguageMenu.vue"
 
