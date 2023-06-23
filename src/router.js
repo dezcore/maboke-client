@@ -124,7 +124,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const globalStore = useGlobalStore();
-  const tokens = window.localStorage.getItem("tokens")
+  const tokens = JSON.parse(window.localStorage.getItem("tokens"))
   const user = JSON.parse(window.localStorage.getItem('user'))
   //console.log("path : ", to, tokens, to.name)
 
@@ -132,18 +132,17 @@ router.beforeEach(async (to, from, next) => {
     next({ name: 'Auth' })
   } else {
 
-    if(globalStore.getAccessToken === undefined && tokens)
+    if(globalStore.getAccessToken === null && tokens)
       globalStore.setAccessToken(tokens)
 
+   //console.log(globalStore.getAccessToken === "")
     if(user)
       globalStore.setUser(user)
-
-    
     globalStore.setLoading(true);
     await nextTick();
-    if(tokens && to.name === 'Auth')
-      next({ name: 'Catalogs'})
-    else
+    //if(tokens && to.name === 'Auth')
+    //next({ name: 'Catalogs'})
+    //else
       next();
   }
 })

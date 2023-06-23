@@ -7,9 +7,9 @@ export const useGlobalStore = defineStore('global', {
       search : '',
       user : null,
       loading : true,
-      access_token: "",
       progress : null,
-      credential : null
+      credential : null,
+      access_token: null,
     }),
     getters: {
       getUser: (state) => state.user,

@@ -1,5 +1,5 @@
-import api from '../axios'
-import {getAuthCode} from "../plugins/youtube/index"
+import api from '@/axios'
+import {getAuthCode} from "@/plugins/youtube/index"
 export default {
     data: () => ({}),
     methods : {

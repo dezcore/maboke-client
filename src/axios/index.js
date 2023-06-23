@@ -5,12 +5,11 @@ axios.interceptors.request.use(async config => {
     let access_token
     const globalStore = useGlobalStore();
     const tokens = globalStore.getAccessToken
-
     if(tokens) {
         access_token = tokens.access_token
-        
-        if(config.url.includes('studiomaker')) {
-            config.headers.tokens = JSON.stringify(tokens)
+        if(config.url.includes('gapi')) {
+            //console.log("access_token : ", access_token)
+            config.headers.token = access_token.trim()//tokens//JSON.stringify(tokens)
             config.headers.accept = "application/json"
         } else if(access_token) {
             delete config.headers.tokens

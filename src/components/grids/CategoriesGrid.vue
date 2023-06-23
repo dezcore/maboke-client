@@ -72,6 +72,10 @@
         type : Function,
         default : () => {}
       },
+      getFileByName : {
+        type : Function,
+        default : () => {}
+      },
       postCategory : {
         type : Function,
         default : () => {}
@@ -89,6 +93,10 @@
         default : ()=>{return []}
       },
       getSerie : {
+        type : Function,
+        default : ()=>{}
+      },
+      postFile : {
         type : Function,
         default : ()=>{}
       },
@@ -154,7 +162,8 @@
           "Serie",
           "Kids",
           "Shows",
-        ]
+        ],
+        configFiles : {}
       }
     },
     computed : {
@@ -181,9 +190,11 @@
         this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
           if(pageable)
             this.pageable = pageable
-            /*this.getFile({id : "" }, (content) => {
-              console.log("Content : ", content)
-            })*/
+          
+          this.fileHandler()
+          /*this.getFile({id : "1X_MVW8KdKyUc-kauRgVcvMadLWVAmz6d" }, (content) => {
+            console.log("Content : ", content)
+          })*/
         })
       })
     },
@@ -232,6 +243,51 @@
             console.log("Set category page : ", category, this.selectPage, res)
           }) 
         }
+      },
+      createFolder : function(folderName, fileName, callBack) {
+        if(folderName && fileName) {
+          this.postFile("/gapi/drive/folders/create", {
+            "fileName" : fileName,
+            "folderName" : folderName,
+            "fileContent": {
+              "test" :  "Hello world !"
+            }
+          }, callBack)
+        }
+      },
+      createFile : function(folderName, fileName, callBack) {
+        if(folderName && fileName) {
+          this.postFile("/gapi/drive/files/create", {
+            "fileName" : fileName,
+            "foldersPaths" : folderName,
+            "mimeType" : "application/json",
+            "fileContent": {
+              "test" :  "Hello world !"
+            }
+          }, callBack)
+        }
+      },
+      fileHandler : function() {
+        this.getFileByName("/gapi/dapi/name", {fileName : "maboke"}, (files) => {
+          let mabokeFile
+          let filesNames = Object.keys(files);
+
+          if(filesNames) {
+            mabokeFile = filesNames.find(name => name === "maboke")
+            if(mabokeFile === undefined) {
+              this.createFolder("maboke", "testDefault", (folder) => {
+                this.configFiles["maboke"] = folder.id
+                this.createFile("maboke", "home.json", (file)=>{
+                  this.configFiles["home"] = file.id
+                  console.log("file : ", this.configFiles)
+                })
+              })
+            } else {
+              this.configFiles[mabokeFile] = files[mabokeFile]
+              console.log("files : ", this.configFiles)
+            }
+          }
+        })
       }
     }
   }

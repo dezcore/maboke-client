@@ -12,9 +12,11 @@
                   :series="series"
                   :getFile="getFile"
                   :getSerie="getSerie"
+                  :postFile="postFile"
                   :getCategory="getCategory"
                   :previewSeasons="setSerie"
                   :postCategory="postCategory"
+                  :getFileByName="getFileByName"
                 />
               </v-col>
               <v-col cols="4">
@@ -97,11 +99,22 @@ export default {
       })
     },
     getFile : function(params, callBack) {
-      this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/google/filecontent", params, (content) => {
+      this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/gapi/filecontent", params, (content) => {
         if(callBack) {
           callBack(content)
         }
       })
+    },
+    getFileByName : function(uri, params, callBack) {
+      if(params) {
+        //"/gapi/dapi/name"
+        console.log("uri : ", uri)
+        this.getData(import.meta.env.VITE_MABOKE_API_ROOT + uri, params, (files) => {
+          if(callBack) {
+            callBack(files)
+          }
+        })
+      }
     },
     getCategory : function(callBack) {
       this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/category", {}, (categories) => {
@@ -109,6 +122,11 @@ export default {
           callBack(categories)
         }
       })
+    },
+    postFile : function(uri, data, callBack) {
+      if(data) {
+        this.postData(import.meta.env.VITE_MABOKE_API_ROOT + uri, data, callBack)
+      }
     },
     postCategory : function(page, category, callBack) {
       let pageCategory
