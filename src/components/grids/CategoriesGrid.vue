@@ -64,15 +64,11 @@
         type : Array,
         default : ()=> {return []}
       },
-      getFile : {
-        type : Function,
-        default : () => {}
-      },
       getCategory : {
         type : Function,
         default : () => {}
       },
-      getFileByName : {
+      getFile : {
         type : Function,
         default : () => {}
       },
@@ -163,6 +159,12 @@
           "Kids",
           "Shows",
         ],
+        appFiles : [
+          "Home.json",
+          "Serie.json",
+          "Kids.json",
+          "Shows.json",
+        ],
         configFiles : {}
       }
     },
@@ -182,23 +184,22 @@
       }
     },
     mounted() {
-      this.getCategory((categories)=>{
-        //console.log("Categories : ", categories)
-        if(categories)
-          this.categories = categories
-
-        this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
-          if(pageable)
-            this.pageable = pageable
-          
-          this.fileHandler()
-          /*this.getFile({id : "1X_MVW8KdKyUc-kauRgVcvMadLWVAmz6d" }, (content) => {
-            console.log("Content : ", content)
-          })*/
-        })
-      })
+      this.initAppEnv()
     },
     methods : {
+      initAppEnv : function() {
+        this.getCategory((categories) => {
+          //console.log("Categories : ", categories)
+          if(categories)
+            this.categories = categories
+
+          this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
+            if(pageable)
+              this.pageable = pageable
+            this.fileHandler()
+          })
+        })
+      },
       showAlertMessage : function(message) {
         if(message) {
           this.alertMessage = message
@@ -208,9 +209,6 @@
             this.showAlert = false
           }, 1000);
         }
-      },
-      serieHandler : function() {
-        console.log("serieHandler")
       },
       appendVideoHandler : function(serie) {
         if(serie && this.season) {
@@ -238,16 +236,21 @@
         }
       },
       setCategoryPage : function(category, index) {
+        let page, pageId, categories
         if(category) {
-          this.postCategory(this.selectPage[index], category, (res) => {
+          page = this.selectPage[index]
+          categories = this.sortCategories
+          pageId = this.configFiles[page+ ".json"]
+          console.log("categoriePage : ", page, pageId, categories[category])
+          /*this.postCategory(this.selectPage[index], category, (res) => {
             console.log("Set category page : ", category, this.selectPage, res)
-          }) 
+          })*/ 
         }
       },
-      createFolder : function(folderName, fileName, callBack) {
-        if(folderName && fileName) {
+      createFolder : function(folderName, callBack) {
+        if(folderName) {
           this.postFile("/gapi/drive/folders/create", {
-            "fileName" : fileName,
+            "fileName" : "defaultFile",
             "folderName" : folderName,
             "fileContent": {
               "test" :  "Hello world !"
@@ -255,37 +258,96 @@
           }, callBack)
         }
       },
-      createFile : function(folderName, fileName, callBack) {
+      createFile : function(folderName, fileName, content, callBack) {
         if(folderName && fileName) {
           this.postFile("/gapi/drive/files/create", {
             "fileName" : fileName,
             "foldersPaths" : folderName,
             "mimeType" : "application/json",
-            "fileContent": {
-              "test" :  "Hello world !"
-            }
+            "fileContent": content,
           }, callBack)
         }
       },
-      fileHandler : function() {
-        this.getFileByName("/gapi/dapi/name", {fileName : "maboke"}, (files) => {
-          let mabokeFile
-          let filesNames = Object.keys(files);
-
-          if(filesNames) {
-            mabokeFile = filesNames.find(name => name === "maboke")
-            if(mabokeFile === undefined) {
-              this.createFolder("maboke", "testDefault", (folder) => {
-                this.configFiles["maboke"] = folder.id
-                this.createFile("maboke", "home.json", (file)=>{
-                  this.configFiles["home"] = file.id
-                  console.log("file : ", this.configFiles)
-                })
-              })
-            } else {
-              this.configFiles[mabokeFile] = files[mabokeFile]
-              console.log("files : ", this.configFiles)
+      appendFile : function(folderId, fileName, content, callBack) {
+        if(folderId && fileName) {
+          this.postFile("/gapi/dapi/file/append", {
+            "fileName" : fileName,
+            "parentFileId" : folderId,
+            "mimeType" : "application/json",
+            "fileContent": content,
+          }, callBack)
+        }
+      },
+      getFileContent : function() {
+        this.getFile("/gapi/filecontent", {fileName : fileName}, (content) => {
+          if(content) {
+            console.log("Content : ", content)
+          }
+        })
+      },
+      getFileId : function(fileName, callBack) {
+        let file
+        if(fileName) {
+          this.getFile("/gapi/dapi/name", {fileName : fileName}, (files) => {
+            let filesNames = Object.keys(files)
+            if(filesNames) {
+              file = filesNames.find(name => name === fileName)
+              if(file && callBack)
+                callBack({name : fileName, id : files[file]})
+              else {
+                callBack({name : null, id : null})
+              }
             }
+          })
+        }
+      },
+      createFiles : function(files, parentFileId, index, callBack) {
+        if(files && index < files.length) {
+          this.appendFile(parentFileId, files[index], {"categories" : []}, (file) => {
+            //console.log("fileName : ",files[index])
+            this.configFiles[files[index]] = file.id
+            //console.log("file : ", this.configFiles)
+            this.createFiles(files, parentFileId, index+1, ()=>{
+              if(callBack)
+                callBack()
+            })
+          })
+        } else if(callBack) {
+          callBack()
+        }
+      },
+      getFiles : function(files, index, callBack) {
+        if(files  && index < files.length) {
+          this.getFileId(files[index], ({name, id})=>{
+            if(name && id)
+              this.configFiles[name] = id
+
+            this.getFiles(files, index + 1 , ()=>{
+              if(callBack)
+                callBack()
+            })
+
+          })
+        } else if(callBack) {
+          callBack()
+        }
+      },
+      fileHandler : function() {
+        let appFolder = "maboke"
+        this.getFileId(appFolder, ({name, id}) => {
+          if(name === null) {
+            //console.log("name : ", name, id)
+            this.createFolder(appFolder, (folder) => {
+              this.configFiles[appFolder] = folder.id
+              this.createFiles(this.appFiles, folder.id, 0, ()=>{
+                console.log("Create configFile : ", this.configFiles)
+              })
+            })
+          } else {
+            this.configFiles[name] = id
+            this.getFiles(this.appFiles, 0, ()=>{
+              console.log("files : ", this.configFiles)
+            })
           }
         })
       }

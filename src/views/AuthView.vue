@@ -25,12 +25,20 @@
   </v-container>
 </template>
 <script>
-  import {getAuthCode} from "../plugins/youtube"
+  import {useGlobalStore} from '@/store'
+  import {getAuthCode} from "@/plugins/youtube"
   
   export default {
     name: 'AuthView',
     mounted() {
-      //console.log("AuthView")
+      const globalStore = useGlobalStore()
+      const tokens = globalStore.getAccessToken
+      if(tokens) {
+        if(this.$route.redirectedFrom && this.$route.redirectedFrom.path)
+          this.$router.push(this.$route.redirectedFrom.path)
+        else
+          this.$router.push('/catalogs')
+      }
     },
     methods : {
       getAuthCode

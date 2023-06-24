@@ -10,13 +10,12 @@
                 <CategoriesGrid
                   state="match"
                   :series="series"
-                  :getFile="getFile"
                   :getSerie="getSerie"
                   :postFile="postFile"
                   :getCategory="getCategory"
                   :previewSeasons="setSerie"
                   :postCategory="postCategory"
-                  :getFileByName="getFileByName"
+                  :getFile="getFile"
                 />
               </v-col>
               <v-col cols="4">
@@ -98,17 +97,8 @@ export default {
         }
       })
     },
-    getFile : function(params, callBack) {
-      this.getData(import.meta.env.VITE_MABOKE_API_ROOT + "/gapi/filecontent", params, (content) => {
-        if(callBack) {
-          callBack(content)
-        }
-      })
-    },
-    getFileByName : function(uri, params, callBack) {
+    getFile : function(uri, params, callBack) {
       if(params) {
-        //"/gapi/dapi/name"
-        console.log("uri : ", uri)
         this.getData(import.meta.env.VITE_MABOKE_API_ROOT + uri, params, (files) => {
           if(callBack) {
             callBack(files)

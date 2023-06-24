@@ -16,7 +16,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 import { nextTick } from 'vue';
-import {useGlobalStore} from './store'
+import {useGlobalStore} from '@/store'
 
 const routes = [
     { 
@@ -126,24 +126,18 @@ router.beforeEach(async (to, from, next) => {
   const globalStore = useGlobalStore();
   const tokens = JSON.parse(window.localStorage.getItem("tokens"))
   const user = JSON.parse(window.localStorage.getItem('user'))
-  //console.log("path : ", to, tokens, to.name)
-
+    
   if(window && to.name === 'Catalogs' && (tokens === null || tokens === 'null')) {
     next({ name: 'Auth' })
   } else {
+    if(user)
+      globalStore.setUser(user)
 
     if(globalStore.getAccessToken === null && tokens)
       globalStore.setAccessToken(tokens)
 
-   //console.log(globalStore.getAccessToken === "")
-    if(user)
-      globalStore.setUser(user)
-    globalStore.setLoading(true);
-    await nextTick();
-    //if(tokens && to.name === 'Auth')
-    //next({ name: 'Catalogs'})
-    //else
-      next();
+    await nextTick()
+    next();
   }
 })
 
