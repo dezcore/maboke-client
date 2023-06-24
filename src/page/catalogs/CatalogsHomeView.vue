@@ -10,6 +10,7 @@
                 <CategoriesGrid
                   state="match"
                   :series="series"
+                  :putFile="putFile"
                   :getSerie="getSerie"
                   :postFile="postFile"
                   :getCategory="getCategory"
@@ -116,6 +117,11 @@ export default {
     postFile : function(uri, data, callBack) {
       if(data) {
         this.postData(import.meta.env.VITE_MABOKE_API_ROOT + uri, data, callBack)
+      }
+    },
+    putFile : function(uri, data, callBack) {
+      if(data) {
+        this.putData(import.meta.env.VITE_MABOKE_API_ROOT + uri, data, callBack)
       }
     },
     postCategory : function(page, category, callBack) {

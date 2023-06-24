@@ -96,6 +96,10 @@
         type : Function,
         default : ()=>{}
       },
+      putFile : {
+        type : Function,
+        default : ()=>{}
+      },
       appendVideos : {
         type : Function,
         default : ()=>{}
@@ -196,7 +200,7 @@
           this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
             if(pageable)
               this.pageable = pageable
-            this.fileHandler()
+            //this.fileHandler()
           })
         })
       },
@@ -241,10 +245,14 @@
           page = this.selectPage[index]
           categories = this.sortCategories
           pageId = this.configFiles[page+ ".json"]
-          console.log("categoriePage : ", page, pageId, categories[category])
-          /*this.postCategory(this.selectPage[index], category, (res) => {
-            console.log("Set category page : ", category, this.selectPage, res)
-          })*/ 
+
+          this.updateFile(page+ ".json", pageId, {"categories" : categories[category]}, (content)=>{
+            //console.log("categoriePage : ", page, pageId, categories[category])
+            console.log("Update : ", content)
+            this.postCategory(this.selectPage[index], category, (res) => {
+              console.log("Set category page : ", category, this.selectPage, res)
+            }) 
+          })
         }
       },
       createFolder : function(folderName, callBack) {
@@ -273,6 +281,16 @@
           this.postFile("/gapi/dapi/file/append", {
             "fileName" : fileName,
             "parentFileId" : folderId,
+            "mimeType" : "application/json",
+            "fileContent": content,
+          }, callBack)
+        }
+      },
+      updateFile : function(fileName, fileId, content, callBack) {
+        if(fileName && fileId && content) {
+          this.putFile("/gapi/dapi/file", {
+            "fileId" : fileId,
+            "fileName" : fileName,
             "mimeType" : "application/json",
             "fileContent": content,
           }, callBack)
