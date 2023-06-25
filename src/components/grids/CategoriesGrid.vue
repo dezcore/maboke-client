@@ -240,11 +240,12 @@
         }
       },
       setCategoryPage : function(category, index) {
-        let page, pageId, categories
+        let page, pageId, categories//, targetFile
         if(category) {
           page = this.selectPage[index]
           categories = this.sortCategories
-          pageId = this.configFiles[page+ ".json"]
+          pageId = this.configFiles[page+ ".json"].id
+          //targetFile = this.configFiles[page+ ".json"]
 
           this.updateFile(page+ ".json", pageId, {"categories" : categories[category]}, (content)=>{
             //console.log("categoriePage : ", page, pageId, categories[category])
@@ -296,12 +297,29 @@
           }, callBack)
         }
       },
-      getFileContent : function() {
-        this.getFile("/gapi/filecontent", {fileName : fileName}, (content) => {
-          if(content) {
+      getFileContent : function(fileId, callBack) {
+        if(fileId) {
+          this.getFile("/gapi/filecontent", {id : fileId}, (content) => {
+            if(callBack)
+              callBack(content)
+          })
+        } else {
+          callBack(null)
+        }
+      },
+      getFilesContents : function(filesIds, filesNames, index, callBack) {
+        if(filesIds && filesNames && index < filesIds.length) {
+          this.getFile("/gapi/filecontent", {id : filesIds[index]}, (content) => {
             console.log("Content : ", content)
-          }
-        })
+            this.configFiles[filesNames[index]].data = content 
+            this.getFilesContents(filesIds, filesNames, index+1, () => {
+              if(callBack)
+                callBack()
+            })
+          })
+        } else if(callBack) {
+          callBack()
+        }
       },
       getFileId : function(fileName, callBack) {
         let file
@@ -323,7 +341,7 @@
         if(files && index < files.length) {
           this.appendFile(parentFileId, files[index], {"categories" : []}, (file) => {
             //console.log("fileName : ",files[index])
-            this.configFiles[files[index]] = file.id
+            this.configFiles[files[index]] = {id : file.id, data : {}}
             //console.log("file : ", this.configFiles)
             this.createFiles(files, parentFileId, index+1, ()=>{
               if(callBack)
@@ -338,7 +356,7 @@
         if(files  && index < files.length) {
           this.getFileId(files[index], ({name, id})=>{
             if(name && id)
-              this.configFiles[name] = id
+              this.configFiles[name] = {id : id, data : {}}
 
             this.getFiles(files, index + 1 , ()=>{
               if(callBack)
@@ -354,17 +372,25 @@
         let appFolder = "maboke"
         this.getFileId(appFolder, ({name, id}) => {
           if(name === null) {
-            //console.log("name : ", name, id)
             this.createFolder(appFolder, (folder) => {
-              this.configFiles[appFolder] = folder.id
-              this.createFiles(this.appFiles, folder.id, 0, ()=>{
-                console.log("Create configFile : ", this.configFiles)
+              this.configFiles[appFolder] = {id : folder.id, data : {}}
+              this.createFiles(this.appFiles, folder.id, 0, () => {
+                const filesNames = Object.keys(this.configFiles)
+                const filesIds = Object.values(this.configFiles).map(file => file.id)
+                this.getFilesContents(filesIds, filesNames, 0, () => {
+                  console.log("Create configFile : ", this.configFiles)
+                })
               })
             })
           } else {
-            this.configFiles[name] = id
-            this.getFiles(this.appFiles, 0, ()=>{
-              console.log("files : ", this.configFiles)
+            this.configFiles[name] = {id : id, data : {}}
+            this.getFiles(this.appFiles, 0, () => {
+              const filesNames = Object.keys(this.configFiles)
+              const filesIds = Object.values(this.configFiles).map(file => file.id)
+
+              this.getFilesContents(filesIds, filesNames, 0, () => {
+                console.log("files : ", this.configFiles)
+              })
             })
           }
         })
