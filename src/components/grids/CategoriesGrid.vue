@@ -401,7 +401,7 @@
         }
       },
       setAppFilesEnv : function(appFolder) {
-        const names = [appFolder, ...this.appFiles] 
+        const names = [appFolder, ...this.appFiles].join(",") 
         if(names) {
           console.log("names : ", names)
           this.getRequest("/gdrive/names", {names : names}, (files) => {
