@@ -21,7 +21,6 @@
               v-model="selectPage[index]"
               :items="pages"
               label="Page"
-              @update:modelValue="setCategoryPage(key, index)"
             ></v-select>
             </form>
 
@@ -68,7 +67,7 @@
         type : Function,
         default : () => {}
       },
-      getFile : {
+      getRequest : {
         type : Function,
         default : () => {}
       },
@@ -92,7 +91,7 @@
         type : Function,
         default : ()=>{}
       },
-      postFile : {
+      postRequest : {
         type : Function,
         default : ()=>{}
       },
@@ -132,6 +131,32 @@
           })
         }
       },
+      selectPage: {
+        handler: function(selectPage) {
+          let targetIndex, newPage, oldPage, categories, category
+
+          if(selectPage) {
+            if(this.currentSelectPage) {
+              targetIndex = selectPage.findIndex((select, index) => {return select !== this.currentSelectPage[index]})
+             
+              if(targetIndex !== -1) {
+                newPage = selectPage[targetIndex]
+                oldPage = this.currentSelectPage[targetIndex]
+                categories = this.sortCategories
+                category =  Object.keys(categories)[targetIndex]
+                if(category) {
+                  this.removeCategorieToPage(category, oldPage, categories, ()=>{
+                    this.addCategorieToPage(category, newPage, categories)
+                  }) 
+                }
+              }
+            }
+
+            this.currentSelectPage = Object.assign({}, selectPage)
+          }
+        },
+        deep: true
+      },
       pageable: {
         handler: function(pageable) {
           if(pageable && pageable.pageNumber !== this.page) {
@@ -169,7 +194,22 @@
           "Kids.json",
           "Shows.json",
         ],
-        configFiles : {}
+        filesContents : [
+          {
+            "categories" : []
+          },
+          {
+            "categories" : []
+          },
+          {
+            "categories" : []
+          },
+          {
+            "categories" : []
+          },
+        ],
+        configFiles : {},
+        currentSelectPage : null,
       }
     },
     computed : {
@@ -200,7 +240,7 @@
           this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
             if(pageable)
               this.pageable = pageable
-            //this.fileHandler()
+            this.fileHandler()
           })
         })
       },
@@ -239,26 +279,46 @@
           this.appendSerie(serie)
         }
       },
-      setCategoryPage : function(category, index) {
-        let page, pageId, categories//, targetFile
-        if(category) {
-          page = this.selectPage[index]
-          categories = this.sortCategories
+      addCategorieToPage : function(category, page, categories, callBack) {
+        let pageId
+        if(category && page && categories) {
           pageId = this.configFiles[page+ ".json"].id
-          //targetFile = this.configFiles[page+ ".json"]
 
-          this.updateFile(page+ ".json", pageId, {"categories" : categories[category]}, (content)=>{
-            //console.log("categoriePage : ", page, pageId, categories[category])
-            console.log("Update : ", content)
-            this.postCategory(this.selectPage[index], category, (res) => {
-              console.log("Set category page : ", category, this.selectPage, res)
+          if(this.configFiles[page+ ".json"].data && this.configFiles[page+ ".json"].data.categories === undefined) {
+            this.configFiles[page+ ".json"].data.categories = {}
+          }
+          this.configFiles[page+ ".json"].data.categories[category] = categories[category]
+          console.log("addCategorieToPage : ", this.configFiles)
+          /*this.updateFile(page+ ".json", pageId, this.configFiles[page+ ".json"].data, (content)=>{
+            this.postCategory(page, category, (res) => {
+              if(callBack)
+                callBack(content, res)
             }) 
-          })
+          })*/
+        } else if(callBack) {
+          callBack()
+        }
+      },
+      removeCategorieToPage : function(category, page, categories, callBack) {
+        let pageId
+        if(category && page && categories) {
+          pageId = this.configFiles[page+ ".json"].id
+
+          if(this.configFiles[page+ ".json"].data.categories && this.configFiles[page+ ".json"].data.categories[category]) {
+            delete this.configFiles[page+ ".json"].data.categories[category]
+            /*this.updateFile(page+ ".json", pageId, this.configFiles[page+ ".json"].data, (content)=>{
+              if(callBack)
+                callBack(content)
+            })*/
+            console.log("remove category : ", this.configFiles)
+          } else if(callBack) {
+            callBack()
+          }
         }
       },
       createFolder : function(folderName, callBack) {
         if(folderName) {
-          this.postFile("/gapi/drive/folders/create", {
+          this.postRequest("/gfile/folder", {
             "fileName" : "defaultFile",
             "folderName" : folderName,
             "fileContent": {
@@ -269,7 +329,7 @@
       },
       createFile : function(folderName, fileName, content, callBack) {
         if(folderName && fileName) {
-          this.postFile("/gapi/drive/files/create", {
+          this.postRequest("/gfile/create", {
             "fileName" : fileName,
             "foldersPaths" : folderName,
             "mimeType" : "application/json",
@@ -277,19 +337,9 @@
           }, callBack)
         }
       },
-      appendFile : function(folderId, fileName, content, callBack) {
-        if(folderId && fileName) {
-          this.postFile("/gapi/dapi/file/append", {
-            "fileName" : fileName,
-            "parentFileId" : folderId,
-            "mimeType" : "application/json",
-            "fileContent": content,
-          }, callBack)
-        }
-      },
       updateFile : function(fileName, fileId, content, callBack) {
         if(fileName && fileId && content) {
-          this.putFile("/gapi/dapi/file", {
+          this.putFile("/gfile", {
             "fileId" : fileId,
             "fileName" : fileName,
             "mimeType" : "application/json",
@@ -299,7 +349,7 @@
       },
       getFileContent : function(fileId, callBack) {
         if(fileId) {
-          this.getFile("/gapi/filecontent", {id : fileId}, (content) => {
+          this.getRequest("/gfile/content", {id : fileId}, (content) => {
             if(callBack)
               callBack(content)
           })
@@ -309,7 +359,7 @@
       },
       getFilesContents : function(filesIds, filesNames, index, callBack) {
         if(filesIds && filesNames && index < filesIds.length) {
-          this.getFile("/gapi/filecontent", {id : filesIds[index]}, (content) => {
+          this.getRequest("/gfile/content", {id : filesIds[index]}, (content) => {
             console.log("Content : ", content)
             this.configFiles[filesNames[index]].data = content 
             this.getFilesContents(filesIds, filesNames, index+1, () => {
@@ -321,77 +371,58 @@
           callBack()
         }
       },
-      getFileId : function(fileName, callBack) {
-        let file
-        if(fileName) {
-          this.getFile("/gapi/dapi/name", {fileName : fileName}, (files) => {
-            let filesNames = Object.keys(files)
-            if(filesNames) {
-              file = filesNames.find(name => name === fileName)
-              if(file && callBack)
-                callBack({name : fileName, id : files[file]})
-              else {
-                callBack({name : null, id : null})
-              }
+      createFiles : function(parentFileId, files, filesContents, callBack) {
+        if(files) {
+          this.postRequest("/gfiles/append", {
+            "parentFileId" : parentFileId,
+            "filesNames" : files,
+            "contents": filesContents,
+            "mimeType" : "application/json"
+          }, callBack)
+        }
+      },
+      initAppFilesEnv : function(appFolder) {
+        if(appFolder) {
+          this.createFolder(appFolder, (folder) => {
+            this.createFiles(folder.id, this.appFiles, this.filesContents, (files) => {
+              //console.log("files : ", files)
+              let gFiles = files.map( (file, index) => {return {name : this.appFiles[index], id : file.id}})
+              gFiles.push({name : appFolder, id : folder.id})
+              this.postRequest("/gdrive/all", gFiles, (gRes) => {    
+                this.appFiles.forEach((fileName, index) => {
+                  this.configFiles[fileName] = {id : files[index].id, data : this.filesContents[index]}
+                })
+                console.log("Gres : ", gRes)
+              })
+            })
+            this.configFiles[appFolder] = {id : folder.id, data : {}}
+            console.log("config : ", this.configFiles)
+          })
+        }
+      },
+      setAppFilesEnv : function(appFolder) {
+        const names = [appFolder, ...this.appFiles] 
+        if(names) {
+          console.log("names : ", names)
+          this.getRequest("/gdrive/names", {names : names}, (files) => {
+            if(files) {
+              console.log("files : ", files)
+              /*files.forEach(({name, fileId}) => {
+                this.configFiles[name] = {id : fileId, data : {}}
+              })*/
             }
+            console.log("setAppFilesEnv : ", files)
           })
-        }
-      },
-      createFiles : function(files, parentFileId, index, callBack) {
-        if(files && index < files.length) {
-          this.appendFile(parentFileId, files[index], {"categories" : []}, (file) => {
-            //console.log("fileName : ",files[index])
-            this.configFiles[files[index]] = {id : file.id, data : {}}
-            //console.log("file : ", this.configFiles)
-            this.createFiles(files, parentFileId, index+1, ()=>{
-              if(callBack)
-                callBack()
-            })
-          })
-        } else if(callBack) {
-          callBack()
-        }
-      },
-      getFiles : function(files, index, callBack) {
-        if(files  && index < files.length) {
-          this.getFileId(files[index], ({name, id})=>{
-            if(name && id)
-              this.configFiles[name] = {id : id, data : {}}
-
-            this.getFiles(files, index + 1 , ()=>{
-              if(callBack)
-                callBack()
-            })
-
-          })
-        } else if(callBack) {
-          callBack()
         }
       },
       fileHandler : function() {
         let appFolder = "maboke"
-        this.getFileId(appFolder, ({name, id}) => {
-          if(name === null) {
-            this.createFolder(appFolder, (folder) => {
-              this.configFiles[appFolder] = {id : folder.id, data : {}}
-              this.createFiles(this.appFiles, folder.id, 0, () => {
-                const filesNames = Object.keys(this.configFiles)
-                const filesIds = Object.values(this.configFiles).map(file => file.id)
-                this.getFilesContents(filesIds, filesNames, 0, () => {
-                  console.log("Create configFile : ", this.configFiles)
-                })
-              })
-            })
+        this.getRequest("/gdrive/exist", {name : appFolder}, (exist) => {
+          console.log("exist : ", exist);
+          if(exist) {
+            this.setAppFilesEnv(appFolder) 
           } else {
-            this.configFiles[name] = {id : id, data : {}}
-            this.getFiles(this.appFiles, 0, () => {
-              const filesNames = Object.keys(this.configFiles)
-              const filesIds = Object.values(this.configFiles).map(file => file.id)
-
-              this.getFilesContents(filesIds, filesNames, 0, () => {
-                console.log("files : ", this.configFiles)
-              })
-            })
+            this.initAppFilesEnv(appFolder)
           }
         })
       }

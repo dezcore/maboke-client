@@ -12,11 +12,11 @@
                   :series="series"
                   :putFile="putFile"
                   :getSerie="getSerie"
-                  :postFile="postFile"
+                  :postRequest="postRequest"
                   :getCategory="getCategory"
                   :previewSeasons="setSerie"
                   :postCategory="postCategory"
-                  :getFile="getFile"
+                  :getRequest="getRequest"
                 />
               </v-col>
               <v-col cols="4">
@@ -98,7 +98,7 @@ export default {
         }
       })
     },
-    getFile : function(uri, params, callBack) {
+    getRequest : function(uri, params, callBack) {
       if(params) {
         this.getData(import.meta.env.VITE_MABOKE_API_ROOT + uri, params, (files) => {
           if(callBack) {
@@ -114,7 +114,7 @@ export default {
         }
       })
     },
-    postFile : function(uri, data, callBack) {
+    postRequest : function(uri, data, callBack) {
       if(data) {
         this.postData(import.meta.env.VITE_MABOKE_API_ROOT + uri, data, callBack)
       }
