@@ -385,14 +385,12 @@
         if(appFolder) {
           this.createFolder(appFolder, (folder) => {
             this.createFiles(folder.id, this.appFiles, this.filesContents, (files) => {
-              //console.log("files : ", files)
-              let gFiles = files.map( (file, index) => {return {name : this.appFiles[index], id : file.id}})
-              gFiles.push({name : appFolder, id : folder.id})
-              this.postRequest("/gdrive/all", gFiles, (gRes) => {    
+              let gFiles = files.map( (file, index) => {return {name : this.appFiles[index], fileId : file.id}})
+              gFiles.push({name : appFolder, fileId : folder.id})
+              this.postRequest("/gdrive/all", gFiles, () => {    
                 this.appFiles.forEach((fileName, index) => {
                   this.configFiles[fileName] = {id : files[index].id, data : this.filesContents[index]}
                 })
-                console.log("Gres : ", gRes)
               })
             })
             this.configFiles[appFolder] = {id : folder.id, data : {}}
@@ -403,22 +401,19 @@
       setAppFilesEnv : function(appFolder) {
         const names = [appFolder, ...this.appFiles].join(",") 
         if(names) {
-          console.log("names : ", names)
           this.getRequest("/gdrive/names", {names : names}, (files) => {
             if(files) {
-              console.log("files : ", files)
-              /*files.forEach(({name, fileId}) => {
+              files.forEach(({name, fileId}) => {
                 this.configFiles[name] = {id : fileId, data : {}}
-              })*/
+              })
             }
-            console.log("setAppFilesEnv : ", files)
+            console.log("setAppFilesEnv : ", this.configFiles)
           })
         }
       },
       fileHandler : function() {
         let appFolder = "maboke"
         this.getRequest("/gdrive/exist", {name : appFolder}, (exist) => {
-          console.log("exist : ", exist);
           if(exist) {
             this.setAppFilesEnv(appFolder) 
           } else {
