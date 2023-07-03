@@ -10,7 +10,12 @@
          <v-breadcrumbs
             :items="items"
             divider=""
-        ></v-breadcrumbs>
+        >
+        <template v-slot:title="{ item }">
+          {{$t(item.title)}}
+        </template>
+
+      </v-breadcrumbs>
       </template>
       <template v-slot:append>        
         <SearchMenu></SearchMenu>
@@ -59,22 +64,22 @@ export default {
     drawer: null,
     items: [
       {
-        title: 'Accueil',
+        title: "api-header.home",
         disabled: false,
         href: '/',
       },
       {
-        title: 'Series',
+        title: "api-header.series",
         disabled: false,
         href: '/serie',
       },
       {
-        title: 'Films',
+        title: "api-header.movies",
         disabled: false,
         href: '/film',
       },
       {
-        title: 'Shows',
+        title: "api-header.shows",
         disabled: false,
         href: '/shows',
       }

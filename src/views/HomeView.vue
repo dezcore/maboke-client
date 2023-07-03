@@ -14,7 +14,7 @@
           :key=" 'categorie'+index"
         >
           <div class="text-h6 mb-2 text-left">
-            {{name}} {{ $t("breakpoints") }}
+            {{ $t(name) }}
           </div>
           <Videos/>
         </v-card-text>
@@ -61,73 +61,73 @@
         searchInput : '',
         categories : [
           {
-            name : "Histoires et talents",
+            name : "categories.stories-and-talents",
             videos : [
 
             ]
           },
           {
-            name : "Notre sélection pour vous",
+            name : "categories.selection-for-you",
             videos : [
 
             ]
           },
           {
-            name : "Nouveautés",
+            name : "categories.news",
             videos : [
 
             ]
           },
           {
-            name : "Appreciés sur Maboke",
+            name : "categories.popular-on-maboke",
             videos : [
 
             ]
           },
           {
-            name : "Revoir",
+            name : "categories.see-again",
             videos : [
 
             ]
           },
           {
-            name : "Films et séries",
+            name : "categories.movies-and-series",
             videos : [
 
             ]
           },
           {
-            name : "Séries internationales",
+            name : "categories.international-series",
             videos : [
               
             ]
           },
           {
-            name : "Seulement sur maboke",
+            name : "categories.only-on-maboke",
             videos : [
               
             ]
           },
           {
-            name : "Top 10 des films",
+            name : "categories.top-10-movies",
             videos : [
               
             ]
           },
           {
-            name : "Ajouts des x mois",
+            name : "categories.additions-of-x-months",
             videos : [
               
             ]
           },
           {
-            name : "Tendances acteulles",
+            name : "categories.current-trends",
             videos : [
               
             ]
           },
           {
-            name : "À regarder ce week-end",
+            name : "categories.watch-this-weekend",
             videos : [
               
             ]

@@ -9,16 +9,11 @@
     "all-components": "All Components",
     "alpha": "Alpha",
     "api": "API",
-    "api-headers": {
-      "links": "Component Pages",
-      "argument": "Argument",
-      "events": "Events",
-      "functions": "Functions",
-      "modifiers": "Modifiers",
-      "props": "Props",
-      "sass": "SASS Variables",
-      "slots": "Slots",
-      "exposed": "Exposed"
+    "api-header": {
+      "home": "Home",
+      "series": "Series",
+      "movies": "Movies",
+      "shows": "Shows"
     },
     "application": "Application",
     "apply": "Apply",
@@ -36,6 +31,20 @@
     },
     "breakpoints": "Breakpoints",
     "business": "Business",
+    "categories": {
+      "stories-and-talents": "Stories and talents",
+      "selection-for-you": "Our selection for you",
+      "news": "News",
+      "popular-on-maboke": "Popular on Maboke",
+      "see-again":"See again",
+      "movies-and-series": "Movies and series",
+      "international-series" : "Popular on Maboke",
+      "top-10-movies" : "Top 10 movies",
+      "additions-of-x-months":"Additions of x months",
+      "only-on-maboke":"Only on maboke",
+      "current-trends":"Current trends",
+      "watch-this-weekend":"Watch this weekend"
+    },
     "cancel": "Cancel",
     "close": "Close",
     "code": "Code",
