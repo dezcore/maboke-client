@@ -2,15 +2,16 @@
   <CatalogsTopBar :showAppBar="true">
     <template #main>
       <div>
-        
-        <VideoTabs :tabs="tabs">
+        <VideoTabs 
+          :tabs="tabs"
+          :postRequest="postRequest"
+        >
           <template #Series>
             <v-row>
               <v-col cols="8">
                 <CategoriesGrid
                   state="match"
                   :series="series"
-                  :putFile="putFile"
                   :getSerie="getSerie"
                   :postRequest="postRequest"
                   :getCategory="getCategory"
@@ -119,16 +120,10 @@ export default {
         this.postData(import.meta.env.VITE_MABOKE_API_ROOT + uri, data, callBack)
       }
     },
-    putFile : function(uri, data, callBack) {
-      if(data) {
-        this.putData(import.meta.env.VITE_MABOKE_API_ROOT + uri, data, callBack)
-      }
-    },
     postCategory : function(page, category, callBack) {
       let pageCategory
       if(page && category) {
         pageCategory = {page : page, category: category}
-        console.log("Page : ", pageCategory)
         this.postData(import.meta.env.VITE_MABOKE_API_ROOT + "/category", pageCategory, callBack)
       }
     },

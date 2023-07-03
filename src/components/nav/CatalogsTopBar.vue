@@ -56,29 +56,29 @@ export default {
     drawer: null,
     items: [
       {
-        title: 'HomeConfig',
+        title: 'General',
         disabled: false,
-        href: '/catalogs',
-      },
-      {
-        title: 'SeriesConfig',
-        disabled: false,
-        href: '/catalogs/serie',
-      },
-      {
-        title: 'MoviesConfig',
-        disabled: false,
-        href: '/catalogs/movie',
-      },
-      {
-        title: 'ShowsConfig',
-        disabled: false,
-        href: '/catalogs/shows'
+        href: '/config',
       },
       {
         title: 'Validation',
         disabled: false,
-        href: '/catalogs/validation'
+        href: '/config/validation',
+      },
+      {
+        title: 'Serie',
+        disabled: false,
+        href: '/config/serie',
+      },
+      {
+        title: 'Movie',
+        disabled: false,
+        href: '/config/movie'
+      },
+      {
+        title: 'Show',
+        disabled: false,
+        href: '/config/show'
       }
     ], 
   }),

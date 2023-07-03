@@ -1,5 +1,24 @@
 <template>
    <v-card>
+    <div>
+      <v-alert
+        v-if="showAlert"
+        type="success"
+        :title="alertMessage"
+      ></v-alert>
+
+      <v-btn
+        class="ma-2"
+        color="primary"
+        @click="generateFiles"
+      >
+        Generate Files
+        <v-icon
+          end
+          icon="mdi-file-multiple"
+        ></v-icon>
+      </v-btn>
+    </div>
     <v-tabs v-model="tab" color="deep-purple-accent-4" align-tabs="center">
       <v-tab 
         v-for="(item, index) in tabs" 
@@ -44,14 +63,38 @@
             }
           ]
         }
+      },
+      postRequest : {
+        type : Function, 
+        default : ()=>{}
       }
     },
     data () {
       return {
         tab: null,
+        showAlert : false,
+        alertMessage : "",
       }
     },
-    methods : {}
+    methods : {
+      showAlertMessage : function(message) {
+        if(message) {
+          this.alertMessage = message
+          this.showAlert = true
+          setTimeout(() => {
+            this.alertMessage = ""
+            this.showAlert = false
+          }, 1000);
+        }
+      },
+      generateFiles : function() {
+        this.postRequest("/gfiles/generate", {}, (files) => {
+          if(files)
+            this.showAlertMessage("Created files successfully");
+          //console.log("createFiles : ", files)
+        })
+      }
+    }
   }
 </script>
 

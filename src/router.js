@@ -36,41 +36,41 @@ const routes = [
       }
     },
     { 
-      path: '/catalogs',
-      name: 'Catalogs',
+      path: '/config',
+      name: 'Configuration',
       component : CatalogsHomeView,
       meta: {
         isAuthenticated: false
       }
     },
     { 
-      path: '/catalogs/serie',
-      name: 'CatalogsSerieView',
+      path: '/config/validation',
+      name: 'ConfigValidation',
+      component : StudioView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/config/serie',
+      name: 'ConfigSerie',
       component : CatalogsSerieView,
       meta: {
         isAuthenticated: false
       }
     },
     { 
-      path: '/catalogs/movie',
-      name: 'CatalogsMovieView',
+      path: '/config/movie',
+      name: 'ConfigMovie',
       component : CatalogsMovieView,
       meta: {
         isAuthenticated: false
       }
     },
     { 
-      path: '/catalogs/shows',
-      name: 'CatalogsShowsView',
+      path: '/config/show',
+      name: 'ConfigShow',
       component : CatalogsShowsView,
-      meta: {
-        isAuthenticated: false
-      }
-    },
-    { 
-      path: '/catalogs/validation',
-      name: 'CatalogsValidation',
-      component : StudioView,
       meta: {
         isAuthenticated: false
       }
@@ -126,8 +126,8 @@ router.beforeEach(async (to, from, next) => {
   const globalStore = useGlobalStore();
   const tokens = JSON.parse(window.localStorage.getItem("tokens"))
   const user = JSON.parse(window.localStorage.getItem('user'))
-    
-  if(window && to.name === 'Catalogs' && (tokens === null || tokens === 'null')) {
+
+  if(window && to.name.includes("Config") && (tokens === null || tokens === 'null')) {
     next({ name: 'Auth' })
   } else {
     if(user)

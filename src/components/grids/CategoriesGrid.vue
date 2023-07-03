@@ -78,11 +78,7 @@
       serie : {
         type : Object,
         default : ()=>{return null}
-      },
-      season : {
-        type : Object,
-        default : ()=>{return null}
-      },
+      }, 
       seasons : {
         type :  Array,
         default : ()=>{return []}
@@ -92,22 +88,6 @@
         default : ()=>{}
       },
       postRequest : {
-        type : Function,
-        default : ()=>{}
-      },
-      putFile : {
-        type : Function,
-        default : ()=>{}
-      },
-      appendVideos : {
-        type : Function,
-        default : ()=>{}
-      },
-      appendSeason : {
-        type : Function,
-        default : ()=>{}
-      },
-      appendSerie : {
         type : Function,
         default : ()=>{}
       },
@@ -133,27 +113,12 @@
       },
       selectPage: {
         handler: function(selectPage) {
-          let targetIndex, newPage, oldPage, categories, category
-
-          if(selectPage) {
-            if(this.currentSelectPage) {
-              targetIndex = selectPage.findIndex((select, index) => {return select !== this.currentSelectPage[index]})
-             
-              if(targetIndex !== -1) {
-                newPage = selectPage[targetIndex]
-                oldPage = this.currentSelectPage[targetIndex]
-                categories = this.sortCategories
-                category =  Object.keys(categories)[targetIndex]
-                if(category) {
-                  this.removeCategorieToPage(category, oldPage, categories, ()=>{
-                    this.addCategorieToPage(category, newPage, categories)
-                  }) 
-                }
-              }
-            }
-
-            this.currentSelectPage = Object.assign({}, selectPage)
+          let targetIndex 
+          if(this.currentSelectPage) {
+            targetIndex = selectPage.findIndex((select, index) => {return select !== this.currentSelectPage[index]})
+            this.selectPageHandler(targetIndex, selectPage) 
           }
+          this.currentSelectPage = Object.assign({}, selectPage)
         },
         deep: true
       },
@@ -188,26 +153,6 @@
           "Kids",
           "Shows",
         ],
-        appFiles : [
-          "Home.json",
-          "Serie.json",
-          "Kids.json",
-          "Shows.json",
-        ],
-        filesContents : [
-          {
-            "categories" : []
-          },
-          {
-            "categories" : []
-          },
-          {
-            "categories" : []
-          },
-          {
-            "categories" : []
-          },
-        ],
         configFiles : {},
         currentSelectPage : null,
       }
@@ -233,14 +178,12 @@
     methods : {
       initAppEnv : function() {
         this.getCategory((categories) => {
-          //console.log("Categories : ", categories)
           if(categories)
             this.categories = categories
 
           this.getSerie({page : 1, size : 12,  state : this.state}, (pageable) => {
             if(pageable)
               this.pageable = pageable
-            this.fileHandler()
           })
         })
       },
@@ -254,172 +197,20 @@
           }, 1000);
         }
       },
-      appendVideoHandler : function(serie) {
-        if(serie && this.season) {
-          //console.log("appendVideoHandler : ", serie)
-          serie.seasons.forEach(season => {
-            this.appendVideos(season.videos)
-          })
-        } else {
-          this.showAlertMessage("Please select a season")
-        }
-      },
-      createSeasonHandler : function(serie) {
-        if(serie && this.serie) {
-          //console.log("appendVideoHandler : ", serie)
-          serie.seasons.forEach(season => {
-            this.appendSeason(season)
-          })
-        }else {
-          this.showAlertMessage("Please select a serie")
-        }
-      },
-      createSerieHandler : function(serie) {
-        if(serie) {
-          this.appendSerie(serie)
-        }
-      },
-      addCategorieToPage : function(category, page, categories, callBack) {
-        let pageId
-        if(category && page && categories) {
-          pageId = this.configFiles[page+ ".json"].id
-
-          if(this.configFiles[page+ ".json"].data && this.configFiles[page+ ".json"].data.categories === undefined) {
-            this.configFiles[page+ ".json"].data.categories = {}
-          }
-          this.configFiles[page+ ".json"].data.categories[category] = categories[category]
-          console.log("addCategorieToPage : ", this.configFiles)
-          /*this.updateFile(page+ ".json", pageId, this.configFiles[page+ ".json"].data, (content)=>{
-            this.postCategory(page, category, (res) => {
-              if(callBack)
-                callBack(content, res)
-            }) 
-          })*/
-        } else if(callBack) {
-          callBack()
-        }
-      },
-      removeCategorieToPage : function(category, page, categories, callBack) {
-        let pageId
-        if(category && page && categories) {
-          pageId = this.configFiles[page+ ".json"].id
-
-          if(this.configFiles[page+ ".json"].data.categories && this.configFiles[page+ ".json"].data.categories[category]) {
-            delete this.configFiles[page+ ".json"].data.categories[category]
-            /*this.updateFile(page+ ".json", pageId, this.configFiles[page+ ".json"].data, (content)=>{
-              if(callBack)
-                callBack(content)
-            })*/
-            console.log("remove category : ", this.configFiles)
-          } else if(callBack) {
-            callBack()
-          }
-        }
-      },
-      createFolder : function(folderName, callBack) {
-        if(folderName) {
-          this.postRequest("/gfile/folder", {
-            "fileName" : "defaultFile",
-            "folderName" : folderName,
-            "fileContent": {
-              "test" :  "Hello world !"
-            }
-          }, callBack)
-        }
-      },
-      createFile : function(folderName, fileName, content, callBack) {
-        if(folderName && fileName) {
-          this.postRequest("/gfile/create", {
-            "fileName" : fileName,
-            "foldersPaths" : folderName,
-            "mimeType" : "application/json",
-            "fileContent": content,
-          }, callBack)
-        }
-      },
-      updateFile : function(fileName, fileId, content, callBack) {
-        if(fileName && fileId && content) {
-          this.putFile("/gfile", {
-            "fileId" : fileId,
-            "fileName" : fileName,
-            "mimeType" : "application/json",
-            "fileContent": content,
-          }, callBack)
-        }
-      },
-      getFileContent : function(fileId, callBack) {
-        if(fileId) {
-          this.getRequest("/gfile/content", {id : fileId}, (content) => {
-            if(callBack)
-              callBack(content)
-          })
-        } else {
-          callBack(null)
-        }
-      },
-      getFilesContents : function(filesIds, filesNames, index, callBack) {
-        if(filesIds && filesNames && index < filesIds.length) {
-          this.getRequest("/gfile/content", {id : filesIds[index]}, (content) => {
-            console.log("Content : ", content)
-            this.configFiles[filesNames[index]].data = content 
-            this.getFilesContents(filesIds, filesNames, index+1, () => {
-              if(callBack)
-                callBack()
+      selectPageHandler : function(targetIndex, selectPage) {
+        let newPage, oldPage, categories, category
+        
+        if(targetIndex !== -1 && selectPage) {
+          newPage = selectPage[targetIndex]
+          oldPage = this.currentSelectPage[targetIndex]
+          categories = this.sortCategories
+          category =  Object.keys(categories)[targetIndex]
+          if(newPage !== oldPage) {
+            this.postCategory(newPage, category, () => {
+              console.log("postCategory : ", category, ", ", newPage)
             })
-          })
-        } else if(callBack) {
-          callBack()
-        }
-      },
-      createFiles : function(parentFileId, files, filesContents, callBack) {
-        if(files) {
-          this.postRequest("/gfiles/append", {
-            "parentFileId" : parentFileId,
-            "filesNames" : files,
-            "contents": filesContents,
-            "mimeType" : "application/json"
-          }, callBack)
-        }
-      },
-      initAppFilesEnv : function(appFolder) {
-        if(appFolder) {
-          this.createFolder(appFolder, (folder) => {
-            this.createFiles(folder.id, this.appFiles, this.filesContents, (files) => {
-              let gFiles = files.map( (file, index) => {return {name : this.appFiles[index], fileId : file.id}})
-              gFiles.push({name : appFolder, fileId : folder.id})
-              this.postRequest("/gdrive/all", gFiles, () => {    
-                this.appFiles.forEach((fileName, index) => {
-                  this.configFiles[fileName] = {id : files[index].id, data : this.filesContents[index]}
-                })
-              })
-            })
-            this.configFiles[appFolder] = {id : folder.id, data : {}}
-            console.log("config : ", this.configFiles)
-          })
-        }
-      },
-      setAppFilesEnv : function(appFolder) {
-        const names = [appFolder, ...this.appFiles].join(",") 
-        if(names) {
-          this.getRequest("/gdrive/names", {names : names}, (files) => {
-            if(files) {
-              files.forEach(({name, fileId}) => {
-                this.configFiles[name] = {id : fileId, data : {}}
-              })
-            }
-            console.log("setAppFilesEnv : ", this.configFiles)
-          })
-        }
-      },
-      fileHandler : function() {
-        let appFolder = "maboke"
-        this.getRequest("/gdrive/exist", {name : appFolder}, (exist) => {
-          if(exist) {
-            this.setAppFilesEnv(appFolder) 
-          } else {
-            this.initAppFilesEnv(appFolder)
           }
-        })
+        }
       }
     }
   }

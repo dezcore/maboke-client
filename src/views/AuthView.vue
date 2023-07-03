@@ -37,7 +37,7 @@
         if(this.$route.redirectedFrom && this.$route.redirectedFrom.path)
           this.$router.push(this.$route.redirectedFrom.path)
         else
-          this.$router.push('/catalogs')
+          this.$router.push('/config')
       }
     },
     methods : {

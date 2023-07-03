@@ -5,11 +5,11 @@ axios.interceptors.request.use(async config => {
     let access_token
     const globalStore = useGlobalStore();
     const tokens = globalStore.getAccessToken
-    const uris = ["gfile", "gfiles"]
+    const uris = ["gfile"]
+    
     if(tokens) {
         access_token = tokens.access_token
         if(uris.some(uri => config.url.includes(uri))) {
-            //console.log("access_token : ", access_token)
             config.headers.token = access_token.trim()//tokens//JSON.stringify(tokens)
             config.headers.accept = "application/json"
         } else if(access_token) {
@@ -18,7 +18,7 @@ axios.interceptors.request.use(async config => {
             config.headers.Authorization = `Bearer ${access_token}`
         }
     }
-    
+
     return config
 })
 
