@@ -131,18 +131,7 @@
         ]
       }
     },
-    created() {
-        window.addEventListener('resize', this.handleResize);
-        this.handleResize();
-    },
-    destroyed() {
-        window.removeEventListener('resize', this.handleResize);
-    },
-    methods : {
-      handleResize : function() {
-        console.log("test resize : ", window.innerWidth, ", ", window.innerHeight)
-      }
-    }
+    methods : {}
   }
 </script>
 

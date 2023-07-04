@@ -20,8 +20,9 @@
     "api": "API",
     "api-header": {
       "home": "Home",
-      "series": "Series",
+      "kids" : "Kids",
       "movies": "Movies",
+      "series": "Series",
       "shows": "Shows"
     },
     "application": "Application",
