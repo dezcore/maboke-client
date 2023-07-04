@@ -8,40 +8,25 @@
         color="black"  
         density="comfortable"
       > 
-        <v-app-bar-title>
-          <template #text>
-          <h2>About us</h2>
+        <template v-slot:prepend>
+          <v-app-bar-title>
+            <template #text>
+              <h2>{{$t(title)}}</h2>
+            </template>
+          </v-app-bar-title>
         </template>
-        </v-app-bar-title>
-
       </v-app-bar>
       <v-card 
-        theme="dark"
+        color="black"
       >
-        <v-img
-          class="mx-auto"
-          height="400"
-          max-width="600"
-          src="/maboke3.png"
-        >
-          <template v-slot:error>
-            <v-img
-              class="mx-auto"
-              height="100"
-              max-width="500"
-              src="/vite.svg"
-            ></v-img>
-          </template>
-        </v-img>
-          <v-card-title class="text-h3">
-            {{$t(title)}}
-          </v-card-title>
-          <v-card-subtitle>{{$t(welcomeText)}}</v-card-subtitle>
-          <v-card-subtitle>{{$t(goalsText)}}</v-card-subtitle>
-          <v-card-subtitle>{{$t(firstGoal)}}</v-card-subtitle>
-          <v-card-subtitle>{{$t(secondGoal)}}</v-card-subtitle>
-          <v-card-subtitle>{{$t(lastGoal)}}</v-card-subtitle>
-          <v-card-subtitle>{{$t(endText)}}</v-card-subtitle>
+        <v-card-text>
+          <p class="text-left pa-3">{{$t(welcomeText)}}</p>
+          <p class="text-left pa-3">{{$t(goalsText)}}</p>
+          <p class="text-left pa-3">{{$t(firstGoal)}}</p>
+          <p class="text-left pa-3">{{$t(secondGoal)}}</p>
+          <p class="text-left pa-3">{{$t(lastGoal)}}</p>
+          <p class="text-left pa-3">{{$t(endText)}}</p>
+        </v-card-text>
       </v-card>
     </template>
     <template #footer>

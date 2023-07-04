@@ -74,7 +74,7 @@
             title : "footer.contact-us",
             items : [
               {
-                title: 'maboke243@gmail.com',
+                title: 'maboke243info@gmail.com',
                 noTranslate : true,
                 href: "/"
               }
