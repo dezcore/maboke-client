@@ -23,8 +23,11 @@
         </h2>
         <Movies/>
       </v-card-text>
-     
     </div>
+  </template>
+  <template #footer>
+    <Footer>
+    </Footer>
   </template>
 </TopBar>
 </template>
@@ -32,6 +35,7 @@
   import windowMixin from "@/mixins/windowMixin"
   import TopBar from "@/components/nav/TopBar.vue"
   import Movies from "@/components/grids/Movies.vue"
+  import Footer from "@/components/footer/Footer.vue"
   import Parallax from "@/components/image/Parallax.vue"
   import VideoCarousel from "@/components/carousels/VideoCarousel.vue"
   import MovieCarouselOverlay from "@/components/overlays/MovieCarouselOverlay.vue"
@@ -41,6 +45,7 @@
     components : {
       TopBar,
       Movies,
+      Footer,
       Parallax,
       VideoCarousel,
       GendersAutocomplete,

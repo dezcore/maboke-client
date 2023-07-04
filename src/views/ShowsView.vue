@@ -20,11 +20,16 @@
         </v-card-text>
       </div>
     </template>
+    <template #footer>
+      <Footer>
+      </Footer>
+    </template>
   </TopBar>
 </template>
 <script>
   import TopBar from "../components/nav/TopBar.vue"
   import Videos from "../components/grids/Videos.vue"
+  import Footer from "@/components/footer/Footer.vue"
   import VideoCarousel from "../components/carousels/VideoCarousel.vue"
   import HomeCarouselOverlay from "../components/overlays/HomeCarouselOverlay.vue"
 
@@ -33,6 +38,7 @@
     components : {
       TopBar,
       Videos,
+      Footer,
       VideoCarousel,
       HomeCarouselOverlay
     },

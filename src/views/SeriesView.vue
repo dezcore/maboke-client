@@ -8,10 +8,15 @@
     />
     <Series/>
   </template>
+  <template #footer>
+    <Footer>
+    </Footer>
+  </template>
 </TopBar>
 </template>
 <script>
   import TopBar from "../components/nav/TopBar.vue"
+  import Footer from "@/components/footer/Footer.vue"
   import Series from "../components/grids/Series.vue"
   import Parallax from "../components/image/Parallax.vue"
 
@@ -20,6 +25,7 @@
     components : {
       TopBar,
       Series,
+      Footer,
       Parallax
     },
     data () {

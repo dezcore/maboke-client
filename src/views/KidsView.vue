@@ -22,14 +22,18 @@
         </h2>
         <Kids/>
       </v-card-text>
-     
     </div>
+  </template>
+  <template #footer>
+    <Footer>
+    </Footer>
   </template>
 </TopBar>
 </template>
 <script>
   import Kids from "../components/grids/Kids.vue"
   import TopBar from "../components/nav/TopBar.vue"
+  import Footer from "@/components/footer/Footer.vue"
   import KidsAvatars from "../components/avatars/KidsAvatars.vue"
   import VideoCarousel from "../components/carousels/VideoCarousel.vue"
   import MovieCarouselOverlay from "../components/overlays/MovieCarouselOverlay.vue"
@@ -40,6 +44,7 @@
     components : {
       Kids,
       TopBar,
+      Footer,
       KidsAvatars,
       VideoCarousel,
       GendersAutocomplete,
