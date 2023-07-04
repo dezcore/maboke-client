@@ -74,11 +74,6 @@ export default {
         title: "Privacy policy",
         disabled: false,
         href: '/about/privacy',
-      },
-      {
-        title: "Content removal",
-        disabled: false,
-        href: '/about/removal',
       }
     ], 
   }),

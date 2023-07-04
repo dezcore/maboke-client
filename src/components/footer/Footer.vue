@@ -66,7 +66,7 @@
             items :  [
               {
                 title: 'footer.faq',
-                href: "/faq"
+                href: "/"
               }
             ],
           },

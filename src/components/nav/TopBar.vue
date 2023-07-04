@@ -25,7 +25,6 @@
           icon="mdi-bell"
         ></v-icon></a>
         <LanguageMenu/>
-        <v-btn href="/kids" variant="text">Kids</v-btn>
       </template>
     </v-app-bar>
     <v-main>
@@ -82,6 +81,11 @@ export default {
         title: "api-header.shows",
         disabled: false,
         href: '/shows',
+      },
+      {
+        title: "Kids",
+        disabled: false,
+        href: '/kids',
       }
     ], 
   }),

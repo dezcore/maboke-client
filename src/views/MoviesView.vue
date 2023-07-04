@@ -27,13 +27,12 @@
 </TopBar>
 </template>
 <script>
-  import TopBar from "../components/nav/TopBar.vue"
-  import Movies from "../components/grids/Movies.vue"
-
-  import Parallax from "../components/image/Parallax.vue"
-  import VideoCarousel from "../components/carousels/VideoCarousel.vue"
-  import MovieCarouselOverlay from "../components/overlays/MovieCarouselOverlay.vue"
-  import GendersAutocomplete from "../components/form/autocomplete/GendersAutocomplete.vue"
+  import TopBar from "@/components/nav/TopBar.vue"
+  import Movies from "@/components/grids/Movies.vue"
+  import Parallax from "@/components/image/Parallax.vue"
+  import VideoCarousel from "@/components/carousels/VideoCarousel.vue"
+  import MovieCarouselOverlay from "@/components/overlays/MovieCarouselOverlay.vue"
+  import GendersAutocomplete from "@/components/form/autocomplete/GendersAutocomplete.vue"
   export default {
     name: 'MoviesView',
     components : {
