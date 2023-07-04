@@ -9,7 +9,9 @@ import StudioView from '@/views/StudioView.vue'
 
 import FaqView from "@/page/footer/FaqView.vue"
 import AboutUsView from "@/page/footer/AboutUsView.vue"
+import PrivacyPolicyView from "@/page/footer/PrivacyPolicyView.vue"
 import CatalogsHomeView from "@/page/catalogs/CatalogsHomeView.vue"
+import ContentRemovalView from "@/page/footer/ContentRemovalView.vue"
 import CatalogsMovieView from "@/page/catalogs/CatalogsMovieView.vue"
 import CatalogsSerieView from "@/page/catalogs/CatalogsSerieView.vue"
 import CatalogsShowsView from "@/page/catalogs/CatalogsShowsView.vue"
@@ -50,6 +52,22 @@ const routes = [
       path: '/about',
       name: 'About',
       component : AboutUsView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/about/privacy',
+      name: 'Privacy',
+      component : PrivacyPolicyView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/about/removal',
+      name: 'Removal',
+      component : ContentRemovalView,
       meta: {
         isAuthenticated: false
       }

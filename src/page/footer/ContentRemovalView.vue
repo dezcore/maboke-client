@@ -50,7 +50,7 @@ import TopBar from "@/components/nav/TopBar.vue"
 import Footer from "@/components/footer/Footer.vue"
 
 export default {
-  name: 'AboutUsView',
+  name: 'ContentRemovalView',
   components : {
     TopBar,
     Footer
