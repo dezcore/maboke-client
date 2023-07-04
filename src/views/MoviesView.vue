@@ -8,7 +8,9 @@
         overlayClass="d-flex align-start flex-column"
       > 
         <template #content>
-          <GendersAutocomplete/>
+          <GendersAutocomplete 
+            v-if="!hideGenders"
+          />
           <MovieCarouselOverlay/>
         </template>
       </VideoCarousel>
@@ -27,6 +29,7 @@
 </TopBar>
 </template>
 <script>
+  import windowMixin from "@/mixins/windowMixin"
   import TopBar from "@/components/nav/TopBar.vue"
   import Movies from "@/components/grids/Movies.vue"
   import Parallax from "@/components/image/Parallax.vue"
@@ -66,6 +69,19 @@
           }
         ]
       }
+    },
+    mixins: [
+      windowMixin
+    ],
+    computed : {
+      hideGenders : function() {
+        let res = false
+
+        if(this.windowCode === "xs" || this.windowCode === "sm")
+          res = true
+
+        return res
+      },
     },
     methods : {}
   }

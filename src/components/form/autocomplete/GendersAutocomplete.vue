@@ -1,9 +1,9 @@
 <template>
-  <div class="mb-12 mt-2">
+  <div :class="getParentDivClass">
     <v-container fluid>
       <v-row>
         <v-col cols="4">
-          <div :class="['text-h5', 'pa-3']">Movie</div>
+          <div :class="getTitleClass">Movie</div>
         </v-col>
         <v-col cols="8">
           <v-select  
@@ -23,6 +23,8 @@
   </div>
 </template>
 <script>
+  import windowMixin from "@/mixins/windowMixin"
+
   export default {
     name: 'GendersAutocomplete',
     components : {},
@@ -81,8 +83,31 @@
         ]
       }
     },
+    mixins: [
+      windowMixin
+    ],
+    computed : {
+      getParentDivClass : function() {
+        let res = "mb-12 mt-2"
+        if(this.windowCode === "xs")
+          res = "mt-1"
+        else if(this.windowCode === "sm")
+          res =  "mt-1"
+
+        return res
+      },
+      getTitleClass : function() {
+        let res = "text-h5 pa-3"
+        if(this.windowCode === "xs")
+          res = "text-h6 pa-1"
+        else if(this.windowCode === "sm")
+          res =  "text-h6 pa-1"
+
+        return res
+      }
+    },
     methods : {
-     
+   
     }
   }
 </script>

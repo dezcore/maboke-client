@@ -1,5 +1,5 @@
 <template>
-  <v-card height="500">
+  <v-card :height="getCarouselHeight">
     <div class="cplayer" ref="cplayer" :attach="true">
     <div id="cplayer"></div>
     <v-overlay
@@ -18,6 +18,7 @@
 </template>
 <script>
   import $ from "jquery"
+  import windowMixin from "@/mixins/windowMixin"
   import {loadVideo,  oProxy} from "../../plugins/youtube/iframe"
   export default {
     name: 'VideoCarousel',
@@ -53,6 +54,21 @@
           playsinline : 0,
           modestbranding : 1,
         }
+      }
+    },
+    mixins: [
+      windowMixin
+    ],
+    computed : {
+      getCarouselHeight : function() {
+        let height = 500
+
+        if(this.windowCode === "xs")
+          height = 100
+        else if(this.windowCode === "sm")
+          height = 200
+
+        return height
       }
     },
     mounted() {

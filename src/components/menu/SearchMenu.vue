@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <v-menu 
       width="300" 
       transition="slide-x-transition"

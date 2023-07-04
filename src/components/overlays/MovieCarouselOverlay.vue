@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="['text-h1', 'pa-2']">Movie</div>
+    <div :class="titleClass">Movie</div>
       <div class="text-center pa-4">
         <v-btn  density="comfortable" class= "ma-1" prepend-icon="mdi-play">
           Lecture
@@ -14,15 +14,21 @@
   </div>
 </template>
 <script>
+  import windowMixin from "@/mixins/windowMixin"
+
   export default {
     name: 'MovieCarouselOverlay',
     components : {},
     data () {
       return {
         mute : true,
-        videoId : ""
+        videoId : "",
+        titleClass : "text-h1 pa-2"
       }
     },
+    mixins: [
+      windowMixin
+    ],
     methods : {
       setMute : function() {
         this.mute = !this.mute

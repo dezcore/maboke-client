@@ -2,7 +2,12 @@
   <div>
     <v-footer color="black">
       <v-row>
-        <v-col cols="3" 
+        <v-col 
+          cols="12"
+          md="3"
+          lg="3"
+          xl="3"
+          xxl="3"
           v-for="(fcol, index) in footerCols" 
           :key="index"
         >

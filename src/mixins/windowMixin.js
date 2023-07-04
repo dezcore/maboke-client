@@ -30,7 +30,7 @@ export default {
           this.windowCode = "xxl"
         else
           this.windowCode = "md"
-        console.log("windowCode : ", this.windowCode)
+        //console.log("windowCode : ", this.windowCode)
       }
     }
 }
