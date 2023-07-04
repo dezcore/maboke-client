@@ -6,6 +6,9 @@ import MoviesView from '@/views/MoviesView.vue'
 import SeriesView from '@/views/SeriesView.vue'
 import PlayerView from '@/views/PlayerView.vue'
 import StudioView from '@/views/StudioView.vue'
+
+import FaqView from "@/page/footer/FaqView.vue"
+import AboutUsView from "@/page/footer/AboutUsView.vue"
 import CatalogsHomeView from "@/page/catalogs/CatalogsHomeView.vue"
 import CatalogsMovieView from "@/page/catalogs/CatalogsMovieView.vue"
 import CatalogsSerieView from "@/page/catalogs/CatalogsSerieView.vue"
@@ -31,6 +34,22 @@ const routes = [
       path: '/login',
       name: 'Auth',
       component : AuthView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/faq',
+      name: 'FAQ',
+      component : FaqView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: '/about',
+      name: 'About',
+      component : AboutUsView,
       meta: {
         isAuthenticated: false
       }
