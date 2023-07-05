@@ -28,7 +28,7 @@
 </template>
 <script>
 import AuthButtons from "@/components/auth/AuthButtons.vue"
-import SearchMenu from "@/components/menu/SearchMenu.vue"
+import SearchMenu from "@/components/search/SearchMenu.vue"
 import LanguageMenu from "@/components/menu/LanguageMenu.vue"
 
 export default {

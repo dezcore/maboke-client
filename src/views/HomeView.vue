@@ -20,7 +20,7 @@
         </v-card-text>
       </div>
       <div v-else>
-        <SearchView :search="searchInput">
+        <SearchView>
         </SearchView>
       </div>
     </template>
@@ -31,14 +31,13 @@
   </TopBar>
 </template>
 <script>
-
+  import {useGlobalStore} from '@/store'
   import SearchView from "@/views/SearchView.vue"
   import TopBar from "@/components/nav/TopBar.vue"
   import Videos from "@/components/grids/Videos.vue"
   import Footer from "@/components/footer/Footer.vue"
   import VideoCarousel from "@/components/carousels/VideoCarousel.vue"
   import HomeCarouselOverlay from "@/components/overlays/HomeCarouselOverlay.vue"
-  import {useGlobalStore} from '@/store'
   
   export default {
     name: 'HomeView',

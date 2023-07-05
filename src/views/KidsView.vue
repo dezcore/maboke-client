@@ -3,7 +3,7 @@
   :showAppBar="true"
 >
   <template #main>
-    <div>
+    <div v-if="search == ''">
       <VideoCarousel 
         overlayClass="d-flex align-start flex-column"
       > 
@@ -23,6 +23,10 @@
         <Kids/>
       </v-card-text>
     </div>
+    <div v-else>
+      <SearchView>
+      </SearchView>
+    </div>
   </template>
   <template #footer>
     <Footer>
@@ -31,13 +35,15 @@
 </TopBar>
 </template>
 <script>
-  import Kids from "../components/grids/Kids.vue"
-  import TopBar from "../components/nav/TopBar.vue"
+  import {useGlobalStore} from '@/store'
+  import Kids from "@/components/grids/Kids.vue"
+  import SearchView from "@/views/SearchView.vue"
+  import TopBar from "@/components/nav/TopBar.vue"
   import Footer from "@/components/footer/Footer.vue"
-  import KidsAvatars from "../components/avatars/KidsAvatars.vue"
-  import VideoCarousel from "../components/carousels/VideoCarousel.vue"
-  import MovieCarouselOverlay from "../components/overlays/MovieCarouselOverlay.vue"
-  import GendersAutocomplete from "../components/form/autocomplete/GendersAutocomplete.vue"
+  import KidsAvatars from "@/components/avatars/KidsAvatars.vue"
+  import VideoCarousel from "@/components/carousels/VideoCarousel.vue"
+  import MovieCarouselOverlay from "@/components/overlays/MovieCarouselOverlay.vue"
+  import GendersAutocomplete from "@/components/form/autocomplete/GendersAutocomplete.vue"
 
   export default {
     name: 'KidsView',
@@ -45,6 +51,7 @@
       Kids,
       TopBar,
       Footer,
+      SearchView,
       KidsAvatars,
       VideoCarousel,
       GendersAutocomplete,
@@ -115,6 +122,12 @@
           }
         ]
       }
+    },
+    computed : {
+      search() {
+        const gStore = useGlobalStore()
+        return gStore.search
+      },
     },
     methods : {}
   }

@@ -35,8 +35,10 @@
 
       </v-breadcrumbs>
       </template>
-      <template v-slot:append>        
-        <SearchMenu></SearchMenu>
+      <SearchSmalllWindow v-if="smallWindow"/>
+      <template v-slot:append>
+        <SearchMenu v-if="!smallWindow">
+        </SearchMenu>
         <a href="/"><v-icon
           color="white"
           class="ma-1"
@@ -83,14 +85,16 @@
 </template>
 <script>
 import windowMixin from "@/mixins/windowMixin"
-import SearchMenu from "@/components/menu/SearchMenu.vue"
+import SearchMenu from "@/components/search/SearchMenu.vue"
 import LanguageMenu from "@/components/menu/LanguageMenu.vue"
+import SearchSmalllWindow from "@/components/search/SearchSmallWindow.vue"
 
 export default {
   name: 'TopBar',
   components : {
     SearchMenu,
-    LanguageMenu
+    LanguageMenu,
+    SearchSmalllWindow
   },
   props : {
     title : {

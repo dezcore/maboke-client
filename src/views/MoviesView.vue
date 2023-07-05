@@ -3,7 +3,7 @@
   :showAppBar="true"
 >
   <template #main>
-    <div>
+    <div v-if="search == ''">
       <VideoCarousel 
         overlayClass="d-flex align-start flex-column"
       > 
@@ -24,6 +24,10 @@
         <Movies/>
       </v-card-text>
     </div>
+    <div v-else>
+      <SearchView>
+      </SearchView>
+    </div>
   </template>
   <template #footer>
     <Footer>
@@ -32,7 +36,9 @@
 </TopBar>
 </template>
 <script>
+  import {useGlobalStore} from '@/store'
   import windowMixin from "@/mixins/windowMixin"
+  import SearchView from "@/views/SearchView.vue"
   import TopBar from "@/components/nav/TopBar.vue"
   import Movies from "@/components/grids/Movies.vue"
   import Footer from "@/components/footer/Footer.vue"
@@ -47,6 +53,7 @@
       Movies,
       Footer,
       Parallax,
+      SearchView,
       VideoCarousel,
       GendersAutocomplete,
       MovieCarouselOverlay
@@ -87,6 +94,10 @@
 
         return res
       },
+      search() {
+        const gStore = useGlobalStore()
+        return gStore.search
+      }
     },
     methods : {}
   }

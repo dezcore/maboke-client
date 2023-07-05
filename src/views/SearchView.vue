@@ -9,23 +9,30 @@
   </div>
 </template>
 <script>
-  import Search from "../components/grids/Search.vue"
+  import {useGlobalStore} from '@/store'
+  import Search from "@/components/grids/Search.vue"
   export default {
     name: 'SearchView',
     components : {
       Search
     },
-    props : {
-      search : {
-        type : String,
-        default : ()=>{return ""}
-      }
+    watch : {
+      /*search(search) {
+        this.searchInput = search
+        console.log("Search : ", search)
+      }*/
     },
     data () {
       return {
         categories : []
       }
     },
-    methods : {}
+    methods : {},
+    computed : {
+      search() {
+        const gStore = useGlobalStore()
+        return gStore.search
+      },
+    },
   }
 </script>

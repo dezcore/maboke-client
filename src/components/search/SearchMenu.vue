@@ -35,7 +35,6 @@
             class="ma-1"
             icon="mdi-search-web"
             v-bind="mergeProps(menu, tooltip)"
-
           ></v-icon>
           </template>
           <span>Search</span>
@@ -46,27 +45,17 @@
 </template>
 
 <script>
+import searchMixin from '@/mixins/searchMixin';
 import { mergeProps } from 'vue'
-import {useGlobalStore} from '@/store'
-//v-menu > .v-overlay__content
+
 export default {
   name: 'SearchMenu',
-  props : {},
-  watch : {
-    search : function(search) {
-    const globalStore  = useGlobalStore()
-    globalStore.setSearch(search)
-   } 
-  },
-  data: () => ({ 
-    items: [], 
-    search: null,
-    select: null,
-  }),
-  computed : {
-  },
+  data: () => ({}),
+  mixins : [
+    searchMixin
+  ],
   methods : {
-    mergeProps,
+    mergeProps
   }
 }
 </script>
