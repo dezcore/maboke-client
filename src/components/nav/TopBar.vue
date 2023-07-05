@@ -6,7 +6,19 @@
       density="compact"
     >
       <template v-slot:prepend>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <router-link
+          to="/"
+          class="d-inline-block ms-4 me-2"
+        >
+          <v-img
+            :key="logo"
+            alt="maboke243 logo"
+            src="/maboke.svg"
+            :width="lgAndUp ? 148 : 34"
+            class="shrink"
+            :transition="false"
+          />
+        </router-link>
         <v-app-bar-nav-icon
           v-if="smallWindow" 
           variant="text" 
@@ -98,6 +110,8 @@ export default {
     return {
       drawer: null,
       drawer: false,
+      lgAndUp: true,
+      logo : 'maboke243-logo',
       items: [
         {
           title: "api-header.home",

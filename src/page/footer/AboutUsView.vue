@@ -28,6 +28,7 @@
       </v-app-bar>
       <v-card 
         color="black"
+        class="ma-8"
       >
         <v-card-text>
           <p class="text-left pa-3">{{$t(welcomeText)}}</p>
