@@ -7,6 +7,7 @@ import SeriesView from '@/views/SeriesView.vue'
 import PlayerView from '@/views/PlayerView.vue'
 import StudioView from '@/views/StudioView.vue'
 
+import Page404 from "@/views/404.vue"
 import FaqView from "@/page/footer/FaqView.vue"
 import AboutUsView from "@/page/footer/AboutUsView.vue"
 import PrivacyPolicyView from "@/page/footer/PrivacyPolicyView.vue"
@@ -148,6 +149,14 @@ const routes = [
       path: '/shows',
       name: 'Shows',
       component : ShowsView,
+      meta: {
+        isAuthenticated: false
+      }
+    },
+    { 
+      path: "/:pathMatch(.*)*",
+      name: '404',
+      component : Page404,
       meta: {
         isAuthenticated: false
       }
