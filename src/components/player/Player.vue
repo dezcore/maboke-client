@@ -1,9 +1,6 @@
 <template>
 <v-row>
     <v-col cols="12">
-        <PlayerToolbar/>
-    </v-col>
-    <v-col cols="12">
         <div class="mabokePlayer" ref="mabokePlayer">
             <PlayerOverlay 
                 :showPlayerOverlay="showPlayerOverlay"
@@ -13,6 +10,9 @@
                 </template>
             </PlayerOverlay>
         </div>
+    </v-col>
+    <v-col cols="12">
+        <PlayerToolbar/>
     </v-col>
 </v-row>
 </template>

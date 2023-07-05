@@ -1,27 +1,36 @@
 <template>
   <div>
-    <v-card flat>
-      <v-container fluid>
-        <v-row class="child-flex">
-          <div>
-            <v-toolbar>
-              <v-btn
-                icon
-                class="hidden-xs-only"
-              >
-                <v-icon @click="goBack">mdi-arrow-left</v-icon>
-              </v-btn>
-            </v-toolbar>
-          </div>
-        </v-row>
-      </v-container>
-    </v-card>
+    <v-toolbar>
+      <v-btn
+        icon
+        class="hidden-xs-only"
+      >
+        <v-icon @click="goBack">mdi-arrow-left</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+
+      <SeasonMenu>
+        <template #smenu="{mprops}">
+          <v-btn icon v-bind="mprops">
+            <v-icon>mdi-movie-roll</v-icon>
+          </v-btn>
+        </template>
+      </SeasonMenu>
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+    </v-toolbar>
   </div>
-  </template>
+</template>
   <script>
+    import SeasonMenu from "@/components/menu/SeasonMenu.vue"
+
     export default {
       name: 'PlayerToolbar',
       props : {},
+      components : {
+        SeasonMenu
+      },
       data: () => ({
 
       }),
