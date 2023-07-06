@@ -4,6 +4,8 @@ import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Markdown from 'vite-plugin-md'
+//import MarkdownItAnchor from 'markdown-it-anchor'
+//import MarkdownItPrism from 'markdown-it-prism'
 import vuetify from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
 
@@ -23,9 +25,18 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     },
     plugins: [
       vue({ include: [/\.vue$/, /\.md$/],}),
-      Markdown(
-        
-      ),
+      Markdown({
+        markdownItOptions: {
+          html: true,
+          linkify: true,
+          typographer: true,
+        },
+        /*markdownItSetup(md) {
+          // for example
+          md.use(MarkdownItAnchor)
+          md.use(MarkdownItPrism)
+        },*/
+      }),
       vuetify({ autoImport: true }), // Enabled by default
       ViteFonts({
         google: {

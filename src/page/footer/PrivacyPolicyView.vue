@@ -26,7 +26,9 @@
           </v-breadcrumbs>
         </template>
       </v-app-bar>
-      <HelloWorld />
+      <v-card>
+        <HelloWorld />
+      </v-card>
     </template>
     <template #footer>
       <Footer>
