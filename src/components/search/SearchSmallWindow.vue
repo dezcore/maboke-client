@@ -11,6 +11,7 @@
     variant="underlined"
     placeholder="Search"
     prepend-inner-icon="mdi-magnify"
+    :auto-select-first="true"
     rounded
     clearable
     class="pa-0 ma-0 mt-0"

@@ -164,4 +164,7 @@ export default {
 </script>
 
 <style>
+.v-breadcrumbs:deep(a) {
+    color: red;
+}
 </style>

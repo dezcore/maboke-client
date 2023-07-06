@@ -44,6 +44,8 @@ export default createVuetify({
                     tertiary: '#E57373',
                     accent: '#005CAF',
                     quarternary: '#B0D1E8',
+                    background:"#ffffff",
+                    surface:"#ffffff"
                 }
             },
             dark: {
@@ -53,6 +55,8 @@ export default createVuetify({
                     tertiary: '#E57373',
                     accent: '#FF4081',
                     quarternary: '#B0D1E8',
+                    background:"#ffffff",
+                    surface:"#ffffff"
                 }
             }
         }   

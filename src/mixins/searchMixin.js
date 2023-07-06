@@ -8,7 +8,7 @@ export default {
   }),
   watch : {
     search : function(search) {
-      console.log("search : ", search)
+      //console.log("search : ", search)
       const globalStore  = useGlobalStore()
       globalStore.setSearch(search)
    } 
