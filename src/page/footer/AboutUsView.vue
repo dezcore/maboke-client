@@ -3,41 +3,8 @@
     :showAppBar="true"
   >
     <template #main>
-      <v-app-bar 
-        :elevation="2"
-        color="black"  
-        density="comfortable"
-      > 
-        <template v-slot:prepend>
-          <v-app-bar-title>
-            <template #text>
-              <h2>{{$t(title)}}</h2>
-            </template>
-          </v-app-bar-title>
-        </template>
-        <template v-slot:append>
-          <v-breadcrumbs
-            :items="items"
-            divider=""
-          >
-            <template v-slot:title="{ item }">
-              {{$t(item.title)}}
-            </template>
-          </v-breadcrumbs>
-        </template>
-      </v-app-bar>
-      <v-card 
-        color="black"
-        class="ma-8"
-      >
-        <v-card-text>
-          <p class="text-left pa-3">{{$t(welcomeText)}}</p>
-          <p class="text-left pa-3">{{$t(goalsText)}}</p>
-          <p class="text-left pa-3">{{$t(firstGoal)}}</p>
-          <p class="text-left pa-3">{{$t(secondGoal)}}</p>
-          <p class="text-left pa-3">{{$t(lastGoal)}}</p>
-          <p class="text-left pa-3">{{$t(endText)}}</p>
-        </v-card-text>
+      <v-card>
+        <EnAbout/>
       </v-card>
     </template>
     <template #footer>
@@ -47,14 +14,17 @@
   </TopBar>
 </template>
 <script>
+
+import EnAbout from '@/page/md/en/about.md'   
 import TopBar from "@/components/nav/TopBar.vue"
 import Footer from "@/components/footer/Footer.vue"
 
 export default {
-  name: 'AboutUsView',
+  name: 'About',
   components : {
     TopBar,
-    Footer
+    Footer,
+    EnAbout
   },
   data: () => ({
     serie : null, 
@@ -64,19 +34,7 @@ export default {
     firstGoal : "about-us-page.first-goal",
     secondGoal : "about-us-page.second-goal",
     lastGoal : "about-us-page.last-goal",
-    endText : "about-us-page.end-text",
-    items: [
-      {
-        title: "About",
-        disabled: false,
-        href: '/about',
-      },
-      {
-        title: "Privacy policy",
-        disabled: false,
-        href: '/about/privacy',
-      }
-    ], 
+    endText : "about-us-page.end-text" 
   }),
   methods : {}
 }

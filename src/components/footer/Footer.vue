@@ -33,9 +33,10 @@
             <v-list-item
               v-for="(element, i) in fcol.items"
                 :key="i"
-                :href="element.href"
-                color="primary"
+                :href="element.href ? element.href : ''"
                 variant="plain"
+                :active="$t(element.title).toLowerCase().includes(page.toLowerCase())" 
+                color="#F40B0C"
               >
               <v-list-item-title 
                 v-text="element.noTranslate ? element.title : $t(element.title)">
@@ -52,6 +53,8 @@
   </div>
 </template>
 <script>
+  import {useGlobalStore} from '@/store'
+  
   export default {
     name: 'Footer',
     data () {
@@ -64,6 +67,14 @@
                 title: 'footer.about-us',
                 href: "/about"
               },
+              {
+                title: "Privacy policy",
+                href: '/privacy',
+              },
+              {
+                title: "Content removal",
+                href: '/removal',
+              }
             ],
           },
           {
@@ -80,8 +91,7 @@
             items : [
               {
                 title: 'maboke243info@gmail.com',
-                noTranslate : true,
-                href: "/"
+                noTranslate : true
               }
             ]
           },
@@ -107,6 +117,12 @@
             ]
           }
         ]
+      }
+    },
+    computed : {
+      page() {
+        const gStore = useGlobalStore()
+        return gStore.page
       }
     },
     methods : {}

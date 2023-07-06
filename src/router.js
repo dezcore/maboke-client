@@ -58,7 +58,7 @@ const routes = [
       }
     },
     { 
-      path: '/about/privacy',
+      path: '/privacy',
       name: 'Privacy',
       component : PrivacyPolicyView,
       meta: {
@@ -66,7 +66,7 @@ const routes = [
       }
     },
     { 
-      path: '/about/removal',
+      path: '/removal',
       name: 'Removal',
       component : ContentRemovalView,
       meta: {
