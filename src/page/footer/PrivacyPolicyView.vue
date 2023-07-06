@@ -26,18 +26,7 @@
           </v-breadcrumbs>
         </template>
       </v-app-bar>
-      <v-card 
-        color="black"
-      >
-        <v-card-text>
-          <p class="text-left pa-3">{{$t(welcomeText)}}</p>
-          <p class="text-left pa-3">{{$t(goalsText)}}</p>
-          <p class="text-left pa-3">{{$t(firstGoal)}}</p>
-          <p class="text-left pa-3">{{$t(secondGoal)}}</p>
-          <p class="text-left pa-3">{{$t(lastGoal)}}</p>
-          <p class="text-left pa-3">{{$t(endText)}}</p>
-        </v-card-text>
-      </v-card>
+      <HelloWorld />
     </template>
     <template #footer>
       <Footer>
@@ -46,6 +35,7 @@
   </TopBar>
 </template>
 <script>
+import HelloWorld from './md/README.md'
 import TopBar from "@/components/nav/TopBar.vue"
 import Footer from "@/components/footer/Footer.vue"
 
@@ -53,7 +43,8 @@ export default {
   name: 'PrivacyPolicyView',
   components : {
     TopBar,
-    Footer
+    Footer,
+    HelloWorld
   },
   data: () => ({
     serie : null, 

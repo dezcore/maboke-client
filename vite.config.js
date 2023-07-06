@@ -3,6 +3,7 @@
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import Markdown from 'vite-plugin-md'
 import vuetify from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
 
@@ -21,7 +22,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       __INTLIFY_PROD_DEVTOOLS__: 'false',
     },
     plugins: [
-      vue(),
+      vue({ include: [/\.vue$/, /\.md$/],}),
+      Markdown(
+        
+      ),
       vuetify({ autoImport: true }), // Enabled by default
       ViteFonts({
         google: {
