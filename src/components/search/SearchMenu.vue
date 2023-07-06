@@ -28,11 +28,11 @@
           </div>
        
 
-      <template v-slot:activator="{ props: menu }">
+      <template v-slot:activator="{ props: menu, isActive : mIsActive}">
         <v-tooltip location="bottom">
-          <template v-slot:activator="{ props: tooltip }">
+          <template v-slot:activator="{ props: tooltip, isActive : tIsActive}">
           <v-icon
-            color="white"
+            :color="mIsActive || tIsActive ? '#F40B0C' : 'white'"
             class="ma-1"
             icon="mdi-search-web"
             v-bind="mergeProps(menu, tooltip)"

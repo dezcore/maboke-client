@@ -23,10 +23,15 @@
               :title="social.title"
               target="_blank"
             >
-              <v-icon
-                :icon="social.icon"
-                color="white"
-              />
+              <v-hover
+                v-slot="{ isHovering, props }"
+              >
+                <v-icon
+                  :icon="social.icon"
+                  :color="isHovering ? '#F40B0C' : 'white'"
+                  v-bind="props"
+                />
+              </v-hover>
             </a>
           </div>
           <v-list bg-color="black" v-else>
@@ -100,12 +105,12 @@
             showIcons : true,
             items : [
               {
-                icon: 'mdi-reddit',
+                icon: 'mdi-facebook',
                 href: 'https://www.reddit.com/r/vuetifyjs',
                 title: 'reddit'
               },
               {
-                icon: 'mdi-github',
+                icon: 'mdi-instagram',
                 href: 'https://github.com/vuetifyjs/vuetify',
                 title: 'github'
               },

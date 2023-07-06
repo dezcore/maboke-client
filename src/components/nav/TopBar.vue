@@ -45,12 +45,23 @@
       <template v-slot:append>
         <SearchMenu v-if="!smallWindow">
         </SearchMenu>
-        <a href="/"><v-icon
-          color="white"
-          class="ma-1"
-          icon="mdi-bell"
-        ></v-icon></a>
         <LanguageMenu/>
+        <v-hover
+          v-slot="{ isHovering : hovering, props : hprops}"
+        >
+          <v-tooltip location="bottom">
+            <template v-slot:activator="{ props: tooltip, isActive : tIsActive}">
+              <v-icon
+                :color="hovering || tIsActive ? '#F40B0C' : 'white'"
+                class="ma-1"
+                icon="mdi-bell"
+                v-bind="mergeProps(hprops, tooltip)"
+                @click="()=>{}"
+              ></v-icon>
+            </template>
+            <span>Notifications</span>
+          </v-tooltip>
+        </v-hover>
       </template>
     </v-app-bar>
     <v-navigation-drawer
@@ -90,6 +101,7 @@
   </v-app>
 </template>
 <script>
+import { mergeProps } from 'vue'
 import {useGlobalStore} from '@/store'
 import windowMixin from "@/mixins/windowMixin"
 import SearchMenu from "@/components/search/SearchMenu.vue"
@@ -171,7 +183,9 @@ export default {
       return gStore.page
     },
   },
-  methods : {}
+  methods : {
+    mergeProps,
+  }
 }
 </script>
 

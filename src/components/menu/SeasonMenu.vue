@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-menu>
+    <v-menu location="top">
       <template v-slot:activator="{ props }">
         <slot name="smenu" :mprops="props"></slot>
       </template>

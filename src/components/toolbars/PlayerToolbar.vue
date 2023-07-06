@@ -8,7 +8,25 @@
         <v-icon @click="goBack">mdi-arrow-left</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-
+      <v-slide-group
+        show-arrows
+      >
+        <v-slide-group-item
+          v-for="n in 10"
+          :key="n"
+          v-slot="{ isSelected, toggle }"
+        >
+          <v-btn
+            class="ma-2"
+            rounded
+            :color="isSelected ? 'primary' : undefined"
+            @click="toggle"
+          >
+            Episode{{ n }}
+          </v-btn>
+        </v-slide-group-item>
+      </v-slide-group>
+      <v-spacer></v-spacer>
       <SeasonMenu>
         <template #smenu="{mprops}">
           <v-btn icon v-bind="mprops">

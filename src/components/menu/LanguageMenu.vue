@@ -1,13 +1,18 @@
 <template>
   <div>
     <v-menu>
-      <template v-slot:activator="{ props }">
-        <v-icon
-          v-bind="props"
-          color="white"
-          class="ma-1"
-          icon="mdi-translate"
-        ></v-icon>
+      <template v-slot:activator="{ props: menu, isActive : mIsActive}">
+        <v-tooltip location="bottom">
+          <template v-slot:activator="{ props: tooltip, isActive : tIsActive}">
+            <v-icon
+              v-bind="mergeProps(menu, tooltip)"
+              :color="mIsActive ||  tIsActive ? '#F40B0C' : 'white'"
+              class="ma-1"
+              icon="mdi-translate"
+            ></v-icon>
+          </template>
+          <span>Languages</span>
+        </v-tooltip>
       </template>
       <v-list>
         <v-list-item
@@ -24,6 +29,7 @@
 </template>
 
 <script>
+import { mergeProps } from 'vue'
 import {useLocaleStore} from '@/store'
 import locales from '@/i18n/locales.json'
 
@@ -53,6 +59,7 @@ export default {
     },
   },
   methods : {
+    mergeProps,
     setLanguage : function(lang) {
       const localeStore = useLocaleStore()
       if(lang) {
