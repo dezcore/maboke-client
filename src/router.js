@@ -27,7 +27,7 @@ import {useGlobalStore} from '@/store'
 const routes = [
     { 
       path: '/', 
-      name: 'Maboke',
+      name: 'Home',
       component: HomeView,
       meta: {
         isAuthenticated: false
@@ -122,8 +122,8 @@ const routes = [
       }
     },
     { 
-      path: '/film',
-      name: 'Film',
+      path: '/movie',
+      name: 'Movies',
       component : MoviesView,
       meta: {
         isAuthenticated: false
@@ -131,7 +131,7 @@ const routes = [
     },
     { 
         path: '/serie',
-        name: 'Serie',
+        name: 'Series',
         component : SeriesView,
         meta: {
           isAuthenticated: false
@@ -172,6 +172,9 @@ router.beforeEach(async (to, from, next) => {
   const globalStore = useGlobalStore();
   const tokens = JSON.parse(window.localStorage.getItem("tokens"))
   const user = JSON.parse(window.localStorage.getItem('user'))
+
+  if(to)
+    globalStore.setPage(to.name)
 
   if(window && to.name.includes("Config") && (tokens === null || tokens === 'null')) {
     next({ name: 'Auth' })

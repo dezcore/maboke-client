@@ -26,11 +26,17 @@
         </v-app-bar-nav-icon>
         <v-breadcrumbs
           v-else
+          v-model="currentPage"
           :items="items"
           divider=""
         >
         <template v-slot:title="{ item }">
-          {{$t(item.title)}}
+          <v-breadcrumbs-item
+            :active="page === $t(item.title)" 
+            active-color="#F40B0C"
+          >
+            {{$t(item.title)}}
+          </v-breadcrumbs-item>
         </template>
 
       </v-breadcrumbs>
@@ -84,6 +90,7 @@
   </v-app>
 </template>
 <script>
+import {useGlobalStore} from '@/store'
 import windowMixin from "@/mixins/windowMixin"
 import SearchMenu from "@/components/search/SearchMenu.vue"
 import LanguageMenu from "@/components/menu/LanguageMenu.vue"
@@ -115,6 +122,7 @@ export default {
       drawer: null,
       drawer: false,
       lgAndUp: true,
+      currentPage:"Home",
       logo : 'maboke243-logo',
       items: [
         {
@@ -132,7 +140,7 @@ export default {
         {
           title: "api-header.movies",
           disabled: false,
-          href: '/film',
+          href: '/movie',
           icon: 'mdi-filmstrip'
         },
         {
@@ -157,14 +165,15 @@ export default {
   computed : {
     smallWindow : function() {
       return this.windowCode === 'xs' || this.windowCode === 'sm'
-    }
+    },
+    page() {
+      const gStore = useGlobalStore()
+      return gStore.page
+    },
   },
   methods : {}
 }
 </script>
 
 <style>
-.v-breadcrumbs:deep(a) {
-    color: red;
-}
 </style>
