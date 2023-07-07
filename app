@@ -19,9 +19,9 @@ run() {
     docker compose up
 }
 
-build_dev() {
+builddev() {
     clean
-    docker build -t maboke-client . --target build-dev
+    docker build -t maboke-client . --target dev-production-stage
     docker compose up
 }
 
@@ -37,8 +37,8 @@ elif [[ "$1" == "test" ]];then
 test
 elif [[ "$1" == "run" ]];then
 run
-elif [[ "$1" == "build_dev" ]];then
-build_dev
+elif [[ "$1" == "builddev" ]];then
+builddev
 elif [[ "$1" == "clean" ]];then
 clean
 fi
