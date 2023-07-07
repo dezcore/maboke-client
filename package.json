@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode development",
-    "build": "vite build --mode production --base=/maboke-client",
+    "build": "vite build --mode production",
     "builddev": "vite build --mode development",
     "preview": "vite preview"
   },

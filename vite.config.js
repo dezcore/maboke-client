@@ -14,6 +14,7 @@ const resolve = file => fileURLToPath(new URL(file, import.meta.url))
 export default defineConfig(({ command, mode, ssrBuild }) => {
   return {
     logLevel: 'info',
+    base: process.env.NODE_ENV === 'production' ? '/maboke-client/' : './',
     resolve: { 
       alias : [
         { find: '@', replacement: `${resolve('src')}/` },
