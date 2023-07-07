@@ -1,0 +1,38 @@
+name: Deploy trafficlaws-client GitHub pages
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Generate static VueJs files
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - run: npm install
+    - run: npm run build
+      
+      env:
+        VITE_TEST_ENV: ${{ secrets.VITE_TEST_ENV }}
+
+    - name: Init new repo in dist folder and commit generated files
+      run: |
+        cd  dist/
+        git init
+        git add -A
+        git config --local user.email "dese_kande@hotmail.fr"
+        git config --local user.name "dezcore"
+        git commit -m 'deploy'
+    - name: Force push to destination branch
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACCESS_TOKEN }}
+        branch: gui-dev #gui-prod
+        force: true
+        directory: ./dist
