@@ -15,3 +15,12 @@ CMD ["npm", "run", "dev"]
 
 FROM base as prod
 RUN npm run build
+
+FROM base as build-dev
+RUN npm run build
+
+#production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=prod /app/dist /usr/share/nginx/html
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
