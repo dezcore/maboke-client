@@ -13,7 +13,7 @@
           <v-img
             :key="logo"
             alt="maboke243 logo"
-            src="/maboke-white-logo.svg"
+            :src="base + '/maboke-white-logo.svg'"
             :width="lgAndUp ? 120 : 34"
             class="shrink"
             :transition="false"
@@ -140,31 +140,31 @@ export default {
         {
           title: "api-header.home",
           disabled: false,
-          href: '/',
+          href: import.meta.env.BASE_URL + '/',
           icon: 'mdi-home'
         },
         {
           title: "api-header.series",
           disabled: false,
-          href: '/serie',
+          href: import.meta.env.BASE_URL + '/serie',
           icon: 'mdi-multimedia'
         },
         {
           title: "api-header.movies",
           disabled: false,
-          href: '/movie',
+          href: import.meta.env.BASE_URL + '/movie',
           icon: 'mdi-filmstrip'
         },
         {
           title: "api-header.shows",
           disabled: false,
-          href: '/shows',
+          href: import.meta.env.BASE_URL + '/shows',
           icon: 'mdi-drama-masks'
         },
         {
           title: "api-header.kids",
           disabled: false,
-          href: '/kids',
+          href: import.meta.env.BASE_URL + '/kids',
           icon: 'mdi-teddy-bear'
         }
       ],
@@ -182,6 +182,9 @@ export default {
       const gStore = useGlobalStore()
       return gStore.page
     },
+    base : function() {
+      return import.meta.env.BASE_URL
+    }
   },
   methods : {
     mergeProps,

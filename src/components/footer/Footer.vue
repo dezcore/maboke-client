@@ -70,15 +70,15 @@
             items :  [
               {
                 title: 'footer.about-us',
-                href: "/about"
+                href: import.meta.env.BASE_URL + "/about"
               },
               {
                 title: "Privacy policy",
-                href: '/privacy',
+                href: import.meta.env.BASE_URL + '/privacy',
               },
               {
                 title: "Content removal",
-                href: '/removal',
+                href: import.meta.env.BASE_URL + '/removal',
               }
             ],
           },

@@ -14,16 +14,17 @@ const resolve = file => fileURLToPath(new URL(file, import.meta.url))
 export default defineConfig(({ command, mode, ssrBuild }) => {
   return {
     logLevel: 'info',
-    base: process.env.NODE_ENV === 'production' ? '/maboke-client/' : './',
     resolve: { 
       alias : [
         { find: '@', replacement: `${resolve('src')}/` },
-      ]
+      ],
+      extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue", ".md"],
     },
     define: {
       'process.env.NODE_ENV': mode === 'production' || ssrBuild ? '"production"' : '"development"',
       __INTLIFY_PROD_DEVTOOLS__: 'false',
     },
+    base: process.env.NODE_ENV === 'production' ? '/maboke-client/' : './test',
     plugins: [
       vue({ include: [/\.vue$/, /\.md$/],}),
       Markdown({
