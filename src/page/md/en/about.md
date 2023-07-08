@@ -4,6 +4,7 @@ meta:
   description: Maboke243 privacy page
   keywords: Maboke243 Privacy DRC CONGO KONGO PAGE COMEDIES MOVIES SERIES SHOWS TV
 ---
+# :sparkles: vue3-markdown-it demo :sparkles:
 
 # About
 <entry />

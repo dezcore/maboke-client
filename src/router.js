@@ -19,7 +19,7 @@ import CatalogsShowsView from "@/page/catalogs/CatalogsShowsView.vue"
 
 import {
   createRouter,
-  createWebHistory,
+  createWebHashHistory
 } from 'vue-router';
 import { nextTick } from 'vue';
 import {useGlobalStore} from '@/store'
@@ -28,144 +28,92 @@ const routes = [
     { 
       path: '/', 
       name: 'Home',
-      component: HomeView,
-      meta: {
-        isAuthenticated: false
-      }
+      component: HomeView
     },
     { 
       path: '/login',
       name: 'Auth',
       component : AuthView,
-      meta: {
-        isAuthenticated: false
-      }
     },
     { 
       path: '/faq',
       name: 'FAQ',
-      component : FaqView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : FaqView
     },
     { 
       path: '/about',
       name: 'About',
-      component : AboutUsView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : AboutUsView
     },
     { 
       path: '/privacy',
       name: 'Privacy',
-      component : PrivacyPolicyView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : PrivacyPolicyView
     },
     { 
       path: '/removal',
       name: 'Removal',
-      component : ContentRemovalView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : ContentRemovalView
     },
     { 
       path: '/config',
       name: 'Configuration',
-      component : CatalogsHomeView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : CatalogsHomeView
     },
     { 
       path: '/config/validation',
       name: 'ConfigValidation',
-      component : StudioView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : StudioView
     },
     { 
       path: '/config/serie',
       name: 'ConfigSerie',
-      component : CatalogsSerieView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : CatalogsSerieView
     },
     { 
       path: '/config/movie',
       name: 'ConfigMovie',
-      component : CatalogsMovieView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : CatalogsMovieView
     },
     { 
       path: '/config/show',
       name: 'ConfigShow',
-      component : CatalogsShowsView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : CatalogsShowsView
     },
     { 
       path: '/player',
       name: 'Player',
-      component : PlayerView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : PlayerView
     },
     { 
       path: '/movie',
       name: 'Movies',
-      component : MoviesView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : MoviesView
     },
     { 
         path: '/serie',
         name: 'Series',
-        component : SeriesView,
-        meta: {
-          isAuthenticated: false
-        }
+        component : SeriesView
     },
     { 
       path: '/kids',
       name: 'Kids',
-      component : KidsView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : KidsView
     },
     { 
       path: '/shows',
       name: 'Shows',
-      component : ShowsView,
-      meta: {
-        isAuthenticated: false
-      }
+      component : ShowsView
     },
     { 
       path: "/:pathMatch(.*)*",
       name: '404',
-      component : Page404,
-      meta: {
-        isAuthenticated: false
-      }
+      component : Page404
     }
 ]
 
 const router = createRouter({
-  base: import.meta.env.BASE_URL,
-  history: createWebHistory(import.meta.env.BASE_URL), 
+  history: createWebHashHistory(), 
   routes
 })
 

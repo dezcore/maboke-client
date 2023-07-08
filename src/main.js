@@ -7,11 +7,15 @@ import store from './store'
 import App from './App.vue'
 import i18n from './plugins/i18n'
 import vuetify from './plugins/vuetify'
+//import { createHead } from '@vueuse/head'
 import VueForceNextTick from 'vue-force-next-tick'
 
 
 /** Register Vue */
 const vue = createApp(App);
+//const head = createHead()
+
+//vue.use(head)
 vue.use(VueAxios, axios)
 vue.use(router);
 vue.use(store);

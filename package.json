@@ -4,13 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --mode development  --base=/maboke-client",
+    "dev": "vite --mode development",
     "build": "vite build --mode production --base=/maboke-client",
     "builddev": "vite build --mode development",
     "preview": "vite preview"
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",
+    "@vueuse/head": "^1.1.26",
+    "@yankeeinlondon/code-builder": "^1.2.1",
+    "@yankeeinlondon/link-builder": "^1.2.1",
     "axios": "^1.4.0",
     "jquery": "^3.6.4",
     "markdown-it-anchor": "^8.6.7",

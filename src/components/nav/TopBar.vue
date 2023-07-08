@@ -13,7 +13,7 @@
           <v-img
             :key="logo"
             alt="maboke243 logo"
-            :src="base + '/maboke-white-logo.svg'"
+            src="maboke-white-logo.svg"
             :width="lgAndUp ? 120 : 34"
             class="shrink"
             :transition="false"
@@ -80,6 +80,7 @@
             :key="i"
             :value="item"
             :href="item.href"
+            to=""
             color="primary"
           >
             <template v-slot:prepend>
@@ -140,31 +141,31 @@ export default {
         {
           title: "api-header.home",
           disabled: false,
-          href: import.meta.env.BASE_URL + '/',
+          href: '#/',
           icon: 'mdi-home'
         },
         {
           title: "api-header.series",
           disabled: false,
-          href: import.meta.env.BASE_URL + '/serie',
+          href: '#/serie',
           icon: 'mdi-multimedia'
         },
         {
           title: "api-header.movies",
           disabled: false,
-          href: import.meta.env.BASE_URL + '/movie',
+          href: '#/movie',
           icon: 'mdi-filmstrip'
         },
         {
           title: "api-header.shows",
           disabled: false,
-          href: import.meta.env.BASE_URL + '/shows',
+          href: '#/shows',
           icon: 'mdi-drama-masks'
         },
         {
           title: "api-header.kids",
           disabled: false,
-          href: import.meta.env.BASE_URL + '/kids',
+          href:  '#/kids',
           icon: 'mdi-teddy-bear'
         }
       ],

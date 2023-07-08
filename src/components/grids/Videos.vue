@@ -27,7 +27,7 @@
           >
             <VideoDescription 
               :img="'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg'"
-              :href="base+'/player?videoId=' + item.id"
+              :href="'#/player?videoId=' + item.id"
             />
           </v-overlay>
         </v-card>
@@ -113,11 +113,7 @@
       }
     },
     methods : {},
-    computed : {
-      base : function() {
-        return import.meta.env.BASE_URL
-      }
-    }
+    computed : {}
   }
 </script>
 
