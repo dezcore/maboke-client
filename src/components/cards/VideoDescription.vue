@@ -12,7 +12,8 @@
     </v-card-title>
     <v-card-actions>
       <a>
-        <v-btn :href="href" icon="mdi-play" size="x-large"></v-btn>
+        <router-link :to="href"><v-btn icon="mdi-play" size="x-large"></v-btn></router-link>
+        
       </a>
       <v-btn icon="mdi-plus" size="x-large"></v-btn>
       <v-list-item-title>Evan You</v-list-item-title>

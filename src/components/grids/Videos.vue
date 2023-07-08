@@ -27,7 +27,7 @@
           >
             <VideoDescription 
               :img="'https://i.ytimg.com/vi/' + item.id + '/mqdefault.jpg'"
-              :href="'#/player?videoId=' + item.id"
+              :href="'/player?videoId=' + item.id"
             />
           </v-overlay>
         </v-card>

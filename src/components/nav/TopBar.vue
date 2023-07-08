@@ -8,7 +8,7 @@
       <template v-slot:prepend>
         <router-link
           to="/"
-          class="d-inline-block ms-4 me-2"
+          class="d-inline-block ml-0"
         >
           <v-img
             :key="logo"
@@ -19,27 +19,22 @@
             :transition="false"
           />
         </router-link>
+        
         <v-app-bar-nav-icon
           v-if="smallWindow" 
           variant="text" 
           @click.stop="drawer = !drawer">
         </v-app-bar-nav-icon>
-        <v-breadcrumbs
-          v-else
-          v-model="currentPage"
-          :items="items"
-          divider=""
+        <router-link
+          v-else 
+          v-for="(item, index) in items"
+          :key="index"
+          :to="item.href"
         >
-        <template v-slot:title="{ item }">
-          <v-breadcrumbs-item
-            :active="page === $t(item.title)" 
-            active-color="#F40B0C"
-          >
+          <v-btn variant="text" :color="page === $t(item.title) ? '#F40B0C' : '#ffffff'">
             {{$t(item.title)}}
-          </v-breadcrumbs-item>
-        </template>
-
-      </v-breadcrumbs>
+          </v-btn>
+        </router-link>
       </template>
       <SearchSmalllWindow v-if="smallWindow"/>
       <template v-slot:append>
@@ -141,31 +136,31 @@ export default {
         {
           title: "api-header.home",
           disabled: false,
-          href: '#/',
+          href: '/',
           icon: 'mdi-home'
         },
         {
           title: "api-header.series",
           disabled: false,
-          href: '#/serie',
+          href: '/serie',
           icon: 'mdi-multimedia'
         },
         {
           title: "api-header.movies",
           disabled: false,
-          href: '#/movie',
+          href: '/movie',
           icon: 'mdi-filmstrip'
         },
         {
           title: "api-header.shows",
           disabled: false,
-          href: '#/shows',
+          href: '/shows',
           icon: 'mdi-drama-masks'
         },
         {
           title: "api-header.kids",
           disabled: false,
-          href:  '#/kids',
+          href:  '/kids',
           icon: 'mdi-teddy-bear'
         }
       ],

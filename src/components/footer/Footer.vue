@@ -38,14 +38,15 @@
             <v-list-item
               v-for="(element, i) in fcol.items"
                 :key="i"
-                :href="element.href ? element.href : ''"
                 variant="plain"
                 :active="$t(element.title).toLowerCase().includes(page.toLowerCase())" 
                 color="#F40B0C"
               >
-              <v-list-item-title 
-                v-text="element.noTranslate ? element.title : $t(element.title)">
-              </v-list-item-title>
+              <router-link :to="element.href ? element.href : ''">
+                <v-list-item-title 
+                  v-text="element.noTranslate ? element.title : $t(element.title)">
+                </v-list-item-title>
+              </router-link>
             </v-list-item>
           </v-list>
         </v-col>
@@ -70,15 +71,15 @@
             items :  [
               {
                 title: 'footer.about-us',
-                href: "#/about"
+                href: "/about"
               },
               {
                 title: "Privacy policy",
-                href:  '#/privacy',
+                href:  '/privacy',
               },
               {
                 title: "Content removal",
-                href: '#/removal',
+                href: '/removal',
               }
             ],
           },
@@ -87,7 +88,7 @@
             items :  [
               {
                 title: 'footer.faq',
-                href: "#/"
+                href: "/"
               }
             ],
           },
