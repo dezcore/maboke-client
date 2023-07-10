@@ -140,9 +140,6 @@
         return gStore.search
       },
     },
-    mounted() {
-      console.log("Base : ", import.meta.env.BASE_URL)
-    },
     methods : {}
   }
 </script>

@@ -4,10 +4,7 @@ meta:
   description: Maboke243 privacy page
   keywords: Maboke243 Privacy DRC CONGO KONGO PAGE COMEDIES MOVIES SERIES SHOWS TV
 ---
-# :sparkles: vue3-markdown-it demo :sparkles:
-
 # About
-<entry />
 Bienvenue sur Maboke243 : votre nouvelle plateforme de visualisation de films, séries, comédies et documentaires entièrement gratuite !
 
 Notre objectif principal est de permettre aux artistes de vivre de leurs œuvres, en offrant un espace dédié spécialement conçu pour eux et vous offrir un accès illimité à un contenu audiovisuel riche et varié.

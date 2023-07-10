@@ -6,8 +6,6 @@ import vue from '@vitejs/plugin-vue'
 import Markdown from 'vite-plugin-md'
 import vuetify from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
-import code from '@yankeeinlondon/code-builder'
-import link from '@yankeeinlondon/link-builder'
 
 const resolve = file => fileURLToPath(new URL(file, import.meta.url))
 
@@ -20,10 +18,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       ],
       extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue", ".md"],
     },
-    /*define: {
+    define: {
       'process.env.NODE_ENV': mode === 'production' || ssrBuild ? '"production"' : '"development"',
       __INTLIFY_PROD_DEVTOOLS__: 'false',
-    },*/
+    },
     //base: process.env.NODE_ENV === 'production' ? '/maboke-client/' : './',
     plugins: [
       vue({ include: [/\.vue$/, /\.md$/],}),
@@ -35,12 +33,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         style: {
           baseStyle: 'github',
         },
-        builders: [
-          link(),
-          code({
-            theme: 'base',
-          }),
-        ]
       }),
       vuetify({ autoImport: true }), // Enabled by default
       ViteFonts({

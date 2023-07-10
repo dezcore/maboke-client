@@ -107,15 +107,6 @@
     "extra-large": "Extra large",
     "extra-small": "Extra small",
     "faq": "FAQs",
-    "faq-page": {
-      "welcome-text" : "Bienvenue sur Maboke243 : votre nouvelle plateforme de visualisation de films, séries et comédies entièrement gratuite !",
-      "goals-text" : "Notre objectif principal est de permettre aux artistes de vivre de leurs œuvres, en offrant un espace dédié spécialement conçu pour eux. Tout en vous offrant un accès illimité à un contenu audiovisuel riche et varié. Plongez dans un océan de divertissement sans devoir vous soucier de coûts supplémentaires.",
-      "first-goal" : "Nous avons identifié trois missions essentielles pour atteindre cet objectif. Tout d'abord, nous nous sommes donné pour mission de regrouper toutes les œuvres provenant de différentes plateformes telles que YouTube, Dailymotion ou encore Vimeo en un seul endroit. Vous permettant ainsi de trouver facilement et rapidement vos contenus préférés sans avoir à naviguer entre différents sites.",
-      "second-goal" : "Dans un second temps, nous souhaitons donner aux artistes la possibilité de se réapproprier leurs œuvres. En effet, nous croyons fermement que les artistes devraient être les premiers à profiter de leurs créations. Sur notre plateforme, les artistes pourront gérer et contrôler eux-mêmes leur contenu, en décidant des conditions d'utilisation et de diffusion.",
-      "last-goal" : "Enfin, nous offrons aux artistes un service leur permettant de monétiser leurs œuvres. Grâce à notre plateforme, ils pourront non seulement partager leur talent avec le public, mais également générer des revenus grâce aux vues générées. Toutes les vues générées via notre plateforme seront directement destinées aux ayant droit, permettant ainsi aux artistes de bénéficier financièrement de leur travail.",
-      "end-text": "Préparez-vous à être captivé par un monde infini de divertissement. Rejoignez-nous dès aujourd'hui et profitez d'une expérience de visionnage sans limite, à portée de clic !",
-      "title": "FAQ"
-    },
     "feature-guides": "Feature guides",
     "features": "Features",
     "feedback": "Feedback",
@@ -129,7 +120,9 @@
       "faq": "FAQ",
       "follow-us": "Follow Us",
       "help": "Help",
-      "information": "Information"
+      "information": "Information",
+      "privacy-policy": "Privacy policy",
+      "content-removal": "content-removal"
     },
     "framework-services": "Framework services",
     "functional": "Functional",

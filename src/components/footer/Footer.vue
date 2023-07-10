@@ -39,20 +39,26 @@
               v-for="(element, i) in fcol.items"
                 :key="i"
                 variant="plain"
-                :active="$t(element.title).toLowerCase().includes(page.toLowerCase())" 
-                color="#F40B0C"
               >
-              <router-link :to="element.href ? element.href : ''">
-                <v-list-item-title 
-                  v-text="element.noTranslate ? element.title : $t(element.title)">
+                <v-btn
+                  v-if="element.href" 
+                  variant="text" 
+                  :to="element.href"
+                  :color="(element.noTranslate ? element.title : $t(element.title)).toLowerCase().includes(page.toLowerCase()) ? '#F40B0C' : '#ffffff'"
+                >
+                  {{element.noTranslate ? element.title : $t(element.title)}}
+                </v-btn>
+                <v-list-item-title
+                  v-else 
+                >
+                  {{element.noTranslate ? element.title : $t(element.title)}}
                 </v-list-item-title>
-              </router-link>
             </v-list-item>
           </v-list>
         </v-col>
         <v-col cols="12">
           <v-divider></v-divider>
-          <div>Copyright  © {{ new Date().getFullYear() }} — <strong>Maboke 243</strong></div>
+          <div>Copyright  © {{ new Date().getFullYear() }} — <strong>Maboke243</strong></div>
         </v-col>
       </v-row>
   </v-footer>
@@ -74,11 +80,11 @@
                 href: "/about"
               },
               {
-                title: "Privacy policy",
+                title: "footer.privacy-policy",
                 href:  '/privacy',
               },
               {
-                title: "Content removal",
+                title: "footer.content-removal",
                 href: '/removal',
               }
             ],
