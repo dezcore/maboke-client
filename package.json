@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@intlify/unplugin-vue-i18n": "^0.12.2",
     "@mdi/font": "^7.2.96",
     "@vueuse/head": "^1.1.26",
     "axios": "^1.4.0",

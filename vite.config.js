@@ -6,6 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import Markdown from 'vite-plugin-md'
 import vuetify from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
+import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 
 const resolve = file => fileURLToPath(new URL(file, import.meta.url))
 
@@ -33,6 +34,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         style: {
           baseStyle: 'github',
         },
+      }),
+      VueI18n({
+        compositionOnly: true,
+        include: [resolve('src/i18n/messages/**')],
       }),
       vuetify({ autoImport: true }), // Enabled by default
       ViteFonts({
