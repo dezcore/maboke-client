@@ -7,6 +7,7 @@ import Markdown from 'vite-plugin-md'
 import vuetify from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
+import { configureMarkdown} from './src/util/markdown-it'
 
 const resolve = file => fileURLToPath(new URL(file, import.meta.url))
 
@@ -27,13 +28,15 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     plugins: [
       vue({ include: [/\.vue$/, /\.md$/],}),
       Markdown({
-        headEnabled: true,
-        frontmatterDefaults: {
-          requireAuth: false,
+        //wrapperComponent: 'unwrap-markdown',
+        //wrapperClasses: '',
+        //headEnabled: true,
+        markdownItOptions: {
+          html: true,
+          linkify: true,
+          typographer: true,
         },
-        style: {
-          baseStyle: 'github',
-        },
+       markdownItSetup: configureMarkdown,
       }),
       VueI18n({
         compositionOnly: true,

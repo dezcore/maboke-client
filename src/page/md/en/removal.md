@@ -6,8 +6,6 @@ meta:
 ---
 
 # Removal
-<entry />
-
 Maboke243 respecte la propriété intellectuelle d'autrui et prend les questions de propriété intellectuelle très au sérieux et s’engage à répondre aux besoins des propriétaires de contenu tout en les aidant à gérer la publication de leur contenu en ligne.
 
 Si vous pensez que votre travail protégé par un droit d'auteur a été copié de manière à constituer une violation du droit d'auteur et qu'il est accessible sur ce site, une notification d'une violation alléguée du droit d'auteur doit nous être envoyée par e-mail ou par courrier ordinaire et doit inclure les informations suivantes (la liste ci-dessous provient en grande partie directement de la loi Digital Millennium Copyright Act of 1998 ; si vous ne comprenez pas la langue, veuillez demander un avis juridique indépendant :
