@@ -13,7 +13,7 @@
           <v-img
             :key="logo"
             alt="maboke243 logo"
-            src="maboke-white-logo.svg"
+            src="/img/maboke-white-logo.svg"
             :width="lgAndUp ? 120 : 34"
             class="shrink"
             :transition="false"
@@ -31,7 +31,7 @@
           :key="index"
           :to="item.href"
         >
-          <v-btn variant="text" :color="page === $t(item.title) ? '#F40B0C' : '#ffffff'">
+          <v-btn variant="text" :color="$t(page) === $t(item.title) ? '#F40B0C' : '#ffffff'">
             {{$t(item.title)}}
           </v-btn>
         </router-link>
@@ -176,7 +176,9 @@ export default {
     },
     page() {
       const gStore = useGlobalStore()
-      return gStore.page
+      let page = gStore.page.toLowerCase()
+      let res = 'api-header.'+page
+      return res
     },
     base : function() {
       return import.meta.env.BASE_URL

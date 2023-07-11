@@ -115,14 +115,14 @@
     "for-enterprise": "For Enterprise",
     "form-inputs-and-controls": "Form inputs & controls",
     "footer": {
-      "about-us":"About Us",
-      "contact-us": "Contact Us",
+      "about":"About Us",
+      "contact": "Contact Us",
       "faq": "FAQ",
-      "follow-us": "Follow Us",
+      "follow": "Follow Us",
       "help": "Help",
       "information": "Information",
-      "privacy-policy": "Privacy policy",
-      "content-removal": "content-removal"
+      "privacy": "Privacy policy",
+      "removal": "content-removal"
     },
     "framework-services": "Framework services",
     "functional": "Functional",

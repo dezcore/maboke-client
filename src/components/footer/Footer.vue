@@ -44,7 +44,7 @@
                   v-if="element.href" 
                   variant="text" 
                   :to="element.href"
-                  :color="(element.noTranslate ? element.title : $t(element.title)).toLowerCase().includes(page.toLowerCase()) ? '#F40B0C' : '#ffffff'"
+                  :color="(element.noTranslate ? element.title : $t(element.title)).includes($t(page)) ? '#F40B0C' : '#ffffff'"
                 >
                   {{element.noTranslate ? element.title : $t(element.title)}}
                 </v-btn>
@@ -76,15 +76,15 @@
             title : "footer.information",
             items :  [
               {
-                title: 'footer.about-us',
+                title: 'footer.about',
                 href: "/about"
               },
               {
-                title: "footer.privacy-policy",
+                title: "footer.privacy",
                 href:  '/privacy',
               },
               {
-                title: "footer.content-removal",
+                title: "footer.removal",
                 href: '/removal',
               }
             ],
@@ -99,7 +99,7 @@
             ],
           },
           {
-            title : "footer.contact-us",
+            title : "footer.contact",
             items : [
               {
                 title: 'maboke243info@gmail.com',
@@ -108,7 +108,7 @@
             ]
           },
           {
-            title : "footer.follow-us",
+            title : "footer.follow",
             showIcons : true,
             items : [
               {
@@ -134,7 +134,9 @@
     computed : {
       page() {
         const gStore = useGlobalStore()
-        return gStore.page
+        let page = gStore.page.toLowerCase()
+        let res = 'footer.' + page
+        return res
       }
     },
     methods : {}
