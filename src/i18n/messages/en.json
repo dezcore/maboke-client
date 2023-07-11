@@ -115,6 +115,12 @@
     "for-enterprise": "For Enterprise",
     "form-inputs-and-controls": "Form inputs & controls",
     "footer": {
+      "home": "@:api-header.home",
+      "kids" : "@:api-header.kids",
+      "movies": "@:api-header.movies",
+      "series": "@:api-header.series",
+      "shows": "@:api-header.shows",
+
       "about":"About Us",
       "contact": "Contact Us",
       "faq": "FAQ",

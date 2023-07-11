@@ -13,7 +13,7 @@
           <v-img
             :key="logo"
             alt="maboke243 logo"
-            src="/img/maboke-white-logo.svg"
+            src="img/maboke-white-logo.svg"
             :width="lgAndUp ? 120 : 34"
             class="shrink"
             :transition="false"

@@ -18,10 +18,11 @@
 </template>
 
 <script>
+
 import $ from "jquery"
-import PlayerToolbar from "../toolbars/PlayerToolbar.vue"
-import PlayerOverlay from "../overlays/PlayerOverlay.vue"
-import {loadVideo,  oProxy, yProxy} from "../../plugins/youtube/iframe"
+import PlayerToolbar from "@/components/toolbars/PlayerToolbar.vue"
+import PlayerOverlay from "@/components/overlays/PlayerOverlay.vue"
+import {loadVideo,  oProxy, yProxy} from "@/plugins/youtube/iframe"
 
 export default {
     name: 'Player',

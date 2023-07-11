@@ -10,9 +10,9 @@
   </TopBar>
 </template>
 <script>
-  import Player from "../components/player/Player.vue"
+  import Player from "@/components/player/Player.vue"
   import Footer from "@/components/footer/Footer.vue"
-  import TopBar from "../components/nav/TopBar.vue"
+  import TopBar from "@/components/nav/TopBar.vue"
 
   export default {
     name: 'PlayerView',

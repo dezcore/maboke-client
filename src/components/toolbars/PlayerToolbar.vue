@@ -1,12 +1,6 @@
 <template>
   <div>
     <v-toolbar>
-      <v-btn
-        icon
-        class="hidden-xs-only"
-      >
-        <v-icon @click="goBack">mdi-arrow-left</v-icon>
-      </v-btn>
       <v-spacer></v-spacer>
       <v-slide-group
         show-arrows
@@ -30,7 +24,7 @@
       <SeasonMenu>
         <template #smenu="{mprops}">
           <v-btn icon v-bind="mprops">
-            <v-icon>mdi-movie-roll</v-icon>
+            <v-icon>mdi-filmstrip-box-multiple</v-icon>
           </v-btn>
         </template>
       </SeasonMenu>
@@ -53,9 +47,6 @@
 
       }),
       methods : {
-        goBack : function() {
-          this.$router.back()//.go(-1) 
-        }
       }
     }
   </script>
