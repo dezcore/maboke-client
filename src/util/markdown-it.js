@@ -3,12 +3,9 @@ import MarkdownItLinkAttributes from 'markdown-it-link-attributes'
 import MarkdownItAttrs from 'markdown-it-attrs'
 import MarkdownItAnchor from 'markdown-it-anchor'
 import MarkdownItHeaderSections from 'markdown-it-header-sections'
-//import markdownRules from './markdown-it-rules'
 import Emoji from 'markdown-it-emoji/bare.js'
-//import MarkdownIt from 'markdown-it'
 
 export const configureMarkdown = (md) => {
-    //let md = require('markdown-it')(/*{html: true, linkify: true, typographer: true}*/)
     md.use(MarkdownItPrism)
     .use(MarkdownItLinkAttributes, {
       matcher (href) {
@@ -50,8 +47,5 @@ export const configureMarkdown = (md) => {
         test_tube: '🧪',
       },
     })
-
-  //markdownRules.forEach(rule => rule(MarkdownIt))
-
   return md
 }

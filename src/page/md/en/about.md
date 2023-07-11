@@ -16,3 +16,12 @@ Nous souhaitons donner aux artistes la possibilité de se réapproprier leurs œ
 Grâce à notre plateforme, ils pourront non seulement partager leur talent avec le public, mais également générer des revenus grâce aux vues générées. Toutes les vues générées via notre plateforme seront directement destinées aux ayant droit, permettant ainsi aux artistes de bénéficier financièrement de leur travail.
 
 Préparez-vous à être captivé par un monde infini de divertissement. Rejoignez-nous dès aujourd'hui et profitez d'une expérience de visionnage sans limite, à portée de clic !
+
+## Our Standards
+Examples of behavior that contributes to creating a positive environment include:
+
+- Using welcoming and inclusive language
+- Being respectful of differing viewpoints and experiences
+- Gracefully accepting constructive criticism
+- Focusing on what is best for the community
+- Showing empathy towards other community members
