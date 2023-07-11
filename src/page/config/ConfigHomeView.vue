@@ -46,10 +46,10 @@
 </template>
 <script>
 import apiMixin from "@/mixins/apiMixin"
+import SerieForm from "@/components/form/SerieForm.vue"
 import VideoTabs from "@/components/tabs/VideoTabs.vue"
 import ConfigTopBar from "@/components/nav/ConfigTopBar.vue"
 import CategoriesGrid from "@/components/grids/CategoriesGrid.vue"
-import SerieForm from "@/components/form/SerieForm.vue"
 
 export default {
   name: 'ConfigHomeView',
