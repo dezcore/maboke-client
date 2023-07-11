@@ -33,18 +33,64 @@
     "breakpoints": "Breakpoints",
     "business": "Business",
     "categories": {
+      "shows" : {
+        "tv-shows":"Tv shows",
+        "talk-shows":"Tv shows",
+        "comedy-club":"Comedy club",
+        "free-episodes":"Free episodes",
+        "relationship":"Relationship",
+        "dramas":"Dramas",
+        "docu-series":"Docuseries",
+        "in-the-kitchen":"In the kitchen",
+        "favories":"Maboke243 favorites"
+      },
+      "series" : {
+        "news": "News",
+        "stories": "Stories",
+        "talents": "Talents",
+        "christian": "Christian"
+      },
+      "movies-src" : {
+        "christian": "Christian",
+        "shadowz": "SHADOWZ",
+        "creatures": "Creatures",
+        "streams-of-imagination" : "Streams of Imagination",
+        "action-and-adventure" : "Action and adventure",
+        "horror" : "Horror",
+        "crime" : "Crime",
+        "romance" : "Romance",
+        "insomnia-unbearable" : "Insomnia Unbearable"
+      },
+      "kids" : {
+        "cartoon" : "Cartoon",
+        "most-popular" : "Most popular",
+        "educational-tv" : "Educational TV",
+        "kids-and-family-tv" : "Kids and family TV",
+        "tv-movies-for-big-kids" : "TV and movies for big kids",
+        "tv-and-movies-for-little-kids" : "TV and movies for little kids"
+      },
+      "cartoon-ad" : {
+        "action" : "Action",
+        "comedy" : "Comedy",
+        "anime" : "Anime"
+      },
+      "we-grow" : "CultivonsNous",
+      "recently-added" : "Recently added",
       "stories-and-talents": "Stories and talents",
       "selection-for-you": "Our selection for you",
       "news": "News",
       "popular-on-maboke": "Popular on Maboke",
       "see-again":"See again",
+      "movies": "Movies",
+      "Series": "Series",
       "movies-and-series": "Movies and series",
       "international-series" : "Popular on Maboke",
       "top-10-movies" : "Top 10 movies",
       "additions-of-x-months":"Additions of x months",
-      "only-on-maboke":"Only on maboke",
+      "only-on-maboke":"Only on maboke243",
       "current-trends":"Current trends",
-      "watch-this-weekend":"Watch this weekend"
+      "watch-this-weekend":"Watch this weekend",
+      "all-maboke-series":"All maboke243 series"
     },
     "cancel": "Cancel",
     "close": "Close",
