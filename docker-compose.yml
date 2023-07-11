@@ -12,4 +12,7 @@ services:
     volumes:
       - .:/app
       - '/app/node_modules'
+      - type: bind
+        source: ./dist
+        target: /app/dist/
 
