@@ -121,7 +121,7 @@ router.beforeEach(async (to, from, next) => {
   const globalStore = useGlobalStore();
   const tokens = JSON.parse(window.localStorage.getItem("tokens"))
   const user = JSON.parse(window.localStorage.getItem('user'))
-
+  
   if(to)
     globalStore.setPage(to.name)
 

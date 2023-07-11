@@ -4,7 +4,8 @@
   >
     <template #main>
       <v-card>
-        <EnPrivacy/>
+        <EnPrivacy v-if="locale === 'en'"/>
+        <FRPrivacy v-else/>
       </v-card>
     </template>
     <template #footer>
@@ -14,7 +15,9 @@
   </TopBar>
 </template>
 <script>
-import EnPrivacy from '@/page/md/en/privacy.md'   
+import {useLocaleStore} from '@/store'
+import EnPrivacy from '@/page/md/en/privacy.md' 
+import FRPrivacy from '@/page/md/fr/privacy.md'  
 import TopBar from "@/components/nav/TopBar.vue"
 import Footer from "@/components/footer/Footer.vue"
 export default {
@@ -22,6 +25,7 @@ export default {
   components : {
     TopBar,
     Footer,
+    FRPrivacy,
     EnPrivacy
   },
   data: () => ({
@@ -34,7 +38,13 @@ export default {
     lastGoal : "about-us-page.last-goal",
     endText : "about-us-page.end-text" 
   }),
-  methods : {}
+  methods : {},
+  computed : {
+    locale() {
+      const localeStore = useLocaleStore()
+      return localeStore.locale
+    }
+  }
 }
 </script>
 <style>

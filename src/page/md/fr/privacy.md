@@ -5,7 +5,7 @@ meta:
   keywords: Maboke243 Privacy DRC CONGO KONGO PAGE COMEDIES MOVIES SERIES SHOWS TV
 ---
 
-# Privacy EN
+# Privacy FR
 Merci de visiter notre site. Votre vie privée est importante pour nous. Pour mieux protéger votre vie privée, nous fournissons cette politique expliquant nos pratiques en matière d'informations en ligne et les choix que vous pouvez faire concernant la collecte et l'utilisation des informations personnellement identifiables que vous soumettez sur nos sites Web, services et applications en ligne et mobiles ("Site" ou " Des sites"). Pour certains produits et/ou services, il peut y avoir des avis supplémentaires sur les pratiques et les choix d'information. Veuillez lire ces déclarations de confidentialité supplémentaires pour comprendre comment elles s'appliquent à vous.
 
 Nous vous encourageons à contacter un avocat de votre choix et à vos propres frais dans le cas où vous ne comprenez pas l'un des termes contenus dans cette politique de confidentialité. Si vous n'êtes pas d'accord avec tout ce qui est contenu dans cette politique de confidentialité, veuillez cesser immédiatement d'utiliser l'un de nos sites, produits et/ou services.

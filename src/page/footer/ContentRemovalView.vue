@@ -5,6 +5,7 @@
     <template #main>
       <v-card>
         <EnRemoval/>
+        <FrRemoval/>
       </v-card>
     </template>
     <template #footer>
@@ -14,7 +15,9 @@
   </TopBar>
 </template>
 <script>
-import EnRemoval from '@/page/md/en/removal.md'   
+import {useLocaleStore} from '@/store'
+import EnRemoval from '@/page/md/en/removal.md'
+import FrRemoval from '@/page/md/fr/removal.md'    
 import TopBar from "@/components/nav/TopBar.vue"
 import Footer from "@/components/footer/Footer.vue"
 export default {
@@ -22,6 +25,7 @@ export default {
   components : {
     TopBar,
     Footer,
+    FrRemoval,
     EnRemoval
   },
   data: () => ({
@@ -34,7 +38,13 @@ export default {
     lastGoal : "about-us-page.last-goal",
     endText : "about-us-page.end-text" 
   }),
-  methods : {}
+  methods : {},
+  computed : {
+    locale() {
+      const localeStore = useLocaleStore()
+      return localeStore.locale
+    }
+  }
 }
 </script>
 <style>

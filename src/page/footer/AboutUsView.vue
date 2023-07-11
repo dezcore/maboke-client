@@ -4,7 +4,8 @@
   >
     <template #main>
       <v-card>
-        <EnAbout/>
+        <EnAbout v-if="locale === 'en'"/>
+        <FrAbout v-else/>
       </v-card>
     </template>
     <template #footer>
@@ -14,8 +15,9 @@
   </TopBar>
 </template>
 <script>
-
-import EnAbout from '@/page/md/en/about.md'   
+import {useLocaleStore} from '@/store'
+import FrAbout from '@/page/md/fr/about.md'
+import EnAbout from '@/page/md/en/about.md'    
 import TopBar from "@/components/nav/TopBar.vue"
 import Footer from "@/components/footer/Footer.vue"
 
@@ -24,7 +26,8 @@ export default {
   components : {
     TopBar,
     Footer,
-    EnAbout
+    EnAbout,
+    FrAbout
   },
   data: () => ({
     serie : null, 
@@ -36,7 +39,13 @@ export default {
     lastGoal : "about-us-page.last-goal",
     endText : "about-us-page.end-text" 
   }),
-  methods : {}
+  methods : {},
+  computed : {
+    locale() {
+      const localeStore = useLocaleStore()
+      return localeStore.locale
+    }
+  }
 }
 </script>
 <style>
