@@ -1,5 +1,5 @@
 <template>
-  <CatalogsTopBar :showAppBar="true">
+  <ConfigTopBar :showAppBar="true">
     <template #main>
       <div>
         
@@ -31,22 +31,22 @@
         </VideoTabs>
       </div>
     </template>
-  </CatalogsTopBar>
+  </ConfigTopBar>
 </template>
 <script>
 import apiMixin from "@/mixins/apiMixin"
 import VideoTabs from "@/components/tabs/VideoTabs.vue"
-import CatalogsTopBar from "@/components/nav/CatalogsTopBar.vue"
+import ConfigTopBar from "@/components/nav/ConfigTopBar.vue"
 import SeriesColGrid from "@/components/grids/SeriesColGrid.vue"
 import SeasonForm from "@/components/form/SeasonForm.vue"
 
 export default {
-  name: 'CatalogsSerieView',
+  name: 'ConfigShowsView',
   components : {
     VideoTabs,
     SeasonForm,
     SeriesColGrid,
-    CatalogsTopBar
+    ConfigTopBar
   },
   data: () => ({
     serie : null, 

@@ -14,7 +14,13 @@
       "kids" : "Kids",
       "movies": "Movies",
       "series": "Series",
-      "shows": "Shows"
+      "shows": "Shows",
+      "validation": "Validation",
+      "confighome" : "@:api-header.home",
+      "configvalidation" : "@:api-header.validation",
+      "configseries" : "@:api-header.series",
+      "configmovies" : "@:api-header.movies",
+      "configshows" : "@:api-header.shows"
     },
     "application": "Application",
     "apply": "Apply",

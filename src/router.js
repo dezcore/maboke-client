@@ -5,21 +5,25 @@ import ShowsView from '@/views/ShowsView.vue'
 import MoviesView from '@/views/MoviesView.vue'
 import SeriesView from '@/views/SeriesView.vue'
 import PlayerView from '@/views/PlayerView.vue'
-import StudioView from '@/views/StudioView.vue'
+import ValidationView from '@/page/config/ValidationView.vue'
+
 
 import Page404 from "@/views/404.vue"
 import FaqView from "@/page/footer/FaqView.vue"
+
+import ConfigHomeView from "@/page/config/ConfigHomeView.vue"
+import ConfigSerieView from "@/page/config/ConfigSerieView.vue"
+import ConfigsMovieView from "@/page/config/ConfigMovieView.vue"
+import ConfigShowsView from "@/page/config/ConfigShowsView.vue"
+
 import AboutUsView from "@/page/footer/AboutUsView.vue"
 import PrivacyPolicyView from "@/page/footer/PrivacyPolicyView.vue"
-import CatalogsHomeView from "@/page/catalogs/CatalogsHomeView.vue"
 import ContentRemovalView from "@/page/footer/ContentRemovalView.vue"
-import CatalogsMovieView from "@/page/catalogs/CatalogsMovieView.vue"
-import CatalogsSerieView from "@/page/catalogs/CatalogsSerieView.vue"
-import CatalogsShowsView from "@/page/catalogs/CatalogsShowsView.vue"
 
 import {
   createRouter,
-  createWebHashHistory
+  createWebHistory,
+  //createWebHashHistory
 } from 'vue-router';
 import { nextTick } from 'vue';
 import {useGlobalStore} from '@/store'
@@ -57,28 +61,28 @@ const routes = [
     },
     { 
       path: '/config',
-      name: 'Configuration',
-      component : CatalogsHomeView
+      name: 'ConfigHome',
+      component : ConfigHomeView
     },
     { 
       path: '/config/validation',
       name: 'ConfigValidation',
-      component : StudioView
+      component : ValidationView
     },
     { 
       path: '/config/serie',
-      name: 'ConfigSerie',
-      component : CatalogsSerieView
+      name: 'ConfigSeries',
+      component : ConfigSerieView
     },
     { 
       path: '/config/movie',
-      name: 'ConfigMovie',
-      component : CatalogsMovieView
+      name: 'ConfigMovies',
+      component : ConfigsMovieView
     },
     { 
       path: '/config/show',
-      name: 'ConfigShow',
-      component : CatalogsShowsView
+      name: 'ConfigShows',
+      component : ConfigShowsView
     },
     { 
       path: '/player',
@@ -113,7 +117,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(), 
+  //history: createWebHashHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),  
   routes
 })
 

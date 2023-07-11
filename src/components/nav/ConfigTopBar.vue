@@ -6,11 +6,28 @@
       density="compact"
     >
       <template v-slot:prepend>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-         <v-breadcrumbs
-            :items="items"
-            divider=""
-        ></v-breadcrumbs>
+        <router-link
+          to="/config"
+          class="d-inline-block ml-0"
+        >
+          <v-img
+            :key="logo"
+            alt="maboke243 logo"
+            src="img/maboke-white-logo.svg"
+            :width="lgAndUp ? 120 : 34"
+            class="shrink"
+            :transition="false"
+          />
+        </router-link>
+        <v-btn
+          v-for="(item, index) in items"
+          :key="index"
+          variant="text" 
+          :to="item.href"
+          :color="$t(page) === $t(item.title) ? '#F40B0C' : '#ffffff'"
+        >
+          {{$t(item.title)}}
+        </v-btn>
       </template>
       <template v-slot:append>        
         <SearchMenu></SearchMenu>
@@ -27,12 +44,14 @@
   </v-app>
 </template>
 <script>
+
+import {useGlobalStore} from '@/store'
 import AuthButtons from "@/components/auth/AuthButtons.vue"
 import SearchMenu from "@/components/search/SearchMenu.vue"
 import LanguageMenu from "@/components/menu/LanguageMenu.vue"
 
 export default {
-  name: 'CatalogsTopBar',
+  name: 'ConfigTopBar',
   components : {
     SearchMenu,
     AuthButtons,
@@ -54,34 +73,44 @@ export default {
   },
   data: () => ({ 
     drawer: null,
+    lgAndUp: true,
+    logo : 'maboke243-logo',
     items: [
       {
-        title: 'General',
+        title: "api-header.confighome",
         disabled: false,
         href: '/config',
       },
       {
-        title: 'Validation',
+        title: "api-header.configvalidation",
         disabled: false,
         href: '/config/validation',
       },
       {
-        title: 'Serie',
+        title: "api-header.configseries",
         disabled: false,
         href: '/config/serie',
       },
       {
-        title: 'Movie',
+        title: "api-header.configmovies",
         disabled: false,
         href: '/config/movie'
       },
       {
-        title: 'Show',
+        title:  "api-header.configshows",
         disabled: false,
         href: '/config/show'
       }
     ], 
   }),
+  computed : {
+    page() {
+      const gStore = useGlobalStore()
+      let page = gStore.page.toLowerCase()
+      let res = 'api-header.'+page
+      return res
+    }
+  }
 }
 </script>
 
