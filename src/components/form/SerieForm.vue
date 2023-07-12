@@ -25,7 +25,9 @@
             v-model="currentSerie.gender"
             :items="gender"
             label="Genre"
-          ></v-combobox>
+            return-object
+          >
+        </v-combobox>
         </v-col>
         <v-col cols="6">
           <v-combobox
@@ -69,6 +71,8 @@
   </div>
 </template>
 <script>
+  import inputsMixin from "@/mixins/inputsMixin"
+
   export default {
     name: 'SerieForm',
     props : {
@@ -102,30 +106,6 @@
         },
         showAlert : false,
         alertMessage : "",
-        gender : [
-          "Action",
-          "Animation",
-          "Aventure",
-          "Biopic",
-          "Comédie",
-          "Documentaire",
-          "Drame",
-          "Famille",
-          "Fantastique",
-          "Guerre",
-          "Historique",
-          "Horreur",
-          "Judiciaire",
-          "Musical",
-          "Policier",
-          "Romance",
-          "Science fiction",
-          "Thriller",
-          "Western",
-          "Comedy",
-          "Theater",
-          "Cartoon"
-        ],
         country : [
           "FR",
           "USA",
@@ -160,6 +140,9 @@
         selectCountry : null,
       }
     },
+    mixins : [
+      inputsMixin
+    ],
     mounted() {      
       if(this.serie)
         this.currentSerie = this.serie
